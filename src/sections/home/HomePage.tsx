@@ -1,19 +1,17 @@
-import { LazyWebGLBadge } from "@/components/webgl/LazyWebGLBadge";
+import { CinematicNav } from "@/components/navigation/CinematicNav";
+import { HeroSection } from "@/sections/hero/HeroSection";
 import { FooterPlaceholder } from "@/components/footer/FooterPlaceholder";
-import { NavbarPlaceholder } from "@/components/navigation/NavbarPlaceholder";
-import { HeroPlaceholder } from "@/sections/home/HeroPlaceholder";
 import { SectionsPlaceholder } from "@/sections/home/SectionsPlaceholder";
 
 export function HomePage() {
   return (
     <div className="site-root flex min-h-screen-fill flex-col">
-      <NavbarPlaceholder />
+      <CinematicNav />
       <main className="flex-1">
-        <HeroPlaceholder />
+        <HeroSection />
         <SectionsPlaceholder />
       </main>
       <FooterPlaceholder />
-      <LazyWebGLBadge />
     </div>
   );
 }

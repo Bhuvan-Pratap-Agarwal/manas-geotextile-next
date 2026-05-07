@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { NavigationProvider } from "@/components/navigation/NavigationContext";
 import { MotionConfig } from "framer-motion";
 import { AnimationProvider } from "@/components/providers/AnimationProvider";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
@@ -16,11 +17,13 @@ export function AppProviders({ children }: AppProvidersProps) {
 
   return (
     <MotionConfig reducedMotion="user">
-      <AnimationProvider reducedMotion={reducedMotion}>
-        <SmoothScrollProvider enabled={smoothScrollEnabled}>
-          {children}
-        </SmoothScrollProvider>
-      </AnimationProvider>
+      <NavigationProvider>
+        <AnimationProvider reducedMotion={reducedMotion}>
+          <SmoothScrollProvider enabled={smoothScrollEnabled}>
+            {children}
+          </SmoothScrollProvider>
+        </AnimationProvider>
+      </NavigationProvider>
     </MotionConfig>
   );
 }
