@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { site } from "@/lib/site";
+import { site, tel } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Container } from "./Container";
 import { Logo } from "./Logo";
@@ -36,7 +36,7 @@ export function Header() {
     >
       <Container className="flex h-16 items-center justify-between">
         <Logo />
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           {site.nav.map((item) => {
             const active = pathname.startsWith(item.href);
             return (
@@ -44,7 +44,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-full px-4 py-2 text-[14px] transition-colors",
+                  "rounded-full px-3.5 py-2 text-[14px] transition-colors",
                   active ? "text-ink" : "text-ink-2/70 hover:text-ink",
                 )}
               >
@@ -61,7 +61,7 @@ export function Header() {
         </nav>
         <button
           type="button"
-          className="relative -mr-2 size-10 md:hidden"
+          className="relative -mr-2 size-10 lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -87,12 +87,12 @@ export function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="h-[calc(100dvh-4rem)] bg-paper md:hidden"
+            className="h-[calc(100dvh-4rem)] overflow-y-auto bg-paper lg:hidden"
             aria-label="Mobile"
           >
             <Container className="flex h-full flex-col justify-between py-10">
               <ul className="space-y-2">
-                {site.nav.map((item, i) => (
+                {[...site.nav, { href: "/contact", label: "Contact" }].map((item, i) => (
                   <motion.li
                     key={item.href}
                     initial={{ opacity: 0, y: 16 }}
@@ -107,7 +107,7 @@ export function Header() {
               </ul>
               <div className="space-y-1 text-ink-2">
                 <a href={`mailto:${site.contact.email}`} className="block">{site.contact.email}</a>
-                <a href={`tel:${site.contact.phone.replace(/\s/g, "")}`} className="block">{site.contact.phone}</a>
+                <a href={tel(site.contact.mobile)} className="block">{site.contact.mobile}</a>
               </div>
             </Container>
           </motion.nav>

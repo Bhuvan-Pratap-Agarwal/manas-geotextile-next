@@ -2,18 +2,26 @@
 
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { products } from "@/lib/content";
+import { products } from "@/lib/products";
 import { site } from "@/lib/site";
 
 // TODO: swap the mailto handoff for a real endpoint (Resend, Formspree or a CRM) before launch.
-export function EnquiryForm({ defaultProduct = "" }: { defaultProduct?: string }) {
+export function EnquiryForm({
+  defaultProduct = "",
+  defaultArea = "",
+  datasheet = false,
+}: {
+  defaultProduct?: string;
+  defaultArea?: string;
+  datasheet?: boolean;
+}) {
   const [sent, setSent] = useState(false);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const get = (k: string) => String(data.get(k) ?? "").trim();
-    const subject = `Enquiry — ${get("product") || "General"} — ${get("company") || get("name")}`;
+    const subject = `${datasheet ? "Datasheet request" : "Enquiry"} — ${get("product") || "General"} — ${get("company") || get("name")}`;
     const body = [
       `Name: ${get("name")}`,
       `Company: ${get("company")}`,
@@ -24,7 +32,7 @@ export function EnquiryForm({ defaultProduct = "" }: { defaultProduct?: string }
       "",
       get("message"),
     ].join("\n");
-    window.location.href = `mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${site.contact.salesEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   }
 
@@ -50,7 +58,7 @@ export function EnquiryForm({ defaultProduct = "" }: { defaultProduct?: string }
         <input name="phone" type="tel" autoComplete="tel" className={field} />
       </label>
       <label className="block">
-        <span className="eyebrow">Product</span>
+        <span className="eyebrow">Product / GSM</span>
         <select name="product" defaultValue={products.find((p) => p.slug === defaultProduct)?.name ?? ""} className={field}>
           <option value="">Not sure — advise me</option>
           {products.map((p) => (
@@ -60,7 +68,7 @@ export function EnquiryForm({ defaultProduct = "" }: { defaultProduct?: string }
       </label>
       <label className="block">
         <span className="eyebrow">Approx. quantity</span>
-        <input name="quantity" placeholder="e.g. 20,000 m²" className={field} />
+        <input name="quantity" defaultValue={defaultArea ? `${defaultArea} m²` : ""} placeholder="e.g. 20,000 m²" className={field} />
       </label>
       <label className="block sm:col-span-2">
         <span className="eyebrow">Project details</span>

@@ -1,36 +1,36 @@
-# Manas Geotextile — website rebuild
+# Manas Geotextile — website
 
-A clean, minimal, modern site for Manas Geotextile, replacing manasgeotextile.com.
+SEO-first, minimal site for Manas Geo Tech India Pvt. Ltd. (manasgeotextile.com).
 
-**Stack:** Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · Geist fonts.
-
-## Run
+**Stack:** Next.js 15 (App Router, fully static) · TypeScript · Tailwind CSS v4 · Framer Motion · Geist.
 
 ```bash
 npm install
 npm run dev     # http://localhost:3000
-npm run build   # production build
+npm run build
 npm run lint
 ```
 
-## Structure
+## Where things live
 
-```
-src/
-  app/            # routes: /, /products, /products/[slug], /applications, /about, /contact, sitemap, robots
-  components/     # Header, Footer, Reveal, ButtonLink, SectionHead, PageHero, StrataVisual, EnquiryForm, CtaBand
-  lib/site.ts     # brand + contact details
-  lib/content.ts  # products, applications, stats, process
-```
+| Path | What |
+|---|---|
+| `src/lib/site.ts` | Company name, contacts, addresses, nav |
+| `src/lib/products.ts` | Products, specs, grades, FAQs, SEO titles |
+| `src/lib/applications.ts` | Application pages + cross-section layers |
+| `src/lib/guides.ts` | Knowledge-hub articles (blocks: p, h2, list, table, callout) |
+| `src/lib/schema.ts` | JSON-LD structured data |
+| `next.config.ts` | 301s from old `.html` URLs |
+| `docs/market-research-and-seo.md` | Research, keyword map, launch checklist |
 
-All copy lives in `src/lib/` — edit there, not in components.
+Add a product, application or guide by adding an entry to the matching file — routes, sitemap, OG image and structured data are generated automatically.
 
-## Before launch (TODO)
+## Before launch
 
-- [ ] Real contact details, address and WhatsApp number in `src/lib/site.ts`
-- [ ] Real product grades and datasheet values in `src/lib/content.ts` (current specs are typical industry ranges)
-- [ ] Confirm stats (years, projects, certifications)
-- [ ] Real company story, certifications and client logos on `/about`
-- [ ] Project photography / case studies
+- [ ] Confirm contacts/addresses in `src/lib/site.ts`
+- [ ] Confirm woven geotextile, geogrid, geocell are really supplied (else delete from `products.ts`)
+- [ ] Add datasheet test values per grade, BIS licence and ISO certificates
+- [ ] Plant photos, project case studies, client logos
 - [ ] Wire the enquiry form to a real endpoint (currently opens a pre-filled email)
-- [ ] Logo, favicon and Open Graph image
+- [ ] Google Search Console token in `src/app/layout.tsx`; submit sitemap
+- [ ] Google Business Profile for head office and factory
