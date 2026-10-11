@@ -1,114 +1,79 @@
 @import "tailwindcss";
-@import "lenis/dist/lenis.css";
-@import "../styles/theme.css";
+
+:root {
+  --paper: #f6f5f1;
+  --paper-2: #edebe4;
+  --ink: #0e100f;
+  --ink-2: #3a3d3b;
+  --muted: #7a7d79;
+  --line: #d9d6cc;
+  --accent: #e0531f;
+}
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-clash), var(--font-inter), ui-sans-serif, system-ui,
-    sans-serif;
-
-  --color-background: var(--surface-base);
-  --color-surface-raised: var(--surface-raised);
-  --color-surface-overlay: var(--surface-overlay);
-  --color-foreground: var(--text-primary);
-  --color-muted: var(--text-muted);
-  --color-accent: var(--accent-primary);
-  --color-accent-dim: var(--accent-muted);
-  --color-border: var(--border-subtle);
-  --color-engine: var(--engineering-line);
-
-  --breakpoint-3xl: 120rem;
-  --breakpoint-ultra: 160rem;
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 html {
-  scroll-behavior: auto;
-  scroll-padding-top: 5.5rem;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--surface-base);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  font-size: var(--text-body);
-  line-height: var(--leading-body);
-  letter-spacing: var(--tracking-body);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  isolation: isolate;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--accent-primary) 35%, transparent);
-  color: var(--text-primary);
-}
-
-.min-h-screen-fill {
-  min-height: 100svh;
+  background: var(--accent);
+  color: white;
 }
 
 @layer utilities {
-  .type-display {
-    font-family: var(--font-display);
-    font-size: var(--text-display);
-    line-height: var(--leading-display);
-    letter-spacing: var(--tracking-display);
-  }
-
-  .type-hero {
-    font-family: var(--font-display);
-    font-size: var(--text-hero);
-    line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-title);
-  }
-
-  .type-title {
-    font-family: var(--font-display);
-    font-size: var(--text-title);
-    line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-title);
-  }
-
-  .type-subtitle {
-    font-size: var(--text-subtitle);
-    line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-title);
-  }
-
-  .type-body {
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    letter-spacing: var(--tracking-body);
-  }
-
-  .type-caption {
-    font-size: var(--text-caption);
-    line-height: 1.35;
+  .eyebrow {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: var(--muted);
   }
-
-  .text-gold {
-    color: var(--accent-primary);
+  .display {
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    font-weight: 500;
   }
+  .h2 {
+    font-size: clamp(2rem, 4.2vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+  }
+  .h3 {
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+  .lead {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+}
 
-  .surface-grid {
-    background-image:
-      linear-gradient(
-        to right,
-        color-mix(in oklab, var(--engineering-line) 55%, transparent) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        to bottom,
-        color-mix(in oklab, var(--engineering-line) 55%, transparent) 1px,
-        transparent 1px
-      );
-    background-size: 120px 120px;
-    mask-image: radial-gradient(
-      circle at 50% 20%,
-      black 0%,
-      transparent 75%
-    );
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }

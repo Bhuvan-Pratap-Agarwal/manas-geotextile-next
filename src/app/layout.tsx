@@ -1,51 +1,29 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { AppProviders } from "@/components/providers/AppProviders";
-import { siteConfig } from "@/lib/config/site";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { site } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.title,
-    template: `%s — ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  metadataBase: new URL(siteConfig.url),
-  openGraph: {
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    locale: "en_IN",
-    type: "website",
-  },
+  metadataBase: new URL(site.url),
+  title: { default: `${site.name} — ${site.tagline}`, template: `%s · ${site.name}` },
+  description: site.description,
+  openGraph: { type: "website", siteName: site.name, locale: "en_IN" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = { themeColor: "#f6f5f1" };
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <head>
-        <link
-          rel="preconnect"
-          href="https://api.fontshare.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="min-h-screen-fill bg-background text-foreground">
-        <AppProviders>{children}</AppProviders>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
