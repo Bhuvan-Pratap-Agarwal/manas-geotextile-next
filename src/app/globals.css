@@ -1,114 +1,274 @@
 @import "tailwindcss";
-@import "lenis/dist/lenis.css";
-@import "../styles/theme.css";
+
+:root {
+  --paper: #f6f5f1;
+  --paper-2: #edebe4;
+  --ink: #0e100f;
+  --ink-2: #3a3d3b;
+  --muted: #62655f;
+  --line: #d9d6cc;
+  --accent: #e0531f;
+  --accent-ink: #b93d0c;
+  --soil: #e6dfd2;
+  --stone: #d3d0c7;
+  --stone-edge: #a9a59a;
+  --fines: #9b8a6e;
+}
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-clash), var(--font-inter), ui-sans-serif, system-ui,
-    sans-serif;
-
-  --color-background: var(--surface-base);
-  --color-surface-raised: var(--surface-raised);
-  --color-surface-overlay: var(--surface-overlay);
-  --color-foreground: var(--text-primary);
-  --color-muted: var(--text-muted);
-  --color-accent: var(--accent-primary);
-  --color-accent-dim: var(--accent-muted);
-  --color-border: var(--border-subtle);
-  --color-engine: var(--engineering-line);
-
-  --breakpoint-3xl: 120rem;
-  --breakpoint-ultra: 160rem;
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 html {
-  scroll-behavior: auto;
-  scroll-padding-top: 5.5rem;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--surface-base);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  font-size: var(--text-body);
-  line-height: var(--leading-body);
-  letter-spacing: var(--tracking-body);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  isolation: isolate;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--accent-primary) 35%, transparent);
-  color: var(--text-primary);
-}
-
-.min-h-screen-fill {
-  min-height: 100svh;
+  background: var(--accent);
+  color: white;
 }
 
 @layer utilities {
-  .type-display {
-    font-family: var(--font-display);
-    font-size: var(--text-display);
-    line-height: var(--leading-display);
-    letter-spacing: var(--tracking-display);
-  }
-
-  .type-hero {
-    font-family: var(--font-display);
-    font-size: var(--text-hero);
-    line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-title);
-  }
-
-  .type-title {
-    font-family: var(--font-display);
-    font-size: var(--text-title);
-    line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-title);
-  }
-
-  .type-subtitle {
-    font-size: var(--text-subtitle);
-    line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-title);
-  }
-
-  .type-body {
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    letter-spacing: var(--tracking-body);
-  }
-
-  .type-caption {
-    font-size: var(--text-caption);
-    line-height: 1.35;
+  .eyebrow {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: var(--muted);
   }
-
-  .text-gold {
-    color: var(--accent-primary);
+  .display {
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    font-weight: 500;
   }
+  .h2 {
+    font-size: clamp(2rem, 4.2vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+  }
+  .h3 {
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+  .lead {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+}
 
-  .surface-grid {
-    background-image:
-      linear-gradient(
-        to right,
-        color-mix(in oklab, var(--engineering-line) 55%, transparent) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        to bottom,
-        color-mix(in oklab, var(--engineering-line) 55%, transparent) 1px,
-        transparent 1px
-      );
-    background-size: 120px 120px;
-    mask-image: radial-gradient(
-      circle at 50% 20%,
-      black 0%,
-      transparent 75%
-    );
+.prose-geo {
+  color: var(--ink-2);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+.prose-geo > * + * {
+  margin-top: 1.25rem;
+}
+.prose-geo h2 {
+  margin-top: 3.5rem;
+  color: var(--ink);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+.prose-geo h3 {
+  margin-top: 2rem;
+  color: var(--ink);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.prose-geo ul,
+.prose-geo ol {
+  padding-left: 1.25rem;
+}
+.prose-geo ul {
+  list-style: none;
+  padding-left: 0;
+}
+.prose-geo ul li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.prose-geo ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.75rem;
+  height: 1px;
+  background: var(--accent);
+}
+.prose-geo ol {
+  list-style: decimal;
+}
+.prose-geo ol li::marker {
+  font-family: var(--font-geist-mono), monospace;
+  color: var(--accent-ink);
+  font-size: 0.85em;
+}
+.prose-geo li + li {
+  margin-top: 0.5rem;
+}
+.prose-geo aside {
+  border-left: 2px solid var(--accent);
+  background: var(--paper-2);
+  padding: 1.25rem 1.5rem;
+  color: var(--ink);
+}
+.prose-geo .table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+}
+.prose-geo table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.prose-geo caption {
+  caption-side: top;
+  text-align: left;
+  padding: 0.9rem 1rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+.prose-geo th,
+.prose-geo td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.prose-geo thead th {
+  background: var(--paper-2);
+  color: var(--ink);
+  font-weight: 500;
+}
+.prose-geo tbody th {
+  color: var(--ink);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.prose-geo tr:last-child > * {
+  border-bottom: 0;
+}
+
+.range {
+  appearance: none;
+  height: 32px;
+  background-color: transparent;
+  background-image: linear-gradient(var(--ink), var(--ink)), linear-gradient(var(--line), var(--line));
+  background-repeat: no-repeat;
+  background-position: left center, center;
+  background-size: 0% 2px, 100% 2px;
+  cursor: pointer;
+}
+.range:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+.range::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--accent);
+  border: 4px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--accent);
+  border: 4px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Reveal-on-scroll (see components/Reveal.tsx) */
+[data-reveal] {
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s);
+}
+[data-reveal=""]:not([data-shown]) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+[data-reveal="rise"] {
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0.01;
+    transform: translateY(18px);
+  }
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+.menu-in {
+  animation: menu-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .menu-in,
+  [data-reveal="rise"] {
+    animation: none;
+  }
+  [data-reveal] {
+    transition: none;
+  }
+  [data-reveal=""]:not([data-shown]) {
+    opacity: 1;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

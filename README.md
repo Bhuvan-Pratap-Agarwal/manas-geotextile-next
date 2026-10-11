@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Manas Geotextile — website
 
-## Getting Started
+SEO-first, minimal site for Manas Geo Tech India Pvt. Ltd. (manasgeotextile.com).
 
-First, run the development server:
+**Stack:** Next.js 15 (App Router, fully static) · TypeScript · Tailwind CSS v4 · Framer Motion · Geist.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | What |
+|---|---|
+| `src/lib/site.ts` | Company name, contacts, addresses, nav |
+| `src/lib/products.ts` | Products, specs, grades, FAQs, SEO titles |
+| `src/lib/applications.ts` | Application pages + cross-section layers |
+| `src/lib/guides.ts` | Knowledge-hub articles (blocks: p, h2, list, table, callout) |
+| `src/lib/schema.ts` | JSON-LD structured data |
+| `next.config.ts` | 301s from old `.html` URLs |
+| `docs/market-research-and-seo.md` | Research, keyword map, launch checklist |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Add a product, application or guide by adding an entry to the matching file — routes, sitemap, OG image and structured data are generated automatically.
 
-## Learn More
+## Before launch
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Confirm contacts/addresses in `src/lib/site.ts`
+- [ ] Confirm woven geotextile, geogrid, geocell are really supplied (else delete from `products.ts`)
+- [ ] Add datasheet test values per grade, BIS licence and ISO certificates
+- [ ] Plant photos, project case studies, client logos
+- [ ] Wire the enquiry form to a real endpoint (currently opens a pre-filled email)
+- [ ] Google Search Console token in `src/app/layout.tsx`; submit sitemap
+- [ ] Google Business Profile for head office and factory
