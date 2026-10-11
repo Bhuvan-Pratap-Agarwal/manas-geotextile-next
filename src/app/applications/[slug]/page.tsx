@@ -37,7 +37,7 @@ export default async function ApplicationPage({ params }: Props) {
         <Container>
           <Breadcrumbs items={[{ name: "Applications", path: "/applications" }, { name: a.name, path }]} />
           <div className="mt-12 grid gap-14 lg:grid-cols-12">
-            <Reveal className="lg:col-span-6">
+            <Reveal immediate className="lg:col-span-6">
               <p className="eyebrow">Application</p>
               <h1 className="display mt-6 text-balance">Geotextile for {a.name.toLowerCase()}</h1>
               <p className="lead mt-8 max-w-xl">{a.summary}</p>
@@ -46,7 +46,7 @@ export default async function ApplicationPage({ params }: Props) {
                 <ButtonLink href="/tools/geotextile-calculator" variant="ghost">Calculate quantity</ButtonLink>
               </div>
             </Reveal>
-            <Reveal className="lg:col-span-6" delay={0.1}>
+            <Reveal immediate className="lg:col-span-6" delay={0.1}>
               <p className="eyebrow mb-6">Typical cross-section</p>
               <LayerStack layers={a.layers} />
             </Reveal>
@@ -61,7 +61,7 @@ export default async function ApplicationPage({ params }: Props) {
             <p className="mt-6 text-2xl leading-snug tracking-[-0.02em]">{a.problem}</p>
           </Reveal>
           <Reveal delay={0.08}>
-            <p className="eyebrow !text-accent">The solution</p>
+            <p className="eyebrow !text-accent-ink">The solution</p>
             <p className="mt-6 text-2xl leading-snug tracking-[-0.02em]">{a.solution}</p>
           </Reveal>
         </Container>

@@ -20,7 +20,7 @@ export function CtaBand({
           </h2>
         </Reveal>
         <Reveal className="flex flex-col items-start justify-end gap-4 lg:col-span-4 lg:items-end" delay={0.1}>
-          <ButtonLink href="/contact" variant="light">Request a quote</ButtonLink>
+          <ButtonLink href="/contact" variant="light">Get a quote</ButtonLink>
           <a href={`mailto:${site.contact.salesEmail}`} className="text-paper/60 hover:text-paper">{site.contact.salesEmail}</a>
         </Reveal>
       </Container>

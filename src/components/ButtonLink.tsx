@@ -18,9 +18,9 @@ export function ButtonLink({
       href={href}
       className={cn(
         "group inline-flex h-12 items-center gap-2 rounded-full pl-6 pr-5 text-[15px] font-medium transition-colors duration-300",
-        variant === "solid" && "bg-ink text-paper hover:bg-accent",
+        variant === "solid" && "bg-ink text-paper hover:bg-accent-ink",
         variant === "ghost" && "border border-ink/15 text-ink hover:border-ink",
-        variant === "light" && "bg-paper text-ink hover:bg-accent hover:text-white",
+        variant === "light" && "bg-paper text-ink hover:bg-accent-ink hover:text-white",
         className,
       )}
     >

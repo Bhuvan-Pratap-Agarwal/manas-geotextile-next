@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: Props) {
         <Container>
           <Breadcrumbs items={[{ name: "Products", path: "/products" }, { name: p.name, path }]} />
           <div className="mt-12 grid gap-12 lg:grid-cols-12">
-            <Reveal className="lg:col-span-7">
+            <Reveal immediate className="lg:col-span-7">
               <p className="eyebrow">{p.code} — {p.functions.join(" · ")}</p>
               <h1 className="display mt-6 text-balance">{p.name}</h1>
               <div className="lead mt-8 max-w-xl space-y-4">
@@ -67,7 +67,7 @@ export default async function ProductPage({ params }: Props) {
                 <ButtonLink href={`/contact?product=${p.slug}&datasheet=1`} variant="ghost">Request datasheet</ButtonLink>
               </div>
             </Reveal>
-            <Reveal className="lg:col-span-5" delay={0.1}>
+            <Reveal immediate className="lg:col-span-5" delay={0.1}>
               <div className="border border-line bg-paper-2/60 p-8">
                 <p className="eyebrow">Specification</p>
                 <dl className="mt-6 divide-y divide-line">
@@ -107,7 +107,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
             <div className="lg:col-span-8">
               <Prose blocks={[{ type: "table", head: p.grades.head, rows: p.grades.rows }]} />
-              <Link href="/guides/geotextile-gsm-guide" className="mt-4 inline-flex items-center gap-1 text-[15px] text-ink-2 hover:text-accent">
+              <Link href="/guides/geotextile-gsm-guide" className="mt-4 inline-flex items-center gap-1 text-[15px] text-ink-2 hover:text-accent-ink">
                 Full GSM guide <ArrowUpRight className="size-4" strokeWidth={1.5} />
               </Link>
             </div>
@@ -155,7 +155,7 @@ export default async function ProductPage({ params }: Props) {
           <div className="mt-8 grid gap-10 md:grid-cols-3">
             {relatedGuides.map((g) => (
               <Link key={g.slug} href={`/guides/${g.slug}`} className="group block border-t border-ink pt-6">
-                <h3 className="h3 transition-colors group-hover:text-accent">{g.title}</h3>
+                <h3 className="h3 transition-colors group-hover:text-accent-ink">{g.title}</h3>
                 <p className="mt-3 text-ink-2">{g.excerpt}</p>
               </Link>
             ))}

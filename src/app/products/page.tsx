@@ -38,7 +38,7 @@ export default function ProductsPage() {
                   <li key={p.slug}>
                     <Reveal delay={i * 0.03}>
                       <Link href={`/products/${p.slug}`} className="group grid gap-6 border-b border-line py-10 md:grid-cols-12">
-                        <span className="font-mono text-sm text-muted transition-colors group-hover:text-accent md:col-span-1">{p.code}</span>
+                        <span className="font-mono text-sm text-muted transition-colors group-hover:text-accent-ink md:col-span-1">{p.code}</span>
                         <div className="md:col-span-5">
                           <h3 className="text-3xl font-medium tracking-[-0.03em] transition-transform duration-500 group-hover:translate-x-2 md:text-4xl">{p.name}</h3>
                           <p className="mt-3 text-ink-2">{p.summary}</p>

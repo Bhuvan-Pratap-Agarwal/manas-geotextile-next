@@ -10,10 +10,10 @@ function Col({ title, links }: { title: string; links: { href: string; label: st
   return (
     <div>
       <p className="eyebrow mb-4">{title}</p>
-      <ul className="space-y-2 text-[15px]">
+      <ul className="space-y-1 text-[15px]">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-ink-2 hover:text-ink">{l.label}</Link>
+            <Link href={l.href} className="inline-block py-1 text-ink-2 hover:text-ink">{l.label}</Link>
           </li>
         ))}
       </ul>
@@ -31,10 +31,10 @@ export function Footer() {
           <p className="mt-5 max-w-xs text-ink-2">
             {site.legalName} — non-woven geotextiles and PVC geomembranes, made in Haryana. Incorporated 1995.
           </p>
-          <div className="mt-6 space-y-1 text-[15px]">
-            <a href={tel(contact.phone)} className="block hover:text-accent">{contact.phone}</a>
-            <a href={tel(contact.mobile)} className="block hover:text-accent">{contact.mobile}</a>
-            <a href={`mailto:${contact.email}`} className="block hover:text-accent">{contact.email}</a>
+          <div className="mt-6 text-[15px]">
+            <a href={tel(contact.phone)} className="block py-1 hover:text-accent-ink">{contact.phone}</a>
+            <a href={tel(contact.mobile)} className="block py-1 hover:text-accent-ink">{contact.mobile}</a>
+            <a href={`mailto:${contact.email}`} className="block py-1 hover:text-accent-ink">{contact.email}</a>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-2 lg:col-span-8">
@@ -59,9 +59,12 @@ export function Footer() {
           </address>
         ))}
       </Container>
-      <Container className="flex flex-col justify-between gap-2 border-t border-line py-6 text-[13px] text-muted sm:flex-row">
-        <p>© {new Date().getFullYear()} {site.legalName}. CIN {site.cin}.</p>
-        <p className="font-mono uppercase tracking-[0.14em]">Made in India</p>
+      <Container className="flex flex-col justify-between gap-2 border-t border-line pb-24 pt-6 text-[13px] text-muted sm:flex-row sm:pb-6">
+        <p>© {new Date().getFullYear()} {site.legalName} · CIN {site.cin}</p>
+        <p className="flex gap-6">
+          <Link href="/privacy" className="-my-1 inline-block py-1 hover:text-ink">Privacy</Link>
+          <span className="font-mono uppercase tracking-[0.14em]">Made in India</span>
+        </p>
       </Container>
     </footer>
   );

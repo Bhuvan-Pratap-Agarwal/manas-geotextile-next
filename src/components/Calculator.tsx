@@ -147,12 +147,12 @@ export function Calculator() {
           </dl>
           <Link
             href={`/contact?product=${selected.product}${r ? `&area=${Math.round(r.gross)}` : ""}`}
-            className="group mt-8 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-paper text-[15px] font-medium text-ink transition-colors hover:bg-accent hover:text-white"
+            className="group mt-8 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-paper text-[15px] font-medium text-ink transition-colors hover:bg-accent-ink hover:text-white"
           >
             Get a quote for this quantity
             <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.75} />
           </Link>
-          <p className="mt-4 text-[12px] leading-relaxed text-paper/40">
+          <p className="mt-4 text-[12px] leading-relaxed text-paper/60">
             Estimate only. Grade suggestions are typical; your specification decides.
           </p>
         </div>

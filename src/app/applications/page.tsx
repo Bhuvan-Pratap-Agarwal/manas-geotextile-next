@@ -34,7 +34,7 @@ export default function ApplicationsPage() {
                   <p className="font-mono text-sm text-muted">{String(i + 1).padStart(2, "0")}</p>
                   <h2 className="h2 mt-4 flex items-start gap-4">
                     {a.name}
-                    <ArrowUpRight className="mt-2 size-7 shrink-0 text-muted transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent" strokeWidth={1.25} />
+                    <ArrowUpRight className="mt-2 size-7 shrink-0 text-muted transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent-ink" strokeWidth={1.25} />
                   </h2>
                   <p className="mt-4 max-w-md text-ink-2">{a.summary}</p>
                 </div>

@@ -21,5 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/tools/geotextile-calculator", 0.8),
     entry("/about", 0.5),
     entry("/contact", 0.6),
+    entry("/privacy", 0.2),
   ];
 }

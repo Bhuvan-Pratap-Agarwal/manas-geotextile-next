@@ -15,7 +15,7 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
               {i === all.length - 1 ? (
                 <span aria-current="page" className="text-ink-2">{it.name}</span>
               ) : (
-                <Link href={it.path} className="hover:text-ink">{it.name}</Link>
+                <Link href={it.path} className="-my-1.5 inline-block py-1.5 hover:text-ink">{it.name}</Link>
               )}
             </li>
           ))}

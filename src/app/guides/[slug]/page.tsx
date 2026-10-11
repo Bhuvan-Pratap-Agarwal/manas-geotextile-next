@@ -60,7 +60,7 @@ export default async function GuidePage({ params }: Props) {
                 <ol className="space-y-2 text-[15px]">
                   {toc.map((t) => (
                     <li key={t}>
-                      <a href={`#${slugify(t)}`} className="text-ink-2 hover:text-accent">{t}</a>
+                      <a href={`#${slugify(t)}`} className="text-ink-2 hover:text-accent-ink">{t}</a>
                     </li>
                   ))}
                 </ol>
@@ -90,7 +90,7 @@ export default async function GuidePage({ params }: Props) {
             <div className="mt-8 grid gap-10 md:grid-cols-2">
               {related.map((r) => (
                 <Link key={r.slug} href={`/guides/${r.slug}`} className="group block border-t border-ink pt-6">
-                  <h2 className="h3 transition-colors group-hover:text-accent">{r.title}</h2>
+                  <h2 className="h3 transition-colors group-hover:text-accent-ink">{r.title}</h2>
                   <p className="mt-3 text-ink-2">{r.excerpt}</p>
                 </Link>
               ))}

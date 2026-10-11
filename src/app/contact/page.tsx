@@ -1,6 +1,7 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Container } from "@/components/Container";
-import { EnquiryForm } from "@/components/EnquiryForm";
+import { Suspense } from "react";
+import { EnquiryForm, EnquiryFromParams } from "@/components/EnquiryForm";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { site, tel } from "@/lib/site";
@@ -13,10 +14,7 @@ export const metadata = pageMetadata({
   path: "/contact",
 });
 
-type Props = { searchParams: Promise<{ product?: string; area?: string; datasheet?: string }> };
-
-export default async function ContactPage({ searchParams }: Props) {
-  const { product, area, datasheet } = await searchParams;
+export default function ContactPage() {
   const { contact, office, factory } = site;
 
   return (
@@ -31,10 +29,10 @@ export default async function ContactPage({ searchParams }: Props) {
           <Reveal className="space-y-10 lg:col-span-4">
             <div>
               <p className="eyebrow">Sales &amp; technical</p>
-              <a href={tel(contact.mobile)} className="mt-3 block text-xl hover:text-accent">{contact.mobile}</a>
-              <a href={tel(contact.phone)} className="mt-1 block text-xl hover:text-accent">{contact.phone}</a>
-              <a href={`mailto:${contact.salesEmail}`} className="mt-1 block text-xl hover:text-accent">{contact.salesEmail}</a>
-              <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="mt-1 block text-xl hover:text-accent">
+              <a href={tel(contact.mobile)} className="mt-3 block text-xl hover:text-accent-ink">{contact.mobile}</a>
+              <a href={tel(contact.phone)} className="mt-1 block text-xl hover:text-accent-ink">{contact.phone}</a>
+              <a href={`mailto:${contact.salesEmail}`} className="mt-1 block text-xl hover:text-accent-ink">{contact.salesEmail}</a>
+              <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="mt-1 block text-xl hover:text-accent-ink">
                 WhatsApp →
               </a>
             </div>
@@ -50,7 +48,7 @@ export default async function ContactPage({ searchParams }: Props) {
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${a.street}, ${a.city}, ${a.region} ${a.postalCode}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-block text-[14px] text-muted underline underline-offset-4 hover:text-ink"
+                  className="mt-1 inline-block py-1.5 text-[14px] text-muted underline underline-offset-4 hover:text-ink"
                 >
                   Open in Maps
                 </a>
@@ -58,13 +56,15 @@ export default async function ContactPage({ searchParams }: Props) {
             ))}
             <div>
               <p className="eyebrow">Factory desk</p>
-              <a href={tel(factory.phone)} className="mt-3 block text-ink-2 hover:text-accent">{factory.phone}</a>
-              <a href={`mailto:${factory.email}`} className="block text-ink-2 hover:text-accent">{factory.email}</a>
+              <a href={tel(factory.phone)} className="mt-3 block text-ink-2 hover:text-accent-ink">{factory.phone}</a>
+              <a href={`mailto:${factory.email}`} className="block text-ink-2 hover:text-accent-ink">{factory.email}</a>
               <p className="mt-3 text-ink-2">{contact.hours}</p>
             </div>
           </Reveal>
           <Reveal className="lg:col-span-8" delay={0.08}>
-            <EnquiryForm defaultProduct={product} defaultArea={area} datasheet={datasheet === "1"} />
+            <Suspense fallback={<EnquiryForm />}>
+              <EnquiryFromParams />
+            </Suspense>
           </Reveal>
         </Container>
       </section>

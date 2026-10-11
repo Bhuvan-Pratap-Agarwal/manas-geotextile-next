@@ -18,14 +18,14 @@ export function PageHero({
     <section className="pb-16 pt-28 md:pb-24 md:pt-36">
       <Container>
         {crumbs && <div className="mb-12">{crumbs}</div>}
-        <Reveal>
+        <Reveal immediate>
           <p className="eyebrow">{eyebrow}</p>
         </Reveal>
-        <Reveal delay={0.05}>
+        <Reveal immediate delay={0.05}>
           <h1 className="display mt-6 max-w-[18ch] text-balance">{title}</h1>
         </Reveal>
         {lead && (
-          <Reveal delay={0.1}>
+          <Reveal immediate delay={0.1}>
             <p className="lead mt-8 max-w-2xl">{lead}</p>
           </Reveal>
         )}

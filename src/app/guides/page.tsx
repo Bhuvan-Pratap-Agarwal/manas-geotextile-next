@@ -33,7 +33,7 @@ export default function GuidesPage() {
                     {String(i + 1).padStart(2, "0")} · {g.readingMinutes} min read
                   </p>
                   <div>
-                    <h2 className="text-2xl font-medium tracking-[-0.03em] transition-colors group-hover:text-accent md:text-3xl">{g.title}</h2>
+                    <h2 className="text-2xl font-medium tracking-[-0.03em] transition-colors group-hover:text-accent-ink md:text-3xl">{g.title}</h2>
                     <p className="mt-3 text-ink-2">{g.excerpt}</p>
                   </div>
                 </Link>

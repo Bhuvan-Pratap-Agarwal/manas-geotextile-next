@@ -71,6 +71,22 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
+      <section className="border-t border-line py-20">
+        <Container className="grid gap-6 lg:grid-cols-12">
+          <p className="eyebrow lg:col-span-3">In the press</p>
+          <a
+            href="https://worldoftechnicaltextile.com/manas-geo-tech-india-breaking-new-ground-in-geotextiles/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group lg:col-span-9"
+          >
+            <p className="text-2xl leading-snug tracking-[-0.02em] transition-colors group-hover:text-accent-ink md:text-3xl">
+              &ldquo;Manas Geo Tech India — breaking new ground in geotextiles&rdquo;
+            </p>
+            <p className="mt-3 text-ink-2">Techtextiles &amp; Nonwovens — profile of the Bawal plant and its European needle-punching line ↗</p>
+          </a>
+        </Container>
+      </section>
       <section className="bg-paper-2 py-20">
         <Container className="grid gap-6 text-[15px] text-ink-2 sm:grid-cols-3">
           <div>

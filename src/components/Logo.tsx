@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
 
 export function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2.5" aria-label={`${site.name} — home`}>
+    <Link href="/" className="flex items-center gap-2.5">
       <svg viewBox="0 0 24 24" className="size-6" aria-hidden>
         <rect x="2" y="4" width="20" height="3" fill="currentColor" />
         <rect x="2" y="10.5" width="20" height="3" fill="var(--accent)" />

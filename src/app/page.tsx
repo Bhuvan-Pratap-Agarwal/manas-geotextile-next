@@ -44,26 +44,30 @@ export default function Home() {
       <section className="pt-28 md:pt-36">
         <Container className="grid gap-14 pb-20 lg:grid-cols-12 lg:gap-10 lg:pb-28">
           <div className="lg:col-span-6 lg:pt-6">
-            <Reveal>
+            <Reveal immediate>
               <p className="eyebrow">Geotextile manufacturer · India · Since 1995</p>
             </Reveal>
-            <Reveal delay={0.05}>
+            <Reveal immediate delay={0.05}>
               <h1 className="mt-6 text-balance text-[clamp(2.6rem,6vw,5.4rem)] font-medium leading-[0.95] tracking-[-0.045em]">
                 The geotextile that keeps roads <span className="text-muted">from failing.</span>
               </h1>
             </Reveal>
-            <Reveal delay={0.1}>
+            <Reveal immediate delay={0.1}>
               <p className="lead mt-8 max-w-lg">
                 Needle-punched non-woven geotextile from 150 to 1500 GSM, PVC geomembranes and geo bags — made on
-                European lines in Haryana for India&apos;s roads, railways, tunnels and coastlines.
+                European lines in Haryana for the contractors and engineers building India&apos;s roads, railways,
+                tunnels and coastlines.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <ButtonLink href="/contact">Get a quote</ButtonLink>
                 <ButtonLink href="/tools/geotextile-calculator" variant="ghost">Calculate quantity</ButtonLink>
               </div>
+              <p className="mt-5 text-[14px] text-muted">
+                No-obligation quote · Reply on WhatsApp, phone or email
+              </p>
             </Reveal>
           </div>
-          <Reveal className="lg:col-span-6" delay={0.15}>
+          <Reveal immediate className="lg:col-span-6" delay={0.15}>
             <SeparationDemo />
           </Reveal>
         </Container>
@@ -82,6 +86,20 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      <div className="border-b border-line">
+        <Container className="flex flex-col gap-1 py-4 text-[14px] text-ink-2 sm:flex-row sm:items-center sm:gap-3">
+          <span className="eyebrow">In the press</span>
+          <a
+            href="https://worldoftechnicaltextile.com/manas-geo-tech-india-breaking-new-ground-in-geotextiles/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-1 hover:text-ink"
+          >
+            Techtextiles &amp; Nonwovens — &ldquo;Manas Geo Tech India: breaking new ground in geotextiles&rdquo; ↗
+          </a>
+        </Container>
+      </div>
 
       {/* Marquee */}
       <div className="overflow-hidden border-b border-line py-5" aria-hidden>
@@ -164,7 +182,7 @@ export default function Home() {
                   <div>
                     <h3 className="h3 flex items-center justify-between gap-4">
                       {a.name}
-                      <ArrowUpRight className="size-5 shrink-0 text-muted transition-colors group-hover:text-accent" strokeWidth={1.5} />
+                      <ArrowUpRight className="size-5 shrink-0 text-muted transition-colors group-hover:text-accent-ink" strokeWidth={1.5} />
                     </h3>
                     <p className="mt-2 text-[15px] text-ink-2">{a.summary}</p>
                   </div>
@@ -205,12 +223,34 @@ export default function Home() {
               <Reveal key={g.slug} delay={i * 0.06}>
                 <Link href={`/guides/${g.slug}`} className="group block border-t border-ink pt-6">
                   <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">{g.readingMinutes} min read</p>
-                  <h3 className="h3 mt-4 transition-colors group-hover:text-accent">{g.title}</h3>
+                  <h3 className="h3 mt-4 transition-colors group-hover:text-accent-ink">{g.title}</h3>
                   <p className="mt-3 text-ink-2">{g.excerpt}</p>
                 </Link>
               </Reveal>
             ))}
           </div>
+        </Container>
+      </section>
+
+      {/* How ordering works */}
+      <section className="bg-paper-2 py-24 md:py-32">
+        <Container>
+          <SectionHead eyebrow="04 — Ordering" title="Three steps from enquiry to site." />
+          <ol className="mt-16 grid gap-10 md:grid-cols-3">
+            {[
+              { t: "Share your requirement", b: "Send the spec, drawing or BOQ — or just the application and area. WhatsApp, phone or the form." },
+              { t: "Get the grade and a quote", b: "We confirm the right grade for your specification and quote a delivered price for your site." },
+              { t: "Dispatch from Bawal", b: "Rolls are made at our IMT Bawal factory and dispatched to your site." },
+            ].map((s, i) => (
+              <li key={s.t} className="border-t border-ink pt-6">
+                <Reveal delay={i * 0.06}>
+                  <span className="font-mono text-sm text-accent-ink">0{i + 1}</span>
+                  <h3 className="h3 mt-6">{s.t}</h3>
+                  <p className="mt-3 text-ink-2">{s.b}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
         </Container>
       </section>
 
