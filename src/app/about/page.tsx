@@ -4,6 +4,8 @@ import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
 import { Photo } from "@/components/Photo";
+import { CountUp } from "@/components/CountUp";
+import { MakingStory } from "@/components/MakingStory";
 import { Reveal } from "@/components/Reveal";
 import { events } from "@/lib/projects";
 import { site } from "@/lib/site";
@@ -15,13 +17,6 @@ export const metadata = pageMetadata({
     "Manas Geo Tech India Pvt. Ltd.: European needle-punching lines, Ramina winder, PVC membrane extrusion and an in-house lab at IMT Bawal, Haryana. 250 tonnes a month. ISO 9001:2015 and ISO 14001:2015.",
   path: "/about",
 });
-
-const steps = [
-  { img: "/images/plant-carding.jpg", title: "Carding", body: "Polypropylene or polyester staple fibre is opened and carded into a thin, even web." },
-  { img: "/images/line-fabric.jpg", title: "Needle punching", body: "Layers of web are locked together by thousands of barbed needles into a strong, permeable felt." },
-  { img: "/images/plant-hall.jpg", title: "Calendering", body: "The fabric is thermo-calendered for a smooth, durable finish and stable thickness." },
-  { img: "/images/plant-ramina-winder.jpg", title: "Winding", body: "A Ramina winder rolls it into tight, even 5 m rolls, or slits it to narrow widths." },
-];
 
 const lab = [
   { img: "/images/lab-wide-width.jpg", title: "Wide-width tensile strength" },
@@ -49,13 +44,13 @@ export default function AboutPage() {
           <Reveal className="lg:col-span-6" delay={0.05}>
             <dl className="grid grid-cols-2 gap-x-6 gap-y-8">
               {[
-                [`${facts.capacityTonnesPerMonth} t`, "Non-woven geotextile per month"],
-                [`${facts.rollWidthM} m`, "Roll width"],
-                ["100–1000", "GSM range"],
+                [<CountUp key="c" to={facts.capacityTonnesPerMonth} suffix=" t" />, "Non-woven geotextile per month"],
+                [<CountUp key="w" to={facts.rollWidthM} suffix=" m" />, "Roll width"],
+                [<CountUp key="g" to={1000} prefix="100–" />, "GSM range"],
                 ["2", "Product lines: geotextile and PVC membrane"],
               ].map(([v, l]) => (
-                <div key={l}>
-                  <dt className="sr-only">{l}</dt>
+                <div key={String(l)}>
+                  <dt className="sr-only">{String(l)}</dt>
                   <dd>
                     <span className="block text-4xl font-bold text-navy [font-stretch:92%]">{v}</span>
                     <span className="mt-1 block text-[15px] text-muted">{l}</span>
@@ -76,18 +71,9 @@ export default function AboutPage() {
       <section className="bg-paper-2 py-16 md:py-24">
         <Container>
           <h2 className="h2 text-navy">How a roll is made</h2>
-          <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <li key={s.title}>
-                <Reveal delay={i * 0.05}>
-                  <Photo src={s.img} alt={s.title} ratio="4/3" sizes="(min-width: 1024px) 25vw, 50vw" />
-                  <p className="mt-4 text-[14px] font-semibold text-accent-ink">Step {i + 1}</p>
-                  <h3 className="h3 text-navy">{s.title}</h3>
-                  <p className="mt-1.5 text-[15px] text-ink-2">{s.body}</p>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-6">
+            <MakingStory />
+          </div>
         </Container>
       </section>
 

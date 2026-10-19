@@ -4,8 +4,9 @@ import { ClientLogos } from "@/components/ClientLogos";
 import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
-import { Photo } from "@/components/Photo";
+import { ProjectGallery } from "@/components/ProjectGallery";
 import { Reveal } from "@/components/Reveal";
+import { applications } from "@/lib/applications";
 import { clients } from "@/lib/clients";
 import { projects } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
@@ -51,17 +52,9 @@ export default function ProjectsPage() {
       <section className="bg-paper-2 py-16 md:py-24">
         <Container>
           <h2 className="h2 text-navy">On site</h2>
-          <div className="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            {rest.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 3) * 0.05}>
-                <article id={p.slug} className="scroll-mt-36">
-                  <Photo src={p.image} alt={p.imageAlt} ratio="4/3" sizes="(min-width: 1024px) 33vw, 50vw" />
-                  <h3 className="mt-4 text-[17px] font-semibold leading-snug text-navy">{p.title}</h3>
-                  <p className="mt-1 text-[14px] text-muted">{p.where} · {p.product}</p>
-                  {p.note && <p className="mt-1.5 text-[15px] text-ink-2">{p.note}</p>}
-                </article>
-              </Reveal>
-            ))}
+          <p className="lead mt-3">Filter by application. Tap any photo to see it full screen.</p>
+          <div className="mt-8">
+            <ProjectGallery items={rest} filters={applications.map((a) => ({ slug: a.slug, name: a.name }))} />
           </div>
         </Container>
       </section>

@@ -7,6 +7,9 @@ import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { Prose } from "@/components/Prose";
+import { MarkSeen } from "@/components/Explored";
+import { NextUp } from "@/components/NextUp";
+import { ReadingProgress } from "@/components/ReadingProgress";
 import { slugify } from "@/lib/content-types";
 import { getGuide, guides } from "@/lib/guides";
 import { articleSchema } from "@/lib/schema";
@@ -35,9 +38,12 @@ export default async function GuidePage({ params }: Props) {
   const path = `/guides/${g.slug}`;
   const toc = g.blocks.filter((b) => b.type === "h2").map((b) => b.text);
   const related = g.related.map(getGuide).filter((r) => r !== undefined);
+  const nextGuide = guides[(guides.findIndex((x) => x.slug === g.slug) + 1) % guides.length];
 
   return (
     <>
+      <ReadingProgress />
+      <MarkSeen path={path} />
       <JsonLd data={articleSchema({ title: g.title, description: g.metaDescription, path, updated: g.updated })} />
       <article>
         <header className="pb-10 pt-32 md:pt-[148px]">
@@ -98,6 +104,7 @@ export default async function GuidePage({ params }: Props) {
           </Container>
         </section>
       )}
+      <NextUp href={`/guides/${nextGuide.slug}`} kicker={`Guide · ${nextGuide.readingMinutes} min read`} title={nextGuide.title} body={nextGuide.excerpt} />
       <CtaBand />
     </>
   );
