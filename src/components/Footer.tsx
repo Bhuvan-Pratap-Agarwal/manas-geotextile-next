@@ -47,6 +47,7 @@ export function Footer() {
               { href: "/projects", label: "Projects & clients" },
               { href: "/downloads", label: "Datasheets & brochures" },
               { href: "/tools/geotextile-calculator", label: "Quantity calculator" },
+              { href: "/tools/build-a-road", label: "Build a road (game)" },
               { href: "/guides", label: "Guides" },
               { href: "/contact", label: "Contact" },
             ]}

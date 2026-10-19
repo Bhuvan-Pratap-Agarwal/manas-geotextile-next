@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./Container";
+import { FibreField } from "./FibreField";
 
 /** Full-width "Up next" teaser that pulls visitors to the next page in a series. */
 export function NextUp({ href, kicker, title, body, image }: { href: string; kicker: string; title: string; body?: string; image?: string }) {
@@ -8,7 +9,8 @@ export function NextUp({ href, kicker, title, body, image }: { href: string; kic
     <section className="py-16 md:py-20">
       <Container>
         <Link href={href} className={`group relative grid overflow-hidden rounded-[8px] bg-navy text-white ${image ? "md:grid-cols-2" : ""}`}>
-          <div className="flex flex-col justify-center p-8 md:p-12">
+          <FibreField color="255, 255, 255" opacity={0.08} density={0.6} />
+          <div className="relative flex flex-col justify-center p-8 md:p-12">
             <p className="text-[14px] font-semibold text-sky">Up next · {kicker}</p>
             <h2 className="mt-3 text-[clamp(1.8rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-[-0.02em] [font-stretch:92%]">{title}</h2>
             {body && <p className="mt-3 max-w-md text-white/75">{body}</p>}

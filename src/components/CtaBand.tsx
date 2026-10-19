@@ -1,6 +1,7 @@
 import { site, tel } from "@/lib/site";
 import { ButtonLink } from "./ButtonLink";
 import { Container } from "./Container";
+import { FibreField } from "./FibreField";
 import { Reveal } from "./Reveal";
 
 export function CtaBand({
@@ -11,8 +12,9 @@ export function CtaBand({
   sub?: string;
 }) {
   return (
-    <section className="bg-navy text-white">
-      <Container className="grid gap-10 py-20 md:py-24 lg:grid-cols-12 lg:items-center">
+    <section className="relative overflow-hidden bg-navy text-white">
+      <FibreField color="255, 255, 255" opacity={0.09} density={0.7} />
+      <Container className="relative grid gap-10 py-20 md:py-24 lg:grid-cols-12 lg:items-center">
         <Reveal className="lg:col-span-7">
           <h2 className="h2 text-balance">{title}</h2>
           <p className="lead mt-4 max-w-xl !text-white/80">{sub}</p>
