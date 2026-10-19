@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
+import { ExploredCount, SeenBadge } from "@/components/Explored";
 import { products } from "@/lib/products";
 import { pageMetadata } from "@/lib/seo";
 
@@ -25,17 +26,22 @@ export default function ProductsPage() {
         eyebrow="Products"
         title="Geosynthetics we make at IMT Bawal"
         lead="Tell us the application and the specification, and we'll recommend the grade. Datasheets for every product are free to download."
-      />
+      >
+        <div className="mt-8">
+          <ExploredCount paths={made.map((p) => `/products/${p.slug}`)} noun="products" />
+        </div>
+      </PageHero>
       <section className="py-16 md:py-24">
         <Container className="space-y-6">
           {made.map((p, i) => (
             <Reveal key={p.slug}>
               <Link
                 href={`/products/${p.slug}`}
-                className="group grid overflow-hidden rounded-[4px] border border-line bg-white transition-colors hover:border-accent md:grid-cols-12"
+                className="group grid overflow-hidden rounded-[10px] border border-line bg-white transition-colors hover:border-accent md:grid-cols-12"
               >
-                <div className={`relative aspect-[16/9] bg-paper-2 md:col-span-5 md:aspect-auto md:min-h-[260px] ${i % 2 ? "md:order-2" : ""}`}>
-                  <Image src={p.image} alt={p.imageAlt} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+                <div className={`relative aspect-[16/9] overflow-hidden bg-paper-2 md:col-span-5 md:aspect-auto md:min-h-[260px] ${i % 2 ? "md:order-2" : ""}`}>
+                  <Image src={p.image} alt={p.imageAlt} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+                  <SeenBadge path={`/products/${p.slug}`} className="absolute left-3 top-3" />
                 </div>
                 <div className="flex flex-col justify-center p-6 md:col-span-7 md:p-10">
                   <p className="spec text-[13px] text-accent-ink">{p.code}</p>
