@@ -49,7 +49,7 @@ Other automated checks:
 | 10 | P2 | CTA label inconsistency ("Request" vs "Get a quote") | Manual | Unified to "Get a quote" | Fixed |
 | 11 | P2 | No privacy information near form | Playbook §15–16 | `/privacy` + note under form | Fixed |
 | 12 | P1 | **No proof: certifications, projects, clients, photos** | Content review | Needs client material | **Open — client** |
-| 13 | P1 | **Leads not captured server-side** | Form hands off to WhatsApp/email | Add Resend/Formspree/CRM endpoint | **Open — needs account** |
+| 13 | P1 | Leads not captured server-side | Form handed off to WhatsApp/email | `/api/enquiry` → Supabase + optional Resend alert | Fixed in code — needs Supabase env vars (docs/deploy.md) |
 | 14 | P2 | No real photography | Content review | Plant, rolls, installation photos (AVIF/WebP, sized) | **Open — client** |
 | 15 | P3 | Hero right column has spare height on large desktops | Screenshot | Revisit once photography exists | Open |
 

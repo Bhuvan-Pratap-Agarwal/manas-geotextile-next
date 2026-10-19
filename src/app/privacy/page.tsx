@@ -26,7 +26,9 @@ export default function PrivacyPage() {
               {
                 type: "list",
                 items: [
-                  "Enquiries: the details you choose to send us on WhatsApp or by email — name, contact details and project information.",
+                  "Enquiries: the details you submit through the enquiry form (name, contact details and project information) are stored securely so our sales team can reply. If you choose WhatsApp or email instead, we receive what you send there.",
+                  "To protect the form from abuse we also record the IP address and browser type with each enquiry.",
+                  "Anonymous, cookie-free visit statistics (Vercel Web Analytics and Speed Insights) — page views and loading speed, never your identity.",
                   "This website does not use advertising or tracking cookies.",
                 ],
               },
