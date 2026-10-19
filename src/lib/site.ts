@@ -1,3 +1,18 @@
+// The real domain. Until it points at Vercel, the site runs on its
+// *.vercel.app address and stays out of search engines (see `indexable`).
+const PRODUCTION_DOMAIN = "https://manasgeotextile.com";
+
+// Vercel sets VERCEL_PROJECT_PRODUCTION_URL at build time; once
+// manasgeotextile.com is added in Vercel it becomes that domain automatically.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : PRODUCTION_DOMAIN);
+
+/** True only on the real domain — staging copies are noindex. */
+export const indexable = /^https:\/\/(www\.)?manasgeotextile\.com$/.test(siteUrl);
+
 // Contact details taken from the current manasgeotextile.com contact page
 // (Oct 2026). Confirm with the client before launch.
 export const site = {
@@ -6,7 +21,7 @@ export const site = {
   tagline: "Non-woven geotextile manufacturer in India",
   description:
     "Manas Geo Tech India manufactures needle-punched non-woven geotextiles (150–1500 GSM, up to 5 m wide), PVC geomembranes and geo bags at IMT Bawal, Haryana — for roads, railways, tunnels, landfills and coastal protection.",
-  url: "https://manasgeotextile.com",
+  url: siteUrl,
   foundingDate: "1995-12-12",
   cin: "U17120DL1995PTC068486",
   contact: {
