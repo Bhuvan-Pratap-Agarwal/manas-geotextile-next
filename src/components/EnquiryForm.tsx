@@ -2,17 +2,19 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { products } from "@/lib/products";
+import { enquiryText, normaliseEnquiry, validateEnquiry, type Enquiry, type EnquiryErrors } from "@/lib/enquiry";
 import { site, tel } from "@/lib/site";
 
-// TODO(launch): post to a real endpoint (Resend, Formspree or a CRM) so leads
-// are captured server-side. Until then the enquiry is handed to WhatsApp or the
-// visitor's email app, already written out.
-
 type Channel = "whatsapp" | "email";
-type Errors = Partial<Record<"name" | "contact", string>>;
+type Status =
+  | { kind: "idle" }
+  | { kind: "submitting" }
+  | { kind: "saved"; id: string | null }
+  | { kind: "handoff"; channel: Channel }
+  | { kind: "failed"; message: string };
 
 const field =
   "w-full border-0 border-b border-line bg-transparent px-0 py-3 text-[16px] outline-none transition-colors placeholder:text-muted focus:border-ink aria-[invalid=true]:border-accent-ink";
@@ -27,99 +29,133 @@ export function EnquiryForm({
   datasheet?: boolean;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const [errors, setErrors] = useState<Errors>({});
-  const [sent, setSent] = useState<Channel | null>(null);
+  const startedAt = useRef(0);
+  const last = useRef<Enquiry | null>(null);
+  const [errors, setErrors] = useState<EnquiryErrors>({});
+  const [status, setStatus] = useState<Status>({ kind: "idle" });
 
-  function read() {
-    const data = new FormData(formRef.current!);
-    const get = (k: string) => String(data.get(k) ?? "").trim();
-    return {
-      name: get("name"),
-      company: get("company"),
-      email: get("email"),
-      phone: get("phone"),
-      product: get("product"),
-      quantity: get("quantity"),
-      location: get("location"),
-      message: get("message"),
-    };
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
+  function read(): Enquiry {
+    const data = Object.fromEntries(new FormData(formRef.current!));
+    return normaliseEnquiry({ ...data, datasheet, page: window.location.pathname + window.location.search });
   }
 
-  function validate(v: ReturnType<typeof read>): Errors {
-    const e: Errors = {};
-    if (!v.name) e.name = "Please tell us your name.";
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email);
-    const phoneOk = v.phone.replace(/\D/g, "").length >= 10;
-    if (!emailOk && !phoneOk) e.contact = "Add a valid email or a 10-digit phone number so we can reply.";
-    return e;
-  }
-
-  function send(channel: Channel) {
-    const v = read();
-    const e = validate(v);
+  function check(v: Enquiry) {
+    const e = validateEnquiry(v);
     setErrors(e);
-    if (Object.keys(e).length) {
+    if (e.name || e.contact) {
       const first = e.name ? "name" : v.phone ? "phone" : "email";
       (formRef.current?.elements.namedItem(first) as HTMLElement | null)?.focus();
-      return;
+      return false;
     }
-    const kind = datasheet ? "Datasheet request" : "Quote request";
-    const lines = [
-      `${kind} — ${v.product || "Geotextile"}`,
-      "",
-      `Name: ${v.name}`,
-      v.company && `Company: ${v.company}`,
-      v.phone && `Phone: ${v.phone}`,
-      v.email && `Email: ${v.email}`,
-      `Product: ${v.product || "Not sure — please advise"}`,
-      v.quantity && `Quantity: ${v.quantity}`,
-      v.location && `Site location: ${v.location}`,
-      v.message && `\n${v.message}`,
-    ].filter(Boolean) as string[];
-    const body = lines.join("\n");
-    const url =
-      channel === "whatsapp"
-        ? `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(body)}`
-        : `mailto:${site.contact.salesEmail}?subject=${encodeURIComponent(`${kind} — ${v.product || "Geotextile"} — ${v.company || v.name}`)}&body=${encodeURIComponent(body)}`;
-    if (channel === "whatsapp") window.open(url, "_blank", "noopener");
-    else window.location.href = url;
-    setSent(channel);
+    return true;
   }
 
-  if (sent) {
+  function handoff(channel: Channel, v: Enquiry | null = last.current) {
+    if (!v) return;
+    const body = enquiryText(v);
+    const subject = `${v.datasheet ? "Datasheet request" : "Quote request"} — ${v.product || "Geotextile"} — ${v.company || v.name}`;
+    if (channel === "whatsapp") {
+      window.open(`https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(body)}`, "_blank", "noopener");
+    } else {
+      window.location.href = `mailto:${site.contact.salesEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+  }
+
+  async function submit() {
+    if (status.kind === "submitting") return;
+    const v = read();
+    if (!check(v)) return;
+    last.current = v;
+    setStatus({ kind: "submitting" });
+    try {
+      const website = String(new FormData(formRef.current!).get("website") ?? "");
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...v, website, elapsed: Date.now() - startedAt.current }),
+      });
+      const json = (await res.json().catch(() => ({}))) as { ok?: boolean; id?: string | null; errors?: EnquiryErrors };
+      if (res.ok && json.ok) {
+        setStatus({ kind: "saved", id: json.id ?? null });
+        return;
+      }
+      // Database not connected yet (env vars missing): behave like the
+      // WhatsApp hand-off so visitors never see a broken form.
+      if (res.status === 503 && json.errors?.form === "not_configured") {
+        handoff("whatsapp", v);
+        setStatus({ kind: "handoff", channel: "whatsapp" });
+        return;
+      }
+      if (res.status === 422 && json.errors) {
+        setStatus({ kind: "idle" });
+        check(v);
+        return;
+      }
+      setStatus({
+        kind: "failed",
+        message:
+          json.errors?.form ?? "Our enquiry system didn't respond.",
+      });
+    } catch {
+      setStatus({ kind: "failed", message: "You seem to be offline." });
+    }
+  }
+
+  function viaChannel(channel: Channel) {
+    const v = read();
+    if (!check(v)) return;
+    last.current = v;
+    handoff(channel, v);
+    setStatus({ kind: "handoff", channel });
+  }
+
+  if (status.kind === "saved" || status.kind === "handoff") {
+    const saved = status.kind === "saved";
     return (
       <div role="status" className="border border-line bg-paper-2/60 p-8 sm:p-10">
         <span className="flex size-10 items-center justify-center rounded-full bg-ink text-paper">
           <Check className="size-5" strokeWidth={2} />
         </span>
-        <h2 className="h3 mt-6">Almost done — press send in {sent === "whatsapp" ? "WhatsApp" : "your email app"}.</h2>
+        <h2 className="h3 mt-6">
+          {saved
+            ? "Thank you — your enquiry has reached our sales team."
+            : `Almost done — press send in ${status.channel === "whatsapp" ? "WhatsApp" : "your email app"}.`}
+        </h2>
         <p className="mt-3 max-w-lg text-ink-2">
-          We&apos;ve written your enquiry out for you. Once you send it, our sales team will reply with a grade
-          recommendation and a quote.
+          {saved
+            ? `We'll reply on ${last.current?.phone ? "the phone number" : "the email"} you gave with a grade recommendation and a quote.`
+            : "We've written your enquiry out for you. Once you send it, our sales team will reply with a grade recommendation and a quote."}
         </p>
+        {saved && status.id && (
+          <p className="mt-4 font-mono text-[13px] text-muted">Reference: {status.id.slice(0, 8).toUpperCase()}</p>
+        )}
         <p className="mt-6 text-[15px] text-ink-2">
-          Didn&apos;t open?{" "}
-          {sent === "email" ? (
-            <button type="button" onClick={() => send("whatsapp")} className="underline underline-offset-4 hover:text-ink">
-              Send on WhatsApp instead
-            </button>
-          ) : (
-            <button type="button" onClick={() => send("email")} className="underline underline-offset-4 hover:text-ink">
-              Send by email instead
-            </button>
-          )}{" "}
+          {saved ? "Need it sooner? " : "Didn't open? "}
+          <button type="button" onClick={() => handoff("whatsapp")} className="py-1 underline underline-offset-4 hover:text-ink">
+            {saved ? "Continue on WhatsApp" : "Send on WhatsApp"}
+          </button>{" "}
           or call{" "}
-          <a href={tel(site.contact.mobile)} className="underline underline-offset-4 hover:text-ink">
+          <a href={tel(site.contact.mobile)} className="py-1 underline underline-offset-4 hover:text-ink">
             {site.contact.mobile}
           </a>
           .
         </p>
-        <button type="button" onClick={() => setSent(null)} className="mt-8 text-[14px] text-muted underline underline-offset-4 hover:text-ink">
-          Edit enquiry
+        <button
+          type="button"
+          onClick={() => setStatus({ kind: "idle" })}
+          className="mt-8 py-1 text-[14px] text-muted underline underline-offset-4 hover:text-ink"
+        >
+          {saved ? "Send another enquiry" : "Edit enquiry"}
         </button>
       </div>
     );
   }
+
+  const submitting = status.kind === "submitting";
 
   return (
     <form
@@ -127,10 +163,18 @@ export function EnquiryForm({
       noValidate
       onSubmit={(e) => {
         e.preventDefault();
-        send("whatsapp");
+        submit();
       }}
-      className="grid gap-x-8 gap-y-7 sm:grid-cols-2"
+      aria-busy={submitting}
+      className="relative grid gap-x-8 gap-y-7 sm:grid-cols-2"
     >
+      {/* Honeypot: hidden from people and assistive tech; bots fill it in. */}
+      <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label>
+          Leave this empty
+          <input name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <p className="text-[15px] text-ink-2 sm:col-span-2">
         {datasheet ? "Tell us which grade you need and we'll send the datasheet." : "Two fields are required. The more you tell us, the more precise the quote."}
       </p>
@@ -198,20 +242,40 @@ export function EnquiryForm({
         <span className="eyebrow">Project details</span>
         <textarea name="message" rows={3} className={`${field} resize-none`} placeholder="Application, GSM or spec, timeline…" />
       </label>
+      {status.kind === "failed" && (
+        <div role="alert" className="border-l-2 border-accent-ink bg-paper-2 px-5 py-4 text-[15px] text-ink sm:col-span-2">
+          <p>{status.message} Your details are still here — send them another way:</p>
+          <p className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
+            <button type="button" onClick={() => viaChannel("whatsapp")} className="py-1 font-medium underline underline-offset-4">
+              WhatsApp
+            </button>
+            <button type="button" onClick={() => viaChannel("email")} className="py-1 font-medium underline underline-offset-4">
+              Email
+            </button>
+            <a href={tel(site.contact.mobile)} className="py-1 font-medium underline underline-offset-4">
+              Call {site.contact.mobile}
+            </a>
+          </p>
+        </div>
+      )}
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center">
         <button
           type="submit"
-          className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink pl-6 pr-5 text-[15px] font-medium text-paper transition-colors hover:bg-accent-ink"
+          disabled={submitting}
+          className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink pl-6 pr-5 text-[15px] font-medium text-paper transition-colors hover:bg-accent-ink disabled:cursor-wait disabled:opacity-70"
         >
-          Send on WhatsApp
-          <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.75} />
+          {submitting ? "Sending…" : datasheet ? "Request datasheet" : "Send enquiry"}
+          {!submitting && (
+            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.75} />
+          )}
         </button>
         <button
           type="button"
-          onClick={() => send("email")}
-          className="inline-flex h-12 items-center justify-center rounded-full border border-ink/15 px-6 text-[15px] font-medium transition-colors hover:border-ink"
+          onClick={() => viaChannel("whatsapp")}
+          disabled={submitting}
+          className="inline-flex h-12 items-center justify-center rounded-full border border-ink/15 px-6 text-[15px] font-medium transition-colors hover:border-ink disabled:opacity-60"
         >
-          Send by email
+          Or send on WhatsApp
         </button>
       </div>
       <p className="text-[13px] text-muted sm:col-span-2">
