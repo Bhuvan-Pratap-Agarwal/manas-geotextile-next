@@ -7,7 +7,7 @@ import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { organizationSchema } from "@/lib/schema";
-import { site } from "@/lib/site";
+import { indexable, site } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -24,7 +24,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: { type: "website", siteName: site.name, locale: "en_IN" },
   twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true, googleBot: { "max-image-preview": "large", "max-snippet": -1 } },
+  robots: indexable
+    ? { index: true, follow: true, googleBot: { "max-image-preview": "large", "max-snippet": -1 } }
+    : { index: false, follow: false },
   // TODO(launch): add Google Search Console verification token.
   // verification: { google: "" },
 };
