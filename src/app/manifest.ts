@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Manas",
     start_url: "/",
     display: "standalone",
-    background_color: "#f6f5f1",
-    theme_color: "#0e100f",
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    background_color: "#ffffff",
+    theme_color: "#10347a",
+    icons: [{ src: "/icon.png", sizes: "512x512", type: "image/png" }],
   };
 }

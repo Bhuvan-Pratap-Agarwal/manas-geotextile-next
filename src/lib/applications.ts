@@ -15,13 +15,15 @@ export type Application = {
   body: { heading: string; text: string }[];
   products: string[];
   faqs: Faq[];
+  image: string;
+  imageAlt: string;
 };
 
 export const applications: Application[] = [
   {
     slug: "roads",
     name: "Roads & Highways",
-    seoTitle: "Geotextile for Road Construction — Subgrade Separation & Stabilisation",
+    seoTitle: "Geotextile for Road Construction | Subgrade Separation & Stabilisation",
     metaDescription:
       "How geotextile is used in road construction: separation of subgrade and aggregate, filtration and stabilisation. Grades, standards (IRC:SP:59, IS 16391) and supply across India.",
     summary: "Keep aggregate clean, spread load and extend pavement life on weak subgrades.",
@@ -52,6 +54,8 @@ export const applications: Application[] = [
       },
     ],
     products: ["non-woven-geotextile", "woven-geotextile", "geogrid", "pipe-wrap-geotextile"],
+    image: "/images/road-karnataka-mgt15.jpg",
+    imageAlt: "MGT-15 geotextile laid on a road project in Karnataka",
     faqs: [
       {
         q: "Why is geotextile used in road construction?",
@@ -66,12 +70,12 @@ export const applications: Application[] = [
   {
     slug: "railways",
     name: "Railways",
-    seoTitle: "Geotextile for Railway Track Formation — Ballast & Subgrade Protection",
+    seoTitle: "Geotextile for Railway Track Formation | Ballast & Subgrade Protection",
     metaDescription:
       "Geotextile in railway formations keeps ballast clean, stops mud pumping and stabilises subgrade under heavy axle loads. Non-woven and woven grades for Indian Railways and metro projects.",
     summary: "Stop mud pumping and keep ballast clean under heavy, repeated axle loads.",
     problem:
-      "Each passing wheel pumps water and fine soil up from the formation into the ballast. Fouled ballast drains poorly, loses its interlock and the track geometry deteriorates — driving constant maintenance.",
+      "Each passing wheel pumps water and fine soil up from the formation into the ballast. Fouled ballast drains poorly, loses its interlock and the track geometry deteriorates, driving constant maintenance.",
     solution:
       "A geotextile layer between blanket and subgrade filters the water, stops fines migrating and adds stability under cyclic loading.",
     benefits: ["Cleaner ballast for longer", "Fewer track geometry corrections", "Stable formation on weak soils", "Lower lifecycle maintenance"],
@@ -88,6 +92,8 @@ export const applications: Application[] = [
       },
     ],
     products: ["non-woven-geotextile", "woven-geotextile", "geogrid"],
+    image: "/images/railway-track.jpg",
+    imageAlt: "Railway track on ballast",
     faqs: [
       {
         q: "What does geotextile do in a railway track?",
@@ -120,6 +126,8 @@ export const applications: Application[] = [
       },
     ],
     products: ["pvc-geomembrane", "non-woven-geotextile"],
+    image: "/images/tunnel-gantry.jpg",
+    imageAlt: "Tunnel lined with PVC membrane, with the lining gantry in place",
     faqs: [
       {
         q: "How are tunnels waterproofed?",
@@ -129,10 +137,10 @@ export const applications: Application[] = [
   },
   {
     slug: "landfills",
-    name: "Landfills & Containment",
-    seoTitle: "Geotextile for Landfills — Geomembrane Protection & Leachate Filtration",
+    name: "Landfills & Canals",
+    seoTitle: "Geotextile for Landfills | Geomembrane Protection & Leachate Filtration",
     metaDescription:
-      "Heavy non-woven geotextiles protect landfill geomembranes from puncture and filter leachate drainage layers. Grades from 600 to 1500 GSM.",
+      "Heavy non-woven geotextiles protect landfill geomembranes from puncture and filter leachate drainage layers. Grades from 600 to 1000 GSM.",
     summary: "Protect the liner, filter the leachate, keep the barrier intact for decades.",
     problem:
       "Landfill liners must stay intact for decades under heavy waste loads. Sharp stones in drainage layers and subgrade can puncture the geomembrane, and leachate drains clog with fines.",
@@ -148,6 +156,8 @@ export const applications: Application[] = [
     ],
     body: [],
     products: ["non-woven-geotextile", "pvc-geomembrane"],
+    image: "/images/canal.jpg",
+    imageAlt: "Lined water channel",
     faqs: [
       {
         q: "What GSM geotextile protects a landfill geomembrane?",
@@ -166,7 +176,7 @@ export const applications: Application[] = [
       "Waves and currents wash fine soil out from under stone revetments and from riverbanks, leading to slumping, breaches and loss of land.",
     solution:
       "A non-woven geotextile filter under the armour layer retains the soil while relieving water pressure. Sand-filled geo bags build flexible revetments and bunds with local material.",
-    benefits: ["Soil retained under armour", "Flexible, self-adjusting protection", "Uses local sand fill", "Lower carbon than rock or concrete"],
+    benefits: ["Soil retained under armour", "Flexible, self-adjusting protection", "Uses local sand fill", "Used for emergency flood embankments"],
     layers: [
       { label: "Geo bags / rock armour", kind: "sand" },
       { label: "Filter geotextile", kind: "geo" },
@@ -180,6 +190,8 @@ export const applications: Application[] = [
       },
     ],
     products: ["geo-bags", "non-woven-geotextile", "geocell"],
+    image: "/images/geobags-north-east.jpg",
+    imageAlt: "Geo bags protecting a riverbank in North East India",
     faqs: [
       {
         q: "How do geo bags prevent erosion?",
@@ -190,10 +202,10 @@ export const applications: Application[] = [
   {
     slug: "drainage",
     name: "Drainage & Filtration",
-    seoTitle: "Geotextile for Drainage — French Drains, Pipe Wrap & Filter Fabric",
+    seoTitle: "Geotextile for Drainage | French Drains, Pipe Wrap & Filter Fabric",
     metaDescription:
       "Non-woven filter geotextile for French drains, subsurface drains, retaining wall backfill and perforated pipe wrapping. Prevents clogging and extends drain life.",
-    summary: "Drains that keep working — because the soil stays out.",
+    summary: "Drains that keep working, because the soil stays out.",
     problem: "Subsurface drains and wall backfills clog as fine soil migrates into the gravel and pipe, and water pressure builds up.",
     solution: "A non-woven filter geotextile wrapped around the drain or lining the trench keeps soil out while water flows freely.",
     benefits: ["Drains stay clear for decades", "Less gravel needed", "Lower water pressure behind walls"],
@@ -205,10 +217,109 @@ export const applications: Application[] = [
     ],
     body: [],
     products: ["pipe-wrap-geotextile", "non-woven-geotextile"],
+    image: "/images/subsurface-drainage-maharashtra.jpg",
+    imageAlt: "Geotextile-wrapped perforated pipes on a subsurface drainage project in Maharashtra",
     faqs: [
       {
         q: "What is the best geotextile for French drains?",
         a: "A non-woven geotextile of around 150–200 GSM, which balances high water flow with good soil retention.",
+      },
+    ],
+  },
+  {
+    slug: "ports",
+    name: "Ports & Land Reclamation",
+    seoTitle: "Geotextile for Ports | Soil Stabilisation for Container Yards & Reclamation",
+    metaDescription:
+      "Non-woven geotextile for port projects: soil stabilisation under container yards, land reclamation, sea walls and breakwaters. Supplied to port and defence port projects in India.",
+    summary: "Stabilise reclaimed ground so it carries heavy axle loads.",
+    problem:
+      "Port yards are often built on soft, reclaimed coastal soil. Under container handlers and heavy trucks the aggregate punches into the subgrade and the pavement fails early.",
+    solution:
+      "A non-woven geotextile between the subgrade and the granular layers stabilises the soil and raises its effective CBR, so the yard carries heavy axle loads. The same fabric filters behind sea walls, jetties and breakwaters.",
+    benefits: ["Higher bearing on soft reclaimed soil", "Thinner granular layers", "Filter layer behind sea walls", "Faster reclamation works"],
+    layers: [
+      { label: "Paving / yard surface", kind: "concrete" },
+      { label: "Granular base", kind: "aggregate" },
+      { label: "Non-woven geotextile", kind: "geo" },
+      { label: "Reclaimed soil", kind: "sand" },
+    ],
+    body: [
+      {
+        heading: "Where we've supplied",
+        text: "Manas non-woven geotextile has been used for soil stabilisation on a major port project and on a defence port project in India.",
+      },
+    ],
+    products: ["non-woven-geotextile", "geo-bags"],
+    image: "/images/defence-port.jpg",
+    imageAlt: "Manas geotextile used for soil stabilisation at a defence port project",
+    faqs: [
+      {
+        q: "How does geotextile help in port construction?",
+        a: "It separates soft reclaimed soil from the granular layers and stabilises the subgrade, so the yard can carry heavy axle loads from container handlers.",
+      },
+    ],
+  },
+  {
+    slug: "waterproofing",
+    name: "Roof & Building Waterproofing",
+    seoTitle: "Geotextile for Roof Waterproofing | Protection Layer for Waterproofing Coatings",
+    metaDescription:
+      "Non-woven geotextile protects roof and basement waterproofing coatings from damage and adds durability. Used on hotel and commercial projects in Delhi NCR.",
+    summary: "Protect the waterproofing coat so it lasts as long as the building.",
+    problem:
+      "Waterproofing coatings on roofs and basements get damaged by foot traffic, screed, tiles and backfill, and then leak.",
+    solution:
+      "A non-woven geotextile laid over (or within) the waterproofing coat protects it from damage and reinforces it, which adds years to its life.",
+    benefits: ["Protects the coating during construction", "Adds durability", "Easy to lay on large roofs"],
+    layers: [
+      { label: "Screed / tiles", kind: "concrete" },
+      { label: "Protection geotextile", kind: "geo" },
+      { label: "Waterproofing coating", kind: "membrane" },
+      { label: "Roof slab", kind: "concrete" },
+    ],
+    body: [
+      {
+        heading: "Where it's been used",
+        text: "Manas non-woven geotextile was used on the roof waterproofing of the Oberoi hotel in New Delhi and on other projects across Delhi NCR.",
+      },
+    ],
+    products: ["non-woven-geotextile"],
+    image: "/images/roof-oberoi.jpg",
+    imageAlt: "Manas geotextile on the roof waterproofing of the Oberoi hotel, New Delhi",
+    faqs: [
+      {
+        q: "Why use geotextile in roof waterproofing?",
+        a: "It protects the waterproofing coat from damage by screed, tiles and site traffic, and reinforces it so it lasts longer.",
+      },
+    ],
+  },
+  {
+    slug: "re-walls",
+    name: "RE Walls & Slopes",
+    seoTitle: "Geotextile and Geocomposite for RE Walls | Drainage & Filter Layer",
+    metaDescription:
+      "Non-woven geotextile and drainage geocomposite as the filter and drainage layer in reinforced earth (RE) walls, gabions and slope protection.",
+    summary: "Keep water pressure off the wall and the fill where it belongs.",
+    problem:
+      "Water trapped behind a reinforced earth wall builds up pressure, and fine fill can wash out through the facing joints or gabions.",
+    solution:
+      "A non-woven geotextile or drainage geocomposite behind the facing filters the fill and drains the water, so pressure stays low and the fill stays in place.",
+    benefits: ["Low pore water pressure", "No fines lost through the facing", "Replaces graded filter material", "Works with gabions and stone pitching"],
+    layers: [
+      { label: "Wall facing / gabion", kind: "concrete" },
+      { label: "Geotextile or geocomposite", kind: "geo" },
+      { label: "Reinforced fill", kind: "sand" },
+      { label: "Retained soil", kind: "soil" },
+    ],
+    body: [],
+    products: ["drainage-geocomposite", "non-woven-geotextile"],
+    image: "/images/gabion-filter.jpg",
+    imageAlt: "Non-woven geotextile used as a filter behind gabion boxes",
+    faqs: [
+      {
+        q: "What does geotextile do in an RE wall?",
+        a: "It works as the filter and drainage layer behind the facing, keeping the fill in place while letting water escape.",
       },
     ],
   },

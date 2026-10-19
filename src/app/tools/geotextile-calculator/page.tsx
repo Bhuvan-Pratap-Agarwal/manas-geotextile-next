@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 const path = "/tools/geotextile-calculator";
 
 export const metadata = pageMetadata({
-  title: "Geotextile Calculator — Square Metres, Rolls & Overlap",
+  title: "Geotextile Calculator | Square Metres, Rolls & Overlap",
   description:
     "Free geotextile quantity calculator: enter area, roll size, overlap and wastage to get total square metres, number of rolls and a suggested GSM.",
   path,
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: "How much extra geotextile should I allow for overlaps?",
-    a: "With 300 mm overlaps on 5 m wide rolls, side laps add about 6%. Narrower rolls or wider overlaps add more — the calculator works it out for your inputs.",
+    a: "With 300 mm overlaps on 5 m wide rolls, side laps add about 6%. Narrower rolls or wider overlaps add more, the calculator works it out for your inputs.",
   },
 ];
 
@@ -46,14 +46,14 @@ export default function CalculatorPage() {
         crumbs={<Breadcrumbs items={[{ name: "Geotextile calculator", path }]} />}
         eyebrow="Free tool"
         title="Geotextile calculator"
-        lead="Work out the square metres and rolls you need — including overlaps and wastage — and get a suggested grade for your application."
+        lead="Work out the square metres and rolls you need, including overlaps and wastage, and get a suggested grade for your application."
       />
-      <section className="pb-24 md:pb-36">
+      <section className="py-14 md:py-20">
         <Container className="border-t border-line pt-12">
           <Calculator />
         </Container>
       </section>
-      <section className="pb-24 md:pb-36">
+      <section className="py-14 md:py-20">
         <Container className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="eyebrow">How it works</p>

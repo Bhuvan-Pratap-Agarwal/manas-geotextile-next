@@ -19,7 +19,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/guides", 0.7),
     ...guides.map((g) => entry(`/guides/${g.slug}`, 0.7, new Date(g.updated))),
     entry("/tools/geotextile-calculator", 0.8),
-    entry("/about", 0.5),
+    entry("/projects", 0.8),
+    entry("/downloads", 0.7),
+    entry("/about", 0.6),
     entry("/contact", 0.6),
     entry("/privacy", 0.2),
   ];

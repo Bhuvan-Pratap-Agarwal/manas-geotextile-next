@@ -13,24 +13,55 @@ const siteUrl =
 /** True only on the real domain — staging copies are noindex. */
 export const indexable = /^https:\/\/(www\.)?manasgeotextile\.com$/.test(siteUrl);
 
-// Contact details taken from the current manasgeotextile.com contact page
-// (Oct 2026). Confirm with the client before launch.
+// Everything below is taken from the current manasgeotextile.com, the
+// company brochures and the MGT / M-Geo datasheets (scraped Oct 2026).
 export const site = {
-  name: "Manas Geotextile",
+  name: "Manas Geo Tech",
   legalName: "Manas Geo Tech India Pvt. Ltd.",
-  tagline: "Non-woven geotextile manufacturer in India",
+  tagline: "Non-woven geotextile and PVC geomembrane, made in Haryana",
   description:
-    "Manas Geo Tech India manufactures needle-punched non-woven geotextiles (150–1500 GSM, up to 5 m wide), PVC geomembranes and geo bags at IMT Bawal, Haryana — for roads, railways, tunnels, landfills and coastal protection.",
+    "Manas Geo Tech India makes needle-punched non-woven geotextile (100 to 1000 GSM, 5 m rolls), PVC tunnel waterproofing membrane, geo bags and drainage geocomposite at IMT Bawal, Haryana. ISO 9001 certified. Supplied to L&T, Afcons, Patel Engineering and other major contractors.",
   url: siteUrl,
   foundingDate: "1995-12-12",
   cin: "U17120DL1995PTC068486",
+  facts: {
+    foundersSince: 1996,
+    capacityTonnesPerMonth: 250,
+    rollWidthM: 5,
+    gsmRange: "100 to 1000 GSM",
+    collaboration: "Indo-Italian technical collaboration",
+    certifications: ["ISO 9001:2015", "ISO 14001:2015", "CE"],
+    salesOffices: ["New Delhi", "Mumbai", "Bengaluru"],
+  },
+  people: [
+    {
+      name: "Dinesh Kanodia",
+      role: "Founder & Chairman",
+      bio: "Over 40 years in Indian infrastructure. Sets the company's direction and its standards for quality.",
+    },
+    {
+      name: "Kartik Kanodia",
+      role: "Director, Sales & Operations",
+      bio: "Runs sales and plant operations and works directly with contractors and government agencies. Studied business at Lancaster University.",
+    },
+    {
+      name: "Ruby Kanodia",
+      role: "Director",
+      bio: "Director of the company since incorporation.",
+    },
+  ],
+  social: {
+    linkedin: "https://www.linkedin.com/company/manas-geo-tech-india-private-limited",
+    facebook: "https://www.facebook.com/Manas-Geo-Tech-India-Pvt-Ltd-790567034314134/",
+    youtube: "https://www.youtube.com/channel/UCa_vwfwSv7bTFN-APIMy9HA",
+  },
   contact: {
     email: "info@manasgeotextile.com",
     salesEmail: "sales@manasgeotextile.com",
     phone: "+91 11 4600 0770",
     mobile: "+91 96430 03960",
     whatsapp: "919643003960",
-    hours: "Mon–Sat · 9:30–18:30 IST",
+    hours: "Mon to Sat, 9:30 am to 6:30 pm",
   },
   office: {
     label: "Head office",
@@ -53,9 +84,9 @@ export const site = {
   nav: [
     { href: "/products", label: "Products" },
     { href: "/applications", label: "Applications" },
+    { href: "/projects", label: "Projects" },
+    { href: "/about", label: "Manufacturing" },
     { href: "/guides", label: "Guides" },
-    { href: "/tools/geotextile-calculator", label: "Calculator" },
-    { href: "/about", label: "Company" },
   ],
 } as const;
 

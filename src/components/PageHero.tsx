@@ -15,18 +15,16 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="pb-16 pt-28 md:pb-24 md:pt-36">
-      <Container>
-        {crumbs && <div className="mb-12">{crumbs}</div>}
+    <section className="border-b border-line bg-paper-2 pt-24 md:pt-[108px]">
+      <Container className="py-12 md:py-16">
+        {crumbs && <div className="mb-8">{crumbs}</div>}
         <Reveal immediate>
           <p className="eyebrow">{eyebrow}</p>
-        </Reveal>
-        <Reveal immediate delay={0.05}>
-          <h1 className="display mt-6 max-w-[18ch] text-balance">{title}</h1>
+          <h1 className="display mt-3 max-w-[22ch] text-balance text-navy">{title}</h1>
         </Reveal>
         {lead && (
-          <Reveal immediate delay={0.1}>
-            <p className="lead mt-8 max-w-2xl">{lead}</p>
+          <Reveal immediate delay={0.05}>
+            <p className="lead mt-5 max-w-2xl">{lead}</p>
           </Reveal>
         )}
         {children}

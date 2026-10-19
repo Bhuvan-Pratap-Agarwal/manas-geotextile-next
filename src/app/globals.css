@@ -1,15 +1,20 @@
 @import "tailwindcss";
 
+/* Colours taken from the Manas "GO" logo and printed brochures:
+   navy #10347a, brand blue #1f6fc5, sky #3fb7e4. */
 :root {
-  --paper: #f6f5f1;
-  --paper-2: #edebe4;
-  --ink: #0e100f;
-  --ink-2: #3a3d3b;
-  --muted: #62655f;
-  --line: #d9d6cc;
-  --accent: #e0531f;
-  --accent-ink: #b93d0c;
-  --soil: #e6dfd2;
+  --paper: #ffffff;
+  --paper-2: #f2f4f7;
+  --ink: #0f1b2d;
+  --ink-2: #374151;
+  --muted: #5a6472;
+  --line: #dde2ea;
+  --navy: #10347a;
+  --navy-2: #0b2659;
+  --accent: #1f6fc5;
+  --accent-ink: #1a62b0;
+  --sky: #3fb7e4;
+  --soil: #e9e3d8;
   --stone: #d3d0c7;
   --stone-edge: #a9a59a;
   --fines: #9b8a6e;
@@ -22,22 +27,24 @@
   --color-ink-2: var(--ink-2);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sky: var(--sky);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-plex-mono);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 8rem;
 }
 
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv11";
+  font-family: var(--font-archivo), system-ui, sans-serif;
 }
 
 :focus-visible {
@@ -52,35 +59,40 @@ body {
 }
 
 @layer utilities {
+  /* Small section label: sentence case, brand blue. */
   .eyebrow {
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent-ink);
   }
   .display {
-    font-size: clamp(2.75rem, 7vw, 6.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.045em;
-    font-weight: 500;
+    font-size: clamp(2.5rem, 5.6vw, 4.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    font-stretch: 92%;
   }
   .h2 {
-    font-size: clamp(2rem, 4.2vw, 3.75rem);
-    line-height: 1;
-    letter-spacing: -0.035em;
-    font-weight: 500;
+    font-size: clamp(1.85rem, 3.4vw, 2.85rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    font-stretch: 92%;
   }
   .h3 {
-    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    font-weight: 500;
+    font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-weight: 600;
   }
   .lead {
-    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-    line-height: 1.55;
+    font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+    line-height: 1.6;
     color: var(--ink-2);
+  }
+  .spec {
+    font-family: var(--font-plex-mono), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
   }
 }
 
@@ -93,60 +105,47 @@ body {
   margin-top: 1.25rem;
 }
 .prose-geo h2 {
-  margin-top: 3.5rem;
+  margin-top: 3rem;
   color: var(--ink);
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  font-weight: 500;
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 700;
 }
 .prose-geo h3 {
   margin-top: 2rem;
   color: var(--ink);
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-.prose-geo ul,
-.prose-geo ol {
-  padding-left: 1.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 .prose-geo ul {
-  list-style: none;
-  padding-left: 0;
+  list-style: disc;
+  padding-left: 1.25rem;
 }
-.prose-geo ul li {
-  position: relative;
-  padding-left: 1.5rem;
-}
-.prose-geo ul li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.8em;
-  width: 0.75rem;
-  height: 1px;
-  background: var(--accent);
+.prose-geo ul li::marker {
+  color: var(--accent);
 }
 .prose-geo ol {
   list-style: decimal;
+  padding-left: 1.25rem;
 }
 .prose-geo ol li::marker {
-  font-family: var(--font-geist-mono), monospace;
   color: var(--accent-ink);
-  font-size: 0.85em;
+  font-weight: 600;
 }
 .prose-geo li + li {
   margin-top: 0.5rem;
 }
 .prose-geo aside {
-  border-left: 2px solid var(--accent);
+  border-left: 3px solid var(--accent);
   background: var(--paper-2);
-  padding: 1.25rem 1.5rem;
+  padding: 1.1rem 1.4rem;
   color: var(--ink);
 }
 .prose-geo .table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
+  border-radius: 4px;
 }
 .prose-geo table {
   width: 100%;
@@ -156,11 +155,9 @@ body {
 .prose-geo caption {
   caption-side: top;
   text-align: left;
-  padding: 0.9rem 1rem;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  padding: 0.8rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--muted);
   border-bottom: 1px solid var(--line);
 }
@@ -168,17 +165,17 @@ body {
 .prose-geo td {
   text-align: left;
   vertical-align: top;
-  padding: 0.8rem 1rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--line);
 }
 .prose-geo thead th {
   background: var(--paper-2);
   color: var(--ink);
-  font-weight: 500;
+  font-weight: 600;
 }
 .prose-geo tbody th {
   color: var(--ink);
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
 }
 .prose-geo tr:last-child > * {
@@ -189,10 +186,10 @@ body {
   appearance: none;
   height: 32px;
   background-color: transparent;
-  background-image: linear-gradient(var(--ink), var(--ink)), linear-gradient(var(--line), var(--line));
+  background-image: linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--line), var(--line));
   background-repeat: no-repeat;
   background-position: left center, center;
-  background-size: 0% 2px, 100% 2px;
+  background-size: 0% 3px, 100% 3px;
   cursor: pointer;
 }
 .range:focus-visible {
@@ -220,43 +217,33 @@ body {
 /* Reveal-on-scroll (see components/Reveal.tsx) */
 [data-reveal] {
   transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s);
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s);
 }
 [data-reveal=""]:not([data-shown]) {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(16px);
 }
 [data-reveal="rise"] {
-  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) both;
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) both;
 }
 @keyframes rise {
   from {
     opacity: 0.01;
-    transform: translateY(18px);
+    transform: translateY(14px);
   }
 }
 @keyframes menu-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(10px);
   }
 }
 .menu-in {
-  animation: menu-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-.marquee {
-  animation: marquee 40s linear infinite;
+  animation: menu-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee,
   .menu-in,
   [data-reveal="rise"] {
     animation: none;

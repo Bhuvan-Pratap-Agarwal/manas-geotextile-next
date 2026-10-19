@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { ButtonLink } from "@/components/ButtonLink";
+import { ButtonLink, buttonClass } from "@/components/ButtonLink";
+import { DatasheetTable } from "@/components/DatasheetTable";
+import { Photo } from "@/components/Photo";
 import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
-import { LayerStack } from "@/components/LayerStack";
 import { Prose } from "@/components/Prose";
 import { Reveal } from "@/components/Reveal";
 import { getApplication } from "@/lib/applications";
@@ -52,63 +52,79 @@ export default async function ProductPage({ params }: Props) {
     <>
       <JsonLd data={productSchema({ name: p.name, description: p.metaDescription, path })} />
 
-      <section className="pb-20 pt-28 md:pt-36">
-        <Container>
+      <section className="pb-16 pt-24 md:pt-[108px]">
+        <Container className="pt-8 md:pt-12">
           <Breadcrumbs items={[{ name: "Products", path: "/products" }, { name: p.name, path }]} />
-          <div className="mt-12 grid gap-12 lg:grid-cols-12">
-            <Reveal immediate className="lg:col-span-7">
-              <p className="eyebrow">{p.code} — {p.functions.join(" · ")}</p>
-              <h1 className="display mt-6 text-balance">{p.name}</h1>
-              <div className="lead mt-8 max-w-xl space-y-4">
+          <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-12">
+            <Reveal immediate className="lg:col-span-6">
+              <p className="eyebrow">{p.functions.join(" · ")}</p>
+              <h1 className="display mt-3 text-balance text-navy">{p.name}</h1>
+              <div className="lead mt-6 max-w-xl space-y-4">
                 {p.intro.map((t) => <p key={t}>{t}</p>)}
               </div>
-              <div className="mt-10 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href={`/contact?product=${p.slug}`}>Get a quote</ButtonLink>
-                <ButtonLink href={`/contact?product=${p.slug}&datasheet=1`} variant="ghost">Request datasheet</ButtonLink>
+                {p.datasheets ? (
+                  <a href={p.datasheets[0].download} download className={buttonClass("outline")}>Download datasheet</a>
+                ) : (
+                  <ButtonLink href={`/contact?product=${p.slug}&datasheet=1`} variant="outline">Request datasheet</ButtonLink>
+                )}
               </div>
             </Reveal>
-            <Reveal immediate className="lg:col-span-5" delay={0.1}>
-              <div className="border border-line bg-paper-2/60 p-8">
-                <p className="eyebrow">Specification</p>
-                <dl className="mt-6 divide-y divide-line">
-                  {p.specs.map((s) => (
-                    <div key={s.label} className="flex justify-between gap-6 py-4 text-[15px]">
-                      <dt className="text-muted">{s.label}</dt>
-                      <dd className="text-right font-medium">{s.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <p className="mt-6 text-[13px] text-muted">Grade-wise test values on the datasheet.</p>
-              </div>
+            <Reveal immediate className="lg:col-span-6" delay={0.05}>
+              <Photo src={p.image} alt={p.imageAlt} ratio="4/3" priority sizes="(min-width: 1024px) 50vw, 100vw" />
+              <dl className="mt-6 divide-y divide-line border-y border-line">
+                {p.specs.map((s) => (
+                  <div key={s.label} className="flex justify-between gap-6 py-3 text-[15px]">
+                    <dt className="text-muted">{s.label}</dt>
+                    <dd className="text-right font-medium text-ink">{s.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </Reveal>
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-line">
+      <section className="bg-paper-2 py-14">
         <Container>
-          <div className={`grid gap-px bg-line ${highlightCols[Math.min(p.highlights.length, 4)]}`}>
-            {p.highlights.map((h, i) => (
-              <Reveal key={h.title} delay={i * 0.05} className="bg-paper py-10 sm:px-6 lg:first:pl-0">
-                <h2 className="h3">{h.title}</h2>
-                <p className="mt-3 text-[15px] text-ink-2">{h.body}</p>
-              </Reveal>
+          <ul className={`grid gap-8 ${highlightCols[Math.min(p.highlights.length, 4)]}`}>
+            {p.highlights.map((h) => (
+              <li key={h.title} className="border-l-2 border-accent pl-4">
+                <h2 className="text-[17px] font-semibold text-navy">{h.title}</h2>
+                <p className="mt-1.5 text-[15px] text-ink-2">{h.body}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
+
+      {p.datasheets && (
+        <section id="datasheet" className="py-16 md:py-24">
+          <Container>
+            <p className="eyebrow">Datasheet</p>
+            <h2 className="h2 mt-3 text-navy">Technical values, grade by grade</h2>
+            <div className="mt-10 space-y-14">
+              {p.datasheets.map((d) => (
+                <DatasheetTable key={d.id} sheet={d} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
 
       {p.grades && (
-        <section className="border-t border-line py-20 md:py-28">
+        <section className="border-t border-line py-16 md:py-24">
           <Container className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="eyebrow">Grade selector</p>
-              <h2 className="h2 mt-6">Which GSM for which job</h2>
+              <p className="eyebrow">Choosing a grade</p>
+              <h2 className="h2 mt-3 text-navy">Which GSM for which job</h2>
+              <p className="mt-4 text-ink-2">A starting point. Your contract specification decides, and we&apos;re happy to check it.</p>
             </div>
             <div className="lg:col-span-8">
               <Prose blocks={[{ type: "table", head: p.grades.head, rows: p.grades.rows }]} />
-              <Link href="/guides/geotextile-gsm-guide" className="mt-4 inline-flex items-center gap-1 text-[15px] text-ink-2 hover:text-accent-ink">
-                Full GSM guide <ArrowUpRight className="size-4" strokeWidth={1.5} />
+              <Link href="/guides/geotextile-gsm-guide" className="mt-4 inline-block py-1 text-[15px] font-semibold text-accent-ink hover:text-navy">
+                Read the full GSM guide →
               </Link>
             </div>
           </Container>
@@ -116,18 +132,16 @@ export default async function ProductPage({ params }: Props) {
       )}
 
       {apps.length > 0 && (
-        <section className="bg-paper-2 py-20 md:py-28">
+        <section className="bg-paper-2 py-16 md:py-24">
           <Container>
-            <p className="eyebrow">Where it goes</p>
-            <h2 className="h2 mt-6">Applications</h2>
-            <div className="mt-12 grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-3">
+            <p className="eyebrow">Where it&apos;s used</p>
+            <h2 className="h2 mt-3 text-navy">Applications</h2>
+            <div className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {apps.map((a) => (
-                <Link key={a.slug} href={`/applications/${a.slug}`} className="group flex flex-col gap-6 border-b border-r border-line bg-paper-2 p-8 transition-colors hover:bg-paper">
-                  <LayerStack layers={a.layers} compact />
-                  <div>
-                    <h3 className="h3">{a.name}</h3>
-                    <p className="mt-2 text-[15px] text-ink-2">{a.summary}</p>
-                  </div>
+                <Link key={a.slug} href={`/applications/${a.slug}`} className="group block">
+                  <Photo src={a.image} alt={a.imageAlt} ratio="16/10" sizes="(min-width: 1024px) 25vw, 50vw" />
+                  <h3 className="mt-3 text-[17px] font-semibold text-navy group-hover:text-accent-ink">{a.name}</h3>
+                  <p className="mt-1 text-[14px] text-ink-2">{a.summary}</p>
                 </Link>
               ))}
             </div>
@@ -136,11 +150,11 @@ export default async function ProductPage({ params }: Props) {
       )}
 
       {p.faqs.length > 0 && (
-        <section className="py-20 md:py-28">
+        <section className="py-16 md:py-24">
           <Container className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="eyebrow">FAQ</p>
-              <h2 className="h2 mt-6">{p.name} questions</h2>
+              <p className="eyebrow">Questions</p>
+              <h2 className="h2 mt-3 text-navy">About {p.name.toLowerCase()}</h2>
             </div>
             <div className="lg:col-span-8">
               <Faq items={p.faqs} />
@@ -149,21 +163,21 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      <section className="border-t border-line py-20">
+      <section className="border-t border-line py-16">
         <Container>
           <p className="eyebrow">Read next</p>
-          <div className="mt-8 grid gap-10 md:grid-cols-3">
+          <div className="mt-6 grid gap-8 md:grid-cols-3">
             {relatedGuides.map((g) => (
-              <Link key={g.slug} href={`/guides/${g.slug}`} className="group block border-t border-ink pt-6">
-                <h3 className="h3 transition-colors group-hover:text-accent-ink">{g.title}</h3>
-                <p className="mt-3 text-ink-2">{g.excerpt}</p>
+              <Link key={g.slug} href={`/guides/${g.slug}`} className="group block rounded-[4px] border border-line p-6 transition-colors hover:border-accent">
+                <h3 className="text-[17px] font-semibold text-navy group-hover:text-accent-ink">{g.title}</h3>
+                <p className="mt-2 text-[15px] text-ink-2">{g.excerpt}</p>
               </Link>
             ))}
           </div>
         </Container>
       </section>
 
-      <CtaBand title={`Need ${p.name.toLowerCase()}?`} sub="Send the spec and quantity — we'll quote from the factory." />
+      <CtaBand title={`Need ${p.name.toLowerCase()}?`} sub="Send the specification and quantity. We'll confirm the grade and quote a delivered price." />
     </>
   );
 }

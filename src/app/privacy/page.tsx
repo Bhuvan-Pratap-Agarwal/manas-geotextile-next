@@ -17,8 +17,8 @@ export default function PrivacyPage() {
   return (
     <>
       <PageHero crumbs={<Breadcrumbs items={[{ name: "Privacy", path: "/privacy" }]} />} eyebrow="Privacy" title="Privacy note" />
-      <section className="pb-24 md:pb-36">
-        <Container className="max-w-3xl border-t border-line pt-12">
+      <section className="py-14 md:py-20">
+        <Container className="max-w-3xl">
           <Prose
             blocks={[
               { type: "p", text: `This website is operated by ${site.legalName}. We keep data collection to the minimum needed to answer your enquiry.` },
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
                 items: [
                   "Enquiries: the details you submit through the enquiry form (name, contact details and project information) are stored securely so our sales team can reply. If you choose WhatsApp or email instead, we receive what you send there.",
                   "To protect the form from abuse we also record the IP address and browser type with each enquiry.",
-                  "Anonymous, cookie-free visit statistics (Vercel Web Analytics and Speed Insights) — page views and loading speed, never your identity.",
+                  "Anonymous, cookie-free visit statistics (Vercel Web Analytics and Speed Insights), page views and loading speed, never your identity.",
                   "This website does not use advertising or tracking cookies.",
                 ],
               },

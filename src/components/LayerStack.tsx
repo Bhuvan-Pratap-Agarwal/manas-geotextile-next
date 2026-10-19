@@ -83,12 +83,12 @@ export function LayerStack({ layers, compact = false }: { layers: Layer[]; compa
                 <text
                   x={barW + 42}
                   y={l.y + l.h / 2 + 4}
-                  fontSize="12"
-                  letterSpacing="1.2"
-                  fontFamily="var(--font-geist-mono), monospace"
+                  fontSize="14"
+                  fontWeight={accent ? 600 : 400}
+                  fontFamily="var(--font-archivo), sans-serif"
                   fill={accent ? "var(--accent-ink)" : "var(--ink-2)"}
                 >
-                  {l.label.toUpperCase()}
+                  {l.label}
                 </text>
               </>
             )}

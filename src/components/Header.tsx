@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { site, tel } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { buttonClass } from "./ButtonLink";
 import { Container } from "./Container";
 import { Logo } from "./Logo";
 
@@ -42,13 +43,22 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300",
-        scrolled || open ? "border-b border-line bg-paper/85 backdrop-blur-xl" : "border-b border-transparent",
+        "fixed inset-x-0 top-0 z-50 bg-white transition-shadow duration-300",
+        scrolled || open ? "shadow-[0_1px_0_var(--line),0_6px_20px_rgba(15,27,45,0.06)]" : "shadow-[0_1px_0_var(--line)]",
       )}
     >
-      <Container className="flex h-16 items-center justify-between">
+      <div className="hidden bg-navy text-[13px] text-white/85 md:block">
+        <Container className="flex h-9 items-center justify-between">
+          <p>ISO 9001:2015 certified manufacturer · Factory at IMT Bawal, Haryana</p>
+          <p className="flex items-center gap-5">
+            <a href={tel(site.contact.mobile)} className="hover:text-white">{site.contact.mobile}</a>
+            <a href={`mailto:${site.contact.salesEmail}`} className="hover:text-white">{site.contact.salesEmail}</a>
+          </p>
+        </Container>
+      </div>
+      <Container className="flex h-16 items-center justify-between md:h-[72px]">
         <Logo />
-        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
           {site.nav.map((item) => {
             const active = pathname.startsWith(item.href);
             return (
@@ -57,71 +67,62 @@ export function Header() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative rounded-full px-3.5 py-2.5 text-[14px] transition-colors",
-                  active
-                    ? "text-ink after:absolute after:bottom-1 after:left-1/2 after:size-1 after:-translate-x-1/2 after:rounded-full after:bg-accent"
-                    : "text-ink-2 hover:text-ink",
+                  "border-b-2 px-3 py-6 text-[15px] font-medium transition-colors",
+                  active ? "border-accent text-navy" : "border-transparent text-ink-2 hover:text-navy",
                 )}
               >
                 {item.label}
               </Link>
             );
           })}
-          <Link
-            href="/contact"
-            className="ml-3 rounded-full bg-ink px-5 py-2.5 text-[14px] font-medium text-paper transition-colors hover:bg-accent-ink"
-          >
+          <Link href="/contact" className={buttonClass("solid", "ml-4 h-11 px-5")}>
             Get a quote
           </Link>
         </nav>
-        <button
-          type="button"
-          className="relative -mr-2 size-10 lg:hidden"
-          ref={toggleRef}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span
-            className={cn(
-              "absolute left-2 right-2 h-px bg-ink transition-transform duration-300",
-              open ? "top-1/2 rotate-45" : "top-[16px]",
-            )}
-          />
-          <span
-            className={cn(
-              "absolute left-2 right-2 h-px bg-ink transition-transform duration-300",
-              open ? "top-1/2 -rotate-45" : "top-[24px]",
-            )}
-          />
-        </button>
+        <div className="flex items-center gap-1 lg:hidden">
+          <a href={tel(site.contact.mobile)} className="px-3 py-2 text-[14px] font-semibold text-navy" aria-label={`Call ${site.contact.mobile}`}>
+            Call
+          </a>
+          <button
+            type="button"
+            className="relative -mr-2 size-11"
+            ref={toggleRef}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className={cn("absolute left-2.5 right-2.5 h-0.5 bg-navy transition-transform duration-300", open ? "top-1/2 rotate-45" : "top-[16px]")} />
+            <span className={cn("absolute left-2.5 right-2.5 h-0.5 bg-navy transition-opacity duration-300", open ? "top-1/2 opacity-0" : "top-[21px]")} />
+            <span className={cn("absolute left-2.5 right-2.5 h-0.5 bg-navy transition-transform duration-300", open ? "top-1/2 -rotate-45" : "top-[26px]")} />
+          </button>
+        </div>
       </Container>
 
       {open && (
         <nav
           id="mobile-menu"
           ref={menuRef}
-          className="menu-in h-[calc(100dvh-4rem)] overflow-y-auto bg-paper lg:hidden"
+          className="menu-in h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-white lg:hidden"
           aria-label="Mobile"
         >
-          <Container className="flex h-full flex-col justify-between py-10">
-            <ul className="space-y-2">
-              {[...site.nav, { href: "/contact", label: "Contact" }].map((item, i) => (
-                <li key={item.href} className="menu-in" style={{ animationDelay: `${0.05 * i}s` }}>
+          <Container className="flex h-full flex-col justify-between py-8">
+            <ul className="divide-y divide-line">
+              {[...site.nav, { href: "/tools/geotextile-calculator", label: "Quantity calculator" }, { href: "/contact", label: "Contact" }].map((item, i) => (
+                <li key={item.href} className="menu-in" style={{ animationDelay: `${0.04 * i}s` }}>
                   <Link
                     href={item.href}
                     aria-current={pathname.startsWith(item.href) ? "page" : undefined}
-                    className="block py-2 text-4xl font-medium tracking-[-0.03em]"
+                    className="block py-4 text-2xl font-semibold text-navy"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="space-y-1 text-ink-2">
-              <a href={`mailto:${site.contact.email}`} className="block py-1">{site.contact.email}</a>
-              <a href={tel(site.contact.mobile)} className="block py-1">{site.contact.mobile}</a>
+            <div className="mt-8 grid gap-3">
+              <Link href="/contact" className={buttonClass("solid")}>Get a quote</Link>
+              <a href={tel(site.contact.mobile)} className={buttonClass("outline")}>Call {site.contact.mobile}</a>
             </div>
           </Container>
         </nav>

@@ -24,7 +24,7 @@ export function Prose({ blocks }: { blocks: Block[] }) {
           }
           case "table":
             return (
-              <div key={i} className="table-wrap">
+              <div key={i} className="table-wrap" tabIndex={0} role="region" aria-label={b.caption ?? "Table"}>
                 <table>
                   {b.caption && <caption>{b.caption}</caption>}
                   <thead>
