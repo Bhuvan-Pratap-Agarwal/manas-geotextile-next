@@ -22,7 +22,7 @@ export function organizationSchema() {
         name: site.name,
         legalName: site.legalName,
         url: site.url,
-        logo: absoluteUrl("/icon.svg"),
+        logo: absoluteUrl("/images/logo-go.png"),
         description: site.description,
         foundingDate: site.foundingDate,
         email: site.contact.email,
@@ -42,7 +42,7 @@ export function organizationSchema() {
       {
         "@type": "LocalBusiness",
         "@id": absoluteUrl("/#factory"),
-        name: `${site.name} — Factory, IMT Bawal`,
+        name: `${site.name} | Factory, IMT Bawal`,
         parentOrganization: { "@id": orgId },
         telephone: site.factory.phone,
         email: site.factory.email,

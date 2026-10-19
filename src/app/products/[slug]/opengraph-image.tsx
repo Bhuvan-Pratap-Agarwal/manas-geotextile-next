@@ -3,7 +3,7 @@ import { getProduct, products } from "@/lib/products";
 
 export const size = ogSize;
 export const contentType = "image/png";
-export const alt = "Manas Geotextile product";
+export const alt = "Manas Geo Tech product";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));

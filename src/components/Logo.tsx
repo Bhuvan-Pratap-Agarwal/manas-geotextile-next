@@ -1,15 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
 
-export function Logo() {
+export function Logo({ inverted = false }: { inverted?: boolean }) {
   return (
     <Link href="/" className="flex items-center gap-2.5">
-      <svg viewBox="0 0 24 24" className="size-6" aria-hidden>
-        <rect x="2" y="4" width="20" height="3" fill="currentColor" />
-        <rect x="2" y="10.5" width="20" height="3" fill="var(--accent)" />
-        <rect x="2" y="17" width="20" height="3" fill="currentColor" />
-      </svg>
-      <span className="text-[17px] font-semibold tracking-[-0.02em]">
-        Manas<span className="font-normal text-muted"> Geotextile</span>
+      <span className={inverted ? "rounded-[3px] bg-white p-1" : ""}>
+        <Image src="/images/logo-go.png" alt="" width={44} height={41} className="h-10 w-auto" priority />
+      </span>
+      <span className="leading-none">
+        <span className={`block text-[20px] font-extrabold tracking-[-0.01em] ${inverted ? "text-white" : "text-navy"}`}>
+          MANAS
+        </span>
+        <span className={`block text-[11px] font-semibold tracking-[0.12em] ${inverted ? "text-white/70" : "text-accent-ink"}`}>
+          GEO TECH INDIA
+        </span>
       </span>
     </Link>
   );

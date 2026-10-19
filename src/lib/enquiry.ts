@@ -54,13 +54,13 @@ export function validateEnquiry(v: Enquiry): EnquiryErrors {
 export function enquiryText(v: Enquiry) {
   const kind = v.datasheet ? "Datasheet request" : "Quote request";
   return [
-    `${kind} — ${v.product || "Geotextile"}`,
+    `${kind} | ${v.product || "Geotextile"}`,
     "",
     `Name: ${v.name}`,
     v.company && `Company: ${v.company}`,
     v.phone && `Phone: ${v.phone}`,
     v.email && `Email: ${v.email}`,
-    `Product: ${v.product || "Not sure — please advise"}`,
+    `Product: ${v.product || "Not sure, please advise"}`,
     v.quantity && `Quantity: ${v.quantity}`,
     v.location && `Site location: ${v.location}`,
     v.message && `\n${v.message}`,

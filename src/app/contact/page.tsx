@@ -8,7 +8,7 @@ import { site, tel } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Contact — Geotextile Quote & Technical Advice",
+  title: "Contact | Geotextile Quote & Technical Advice",
   description:
     "Get a geotextile quote or datasheet from Manas Geo Tech India. Head office Vasant Kunj, New Delhi; factory IMT Bawal, Haryana. Call +91 11 4600 0770.",
   path: "/contact",
@@ -24,8 +24,8 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Let's talk about your project."
       />
-      <section className="pb-24 md:pb-36">
-        <Container className="grid gap-16 border-t border-line pt-12 lg:grid-cols-12">
+      <section className="py-14 md:py-20">
+        <Container className="grid gap-16 lg:grid-cols-12">
           <Reveal className="space-y-10 lg:col-span-4">
             <div>
               <p className="eyebrow">Sales &amp; technical</p>

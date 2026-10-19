@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
@@ -10,13 +10,13 @@ import { organizationSchema } from "@/lib/schema";
 import { indexable, site } from "@/lib/site";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const archivo = Archivo({ variable: "--font-archivo", subsets: ["latin"], axes: ["wdth"] });
+const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Geotextile Manufacturer in India — Non-Woven Geotextile, PVC Geomembrane | Manas",
+    default: "Geotextile Manufacturer in India | Non-Woven Geotextile & PVC Geomembrane | Manas Geo Tech",
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -31,12 +31,12 @@ export const metadata: Metadata = {
   // verification: { google: "" },
 };
 
-export const viewport: Viewport = { themeColor: "#f6f5f1" };
+export const viewport: Viewport = { themeColor: "#10347a" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-IN">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${archivo.variable} ${plexMono.variable} antialiased`}>
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>

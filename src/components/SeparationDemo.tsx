@@ -145,7 +145,7 @@ export function SeparationDemo() {
               <span className={withGeo ? "eyebrow !text-accent-ink" : "eyebrow"}>
                 {withGeo ? "With geotextile" : "Without"}
               </span>
-              <span className="font-mono text-xs text-muted tabular-nums">
+              <span className="spec text-xs text-muted tabular-nums">
                 −{withGeo ? lossWith : lossWithout}% base
               </span>
             </figcaption>
@@ -158,8 +158,8 @@ export function SeparationDemo() {
 
       <label className="mt-6 block">
         <span className="flex items-baseline justify-between">
-          <span className="eyebrow">Drag — years of traffic</span>
-          <span className="font-mono text-sm tabular-nums" aria-hidden>{years} yr</span>
+          <span className="eyebrow">Drag to add years of traffic</span>
+          <span className="spec text-sm tabular-nums" aria-hidden>{years} yr</span>
         </span>
         <input
           type="range"
@@ -177,7 +177,7 @@ export function SeparationDemo() {
         />
       </label>
       <p className="mt-4 text-[13px] leading-relaxed text-muted">
-        Illustrative. Without separation, aggregate punches into the subgrade and fines pump up into the base — the
+        Illustrative. Without separation, aggregate punches into the subgrade and fines pump up into the base, the
         road ruts. A geotextile keeps both layers intact.
       </p>
     </div>

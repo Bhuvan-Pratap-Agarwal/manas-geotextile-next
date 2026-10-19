@@ -5,26 +5,22 @@ export function SectionHead({
   title,
   lead,
   aside,
+  invert = false,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: React.ReactNode;
   lead?: string;
   aside?: React.ReactNode;
+  invert?: boolean;
 }) {
   return (
-    <div className="grid gap-8 border-t border-line pt-6 lg:grid-cols-12">
-      <Reveal className="lg:col-span-3">
-        <p className="eyebrow">{eyebrow}</p>
+    <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <Reveal className="max-w-2xl">
+        {eyebrow && <p className={invert ? "eyebrow !text-sky" : "eyebrow"}>{eyebrow}</p>}
+        <h2 className={`h2 text-balance ${invert ? "" : "text-navy"} ${eyebrow ? "mt-3" : ""}`}>{title}</h2>
+        {lead && <p className={`lead mt-4 ${invert ? "!text-white/75" : ""}`}>{lead}</p>}
       </Reveal>
-      <Reveal className="lg:col-span-6" delay={0.05}>
-        <h2 className="h2 text-balance">{title}</h2>
-        {lead && <p className="lead mt-6 max-w-xl">{lead}</p>}
-      </Reveal>
-      {aside && (
-        <Reveal className="flex items-end lg:col-span-3 lg:justify-end" delay={0.1}>
-          {aside}
-        </Reveal>
-      )}
+      {aside && <Reveal className="shrink-0" delay={0.05}>{aside}</Reveal>}
     </div>
   );
 }

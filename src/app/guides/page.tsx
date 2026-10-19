@@ -8,7 +8,7 @@ import { guides } from "@/lib/guides";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Geotextile Guides — Types, GSM, Price, Standards & Installation",
+  title: "Geotextile Guides | Types, GSM, Price, Standards & Installation",
   description:
     "Practical geotextile guides for engineers and contractors: what geotextile is, woven vs non-woven, GSM selection, prices in India, BIS standards and installation.",
   path: "/guides",
@@ -29,7 +29,7 @@ export default function GuidesPage() {
             {guides.map((g, i) => (
               <Reveal key={g.slug} delay={(i % 2) * 0.05} className="bg-paper">
                 <Link href={`/guides/${g.slug}`} className="group flex h-full min-h-64 flex-col justify-between gap-10 p-8 transition-colors hover:bg-paper-2 md:p-10">
-                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+                  <p className="text-[14px] text-muted">
                     {String(i + 1).padStart(2, "0")} · {g.readingMinutes} min read
                   </p>
                   <div>

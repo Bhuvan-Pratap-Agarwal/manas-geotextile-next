@@ -1,6 +1,15 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+export const buttonClass = (variant: "solid" | "outline" | "light" | "navy" = "solid", className?: string) =>
+  cn(
+    "inline-flex h-12 items-center justify-center gap-2 rounded-[4px] px-6 text-[15px] font-semibold transition-colors duration-200",
+    variant === "solid" && "bg-accent text-white hover:bg-navy",
+    variant === "navy" && "bg-navy text-white hover:bg-accent",
+    variant === "outline" && "border border-navy/25 text-navy hover:border-navy hover:bg-navy/[0.03]",
+    variant === "light" && "bg-white text-navy hover:bg-sky hover:text-navy",
+    className,
+  );
 
 export function ButtonLink({
   href,
@@ -10,25 +19,12 @@ export function ButtonLink({
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: "solid" | "ghost" | "light";
+  variant?: "solid" | "outline" | "light" | "navy";
   className?: string;
 }) {
   return (
-    <Link
-      href={href}
-      className={cn(
-        "group inline-flex h-12 items-center gap-2 rounded-full pl-6 pr-5 text-[15px] font-medium transition-colors duration-300",
-        variant === "solid" && "bg-ink text-paper hover:bg-accent-ink",
-        variant === "ghost" && "border border-ink/15 text-ink hover:border-ink",
-        variant === "light" && "bg-paper text-ink hover:bg-accent-ink hover:text-white",
-        className,
-      )}
-    >
+    <Link href={href} className={buttonClass(variant, className)}>
       {children}
-      <ArrowUpRight
-        className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-        strokeWidth={1.75}
-      />
     </Link>
   );
 }

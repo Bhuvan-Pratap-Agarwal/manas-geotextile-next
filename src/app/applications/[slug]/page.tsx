@@ -6,9 +6,11 @@ import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
 import { LayerStack } from "@/components/LayerStack";
+import { Photo } from "@/components/Photo";
 import { Reveal } from "@/components/Reveal";
 import { applications, getApplication } from "@/lib/applications";
 import { getProduct } from "@/lib/products";
+import { projects } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -31,78 +33,98 @@ export default async function ApplicationPage({ params }: Props) {
   const path = `/applications/${a.slug}`;
   const prods = a.products.map(getProduct).filter((p) => p !== undefined);
 
+  const related = projects.filter((pr) => pr.application === a.slug).slice(0, 3);
+
   return (
     <>
-      <section className="pb-20 pt-28 md:pt-36">
-        <Container>
+      <section className="pt-24 md:pt-[108px]">
+        <Container className="pt-8 md:pt-12">
           <Breadcrumbs items={[{ name: "Applications", path: "/applications" }, { name: a.name, path }]} />
-          <div className="mt-12 grid gap-14 lg:grid-cols-12">
+          <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-12">
             <Reveal immediate className="lg:col-span-6">
               <p className="eyebrow">Application</p>
-              <h1 className="display mt-6 text-balance">Geotextile for {a.name.toLowerCase()}</h1>
-              <p className="lead mt-8 max-w-xl">{a.summary}</p>
-              <div className="mt-10 flex flex-wrap gap-3">
+              <h1 className="display mt-3 text-balance text-navy">Geotextile for {a.name.toLowerCase()}</h1>
+              <p className="lead mt-6 max-w-xl">{a.summary}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href={`/contact?product=${a.products[0]}`}>Get a quote</ButtonLink>
-                <ButtonLink href="/tools/geotextile-calculator" variant="ghost">Calculate quantity</ButtonLink>
+                <ButtonLink href="/tools/geotextile-calculator" variant="outline">Calculate quantity</ButtonLink>
               </div>
             </Reveal>
-            <Reveal immediate className="lg:col-span-6" delay={0.1}>
-              <p className="eyebrow mb-6">Typical cross-section</p>
-              <LayerStack layers={a.layers} />
+            <Reveal immediate className="lg:col-span-6" delay={0.05}>
+              <Photo src={a.image} alt={a.imageAlt} caption={a.imageAlt} ratio="4/3" priority sizes="(min-width: 1024px) 50vw, 100vw" />
             </Reveal>
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-line py-20 md:py-28">
-        <Container className="grid gap-12 md:grid-cols-2">
-          <Reveal>
-            <p className="eyebrow">The problem</p>
-            <p className="mt-6 text-2xl leading-snug tracking-[-0.02em]">{a.problem}</p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="eyebrow !text-accent-ink">The solution</p>
-            <p className="mt-6 text-2xl leading-snug tracking-[-0.02em]">{a.solution}</p>
-          </Reveal>
-        </Container>
-      </section>
-
-      <section className="bg-ink py-20 text-paper md:py-28">
-        <Container>
-          <p className="eyebrow !text-paper/50">What you gain</p>
-          <ul className="mt-10 grid gap-px bg-paper/10 sm:grid-cols-2 lg:grid-cols-4">
-            {a.benefits.map((b, i) => (
-              <li key={b} className="bg-ink py-8 pr-6 sm:px-6 lg:first:pl-0">
-                <span className="font-mono text-sm text-accent">{String(i + 1).padStart(2, "0")}</span>
-                <p className="mt-4 text-xl leading-snug tracking-[-0.01em]">{b}</p>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {a.body.length > 0 && (
-        <section className="py-20 md:py-28">
-          <Container className="grid gap-12 md:grid-cols-2">
+      <section className="py-16 md:py-24">
+        <Container className="grid gap-12 lg:grid-cols-12">
+          <div className="space-y-10 lg:col-span-6">
+            <Reveal>
+              <h2 className="h3 text-navy">The problem</h2>
+              <p className="mt-3 text-[17px] leading-relaxed text-ink-2">{a.problem}</p>
+            </Reveal>
+            <Reveal>
+              <h2 className="h3 text-navy">What the geotextile does</h2>
+              <p className="mt-3 text-[17px] leading-relaxed text-ink-2">{a.solution}</p>
+            </Reveal>
+            <Reveal>
+              <h2 className="h3 text-navy">What you gain</h2>
+              <ul className="mt-3 space-y-2 text-[17px] text-ink-2">
+                {a.benefits.map((b) => (
+                  <li key={b} className="flex gap-3">
+                    <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
             {a.body.map((b) => (
               <Reveal key={b.heading}>
-                <h2 className="h3">{b.heading}</h2>
-                <p className="mt-4 text-ink-2">{b.text}</p>
+                <h2 className="h3 text-navy">{b.heading}</h2>
+                <p className="mt-3 text-[17px] leading-relaxed text-ink-2">{b.text}</p>
               </Reveal>
             ))}
+          </div>
+          <Reveal className="lg:col-span-5 lg:col-start-8" delay={0.05}>
+            <div className="rounded-[4px] border border-line p-6 lg:sticky lg:top-32">
+              <p className="text-[15px] font-semibold text-navy">Typical cross-section</p>
+              <div className="mt-5">
+                <LayerStack layers={a.layers} />
+              </div>
+            </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      {related.length > 0 && (
+        <section className="bg-paper-2 py-16 md:py-20">
+          <Container>
+            <h2 className="h2 text-navy">From our project records</h2>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((pr) => (
+                <Link key={pr.slug} href={`/projects#${pr.slug}`} className="group block">
+                  <Photo src={pr.image} alt={pr.imageAlt} ratio="4/3" sizes="(min-width: 1024px) 33vw, 50vw" />
+                  <p className="mt-3 font-semibold text-navy group-hover:text-accent-ink">{pr.title}</p>
+                  <p className="text-[14px] text-muted">{pr.where} · {pr.product}</p>
+                </Link>
+              ))}
+            </div>
           </Container>
         </section>
       )}
 
-      <section className="border-t border-line py-20 md:py-28">
+      <section className="py-16 md:py-20">
         <Container>
-          <p className="eyebrow">Products for {a.name.toLowerCase()}</p>
-          <div className="mt-8 grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+          <h2 className="h2 text-navy">Products for {a.name.toLowerCase()}</h2>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {prods.map((p) => (
-              <Link key={p.slug} href={`/products/${p.slug}`} className="border-b border-r border-line bg-paper p-8 transition-colors hover:bg-paper-2">
-                <span className="font-mono text-sm text-muted">{p.code}</span>
-                <h3 className="h3 mt-8">{p.name}</h3>
-                <p className="mt-2 text-[15px] text-ink-2">{p.summary}</p>
+              <Link key={p.slug} href={`/products/${p.slug}`} className="group overflow-hidden rounded-[4px] border border-line transition-colors hover:border-accent">
+                <Photo src={p.image} alt={p.imageAlt} ratio="16/10" sizes="(min-width: 1024px) 25vw, 50vw" className="[&_div]:rounded-none" />
+                <div className="p-5">
+                  <h3 className="font-semibold text-navy group-hover:text-accent-ink">{p.name}</h3>
+                  <p className="mt-1 text-[14px] text-ink-2">{p.summary}</p>
+                </div>
               </Link>
             ))}
           </div>
@@ -110,11 +132,11 @@ export default async function ApplicationPage({ params }: Props) {
       </section>
 
       {a.faqs.length > 0 && (
-        <section className="pb-20 md:pb-28">
+        <section className="border-t border-line py-16 md:py-20">
           <Container className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="eyebrow">FAQ</p>
-              <h2 className="h2 mt-6">Common questions</h2>
+              <p className="eyebrow">Questions</p>
+              <h2 className="h2 mt-3 text-navy">Common questions</h2>
             </div>
             <div className="lg:col-span-8">
               <Faq items={a.faqs} />

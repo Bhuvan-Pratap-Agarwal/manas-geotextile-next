@@ -90,7 +90,7 @@ async function notify(e: Enquiry, id: string | null) {
         from,
         to: to.split(",").map((s) => s.trim()),
         reply_to: e.email || undefined,
-        subject: `New ${e.datasheet ? "datasheet" : "quote"} enquiry — ${e.product || "Geotextile"} — ${e.company || e.name}`,
+        subject: `New ${e.datasheet ? "datasheet" : "quote"} enquiry | ${e.product || "Geotextile"} | ${e.company || e.name}`,
         text: `${enquiryText(e)}\n\nPage: ${e.page || "-"}\nRef: ${id ?? "-"}`,
       }),
     });

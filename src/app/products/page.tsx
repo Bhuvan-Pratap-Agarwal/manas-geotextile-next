@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
@@ -9,53 +9,62 @@ import { products } from "@/lib/products";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Geotextile Products — Non-Woven Geotextile, PVC Geomembrane, Geo Bags",
+  title: "Geotextile Products | Non-Woven Geotextile, PVC Membrane, Geo Bags, Geocomposite",
   description:
-    "Geosynthetic products from Manas: non-woven geotextile (150–1500 GSM), PVC geomembrane, geo bags, pipe-wrap geotextile, woven geotextile, geogrid and geocell.",
+    "Manas Geo Tech products: MGT polypropylene and M-Geo polyester non-woven geotextile (100 to 1000 GSM), PVC tunnel waterproofing membrane, geo bags, drainage geocomposite and pipe wrap geotextile.",
   path: "/products",
 });
 
 export default function ProductsPage() {
-  const groups = [
-    { title: "Manufactured by Manas", items: products.filter((p) => p.origin === "manufactured") },
-    { title: "Also supplied", items: products.filter((p) => p.origin === "supplied") },
-  ];
+  const made = products.filter((p) => p.origin === "manufactured");
+  const supplied = products.filter((p) => p.origin === "supplied");
   return (
     <>
       <PageHero
         crumbs={<Breadcrumbs items={[{ name: "Products", path: "/products" }]} />}
         eyebrow="Products"
-        title="Geotextiles and geosynthetics, specified to the job."
-        lead="Every grade we make is produced at our IMT Bawal factory. Tell us the application and we'll recommend the right one."
+        title="Geosynthetics we make at IMT Bawal"
+        lead="Tell us the application and the specification, and we'll recommend the grade. Datasheets for every product are free to download."
       />
-      <section className="pb-24 md:pb-36">
-        <Container className="space-y-20">
-          {groups.map((g) => (
-            <div key={g.title}>
-              <h2 className="eyebrow mb-6">{g.title}</h2>
-              <ul className="border-t border-line">
-                {g.items.map((p, i) => (
-                  <li key={p.slug}>
-                    <Reveal delay={i * 0.03}>
-                      <Link href={`/products/${p.slug}`} className="group grid gap-6 border-b border-line py-10 md:grid-cols-12">
-                        <span className="font-mono text-sm text-muted transition-colors group-hover:text-accent-ink md:col-span-1">{p.code}</span>
-                        <div className="md:col-span-5">
-                          <h3 className="text-3xl font-medium tracking-[-0.03em] transition-transform duration-500 group-hover:translate-x-2 md:text-4xl">{p.name}</h3>
-                          <p className="mt-3 text-ink-2">{p.summary}</p>
-                        </div>
-                        <div className="flex flex-wrap content-start gap-2 md:col-span-5">
-                          {p.functions.map((f) => (
-                            <span key={f} className="rounded-full border border-line px-3 py-1 text-[13px] text-ink-2">{f}</span>
-                          ))}
-                        </div>
-                        <ArrowUpRight className="hidden size-6 justify-self-end text-muted transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-ink md:col-span-1 md:block" strokeWidth={1.5} />
-                      </Link>
-                    </Reveal>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <section className="py-16 md:py-24">
+        <Container className="space-y-6">
+          {made.map((p, i) => (
+            <Reveal key={p.slug}>
+              <Link
+                href={`/products/${p.slug}`}
+                className="group grid overflow-hidden rounded-[4px] border border-line bg-white transition-colors hover:border-accent md:grid-cols-12"
+              >
+                <div className={`relative aspect-[16/9] bg-paper-2 md:col-span-5 md:aspect-auto md:min-h-[260px] ${i % 2 ? "md:order-2" : ""}`}>
+                  <Image src={p.image} alt={p.imageAlt} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+                </div>
+                <div className="flex flex-col justify-center p-6 md:col-span-7 md:p-10">
+                  <p className="spec text-[13px] text-accent-ink">{p.code}</p>
+                  <h2 className="h2 mt-1 text-navy group-hover:text-accent-ink">{p.name}</h2>
+                  <p className="mt-3 max-w-xl text-ink-2">{p.summary}</p>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {p.functions.map((f) => (
+                      <li key={f} className="rounded-[3px] bg-paper-2 px-2.5 py-1 text-[13px] text-ink-2">{f}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-6 font-semibold text-accent-ink">View details and datasheet →</p>
+                </div>
+              </Link>
+            </Reveal>
           ))}
+        </Container>
+      </section>
+      <section className="border-t border-line bg-paper-2 py-14">
+        <Container>
+          <h2 className="text-lg font-semibold text-navy">Also supplied with our geotextile</h2>
+          <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
+            {supplied.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/products/${p.slug}`} className="inline-block py-1 text-ink-2 underline decoration-line underline-offset-4 hover:text-navy hover:decoration-navy">
+                  {p.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
       <CtaBand />

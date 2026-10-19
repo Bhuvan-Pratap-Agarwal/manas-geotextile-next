@@ -1,6 +1,10 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const ogSize = { width: 1200, height: 630 };
+
+const logo = `data:image/png;base64,${readFileSync(join(process.cwd(), "public/images/logo-go.png")).toString("base64")}`;
 
 export function ogImage({ eyebrow, title }: { eyebrow: string; title: string }) {
   return new ImageResponse(
@@ -12,27 +16,26 @@ export function ogImage({ eyebrow, title }: { eyebrow: string; title: string }) 
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#f6f5f1",
-          color: "#0e100f",
-          padding: "72px 80px",
+          background: "#ffffff",
+          color: "#10347a",
+          padding: "64px 80px",
+          borderTop: "18px solid #10347a",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 28 }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            <div style={{ width: 40, height: 6, background: "#0e100f" }} />
-            <div style={{ width: 40, height: 6, background: "#e0531f" }} />
-            <div style={{ width: 40, height: 6, background: "#0e100f" }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logo} width={76} height={70} alt="" />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: 34, fontWeight: 800 }}>MANAS</span>
+            <span style={{ fontSize: 18, letterSpacing: 3, color: "#1a62b0" }}>GEO TECH INDIA</span>
           </div>
-          <span style={{ fontWeight: 700 }}>Manas</span>
-          <span style={{ color: "#7a7d79" }}>Geotextile</span>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ fontSize: 24, letterSpacing: 4, textTransform: "uppercase", color: "#e0531f" }}>{eyebrow}</div>
-          <div style={{ fontSize: title.length > 48 ? 64 : 80, lineHeight: 1.02, letterSpacing: -3, maxWidth: 1000 }}>{title}</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div style={{ fontSize: 28, color: "#1a62b0" }}>{eyebrow}</div>
+          <div style={{ fontSize: title.length > 48 ? 62 : 76, fontWeight: 700, lineHeight: 1.05, letterSpacing: -1.5, maxWidth: 1040 }}>{title}</div>
         </div>
-        <div style={{ display: "flex", height: 14, width: "100%" }}>
-          <div style={{ flex: 3, background: "#0e100f" }} />
-          <div style={{ flex: 1, background: "#e0531f" }} />
+        <div style={{ display: "flex", fontSize: 24, color: "#5a6472" }}>
+          ISO 9001 certified · Factory at IMT Bawal, Haryana · manasgeotextile.com
         </div>
       </div>
     ),

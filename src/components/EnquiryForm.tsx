@@ -57,7 +57,7 @@ export function EnquiryForm({
   function handoff(channel: Channel, v: Enquiry | null = last.current) {
     if (!v) return;
     const body = enquiryText(v);
-    const subject = `${v.datasheet ? "Datasheet request" : "Quote request"} — ${v.product || "Geotextile"} — ${v.company || v.name}`;
+    const subject = `${v.datasheet ? "Datasheet request" : "Quote request"} | ${v.product || "Geotextile"} | ${v.company || v.name}`;
     if (channel === "whatsapp") {
       window.open(`https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(body)}`, "_blank", "noopener");
     } else {
@@ -117,13 +117,13 @@ export function EnquiryForm({
     const saved = status.kind === "saved";
     return (
       <div role="status" className="border border-line bg-paper-2/60 p-8 sm:p-10">
-        <span className="flex size-10 items-center justify-center rounded-full bg-ink text-paper">
+        <span className="flex size-10 items-center justify-center rounded-full bg-accent text-white">
           <Check className="size-5" strokeWidth={2} />
         </span>
         <h2 className="h3 mt-6">
           {saved
-            ? "Thank you — your enquiry has reached our sales team."
-            : `Almost done — press send in ${status.channel === "whatsapp" ? "WhatsApp" : "your email app"}.`}
+            ? "Thank you, your enquiry has reached our sales team."
+            : `Almost done, press send in ${status.channel === "whatsapp" ? "WhatsApp" : "your email app"}.`}
         </h2>
         <p className="mt-3 max-w-lg text-ink-2">
           {saved
@@ -131,7 +131,7 @@ export function EnquiryForm({
             : "We've written your enquiry out for you. Once you send it, our sales team will reply with a grade recommendation and a quote."}
         </p>
         {saved && status.id && (
-          <p className="mt-4 font-mono text-[13px] text-muted">Reference: {status.id.slice(0, 8).toUpperCase()}</p>
+          <p className="mt-4 spec text-[13px] text-muted">Reference: {status.id.slice(0, 8).toUpperCase()}</p>
         )}
         <p className="mt-6 text-[15px] text-ink-2">
           {saved ? "Need it sooner? " : "Didn't open? "}
@@ -219,12 +219,12 @@ export function EnquiryForm({
         />
       </label>
       <p id={errors.contact ? "err-contact" : "hint-contact"} className={errors.contact ? "-mt-4 text-[14px] text-accent-ink sm:col-span-2" : "-mt-4 text-[13px] text-muted sm:col-span-2"}>
-        {errors.contact ?? "Phone or email — whichever you prefer we reply on."}
+        {errors.contact ?? "Phone or email, whichever you prefer we reply on."}
       </p>
       <label className="block">
         <span className="eyebrow">Product</span>
         <select name="product" defaultValue={products.find((p) => p.slug === defaultProduct)?.name ?? ""} className={field}>
-          <option value="">Not sure — advise me</option>
+          <option value="">Not sure, advise me</option>
           {products.map((p) => (
             <option key={p.slug} value={p.name}>{p.name}</option>
           ))}
@@ -236,7 +236,7 @@ export function EnquiryForm({
       </label>
       <label className="block sm:col-span-2">
         <span className="eyebrow">Site location</span>
-        <input name="location" placeholder="City / state — for a delivered price" className={field} />
+        <input name="location" placeholder="City / state, for a delivered price" className={field} />
       </label>
       <label className="block sm:col-span-2">
         <span className="eyebrow">Project details</span>
@@ -244,7 +244,7 @@ export function EnquiryForm({
       </label>
       {status.kind === "failed" && (
         <div role="alert" className="border-l-2 border-accent-ink bg-paper-2 px-5 py-4 text-[15px] text-ink sm:col-span-2">
-          <p>{status.message} Your details are still here — send them another way:</p>
+          <p>{status.message} Your details are still here, send them another way:</p>
           <p className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
             <button type="button" onClick={() => viaChannel("whatsapp")} className="py-1 font-medium underline underline-offset-4">
               WhatsApp
@@ -262,7 +262,7 @@ export function EnquiryForm({
         <button
           type="submit"
           disabled={submitting}
-          className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink pl-6 pr-5 text-[15px] font-medium text-paper transition-colors hover:bg-accent-ink disabled:cursor-wait disabled:opacity-70"
+          className="group inline-flex h-12 items-center justify-center gap-2 rounded-[4px] bg-accent px-6 text-[15px] font-semibold text-white transition-colors hover:bg-navy disabled:cursor-wait disabled:opacity-70"
         >
           {submitting ? "Sending…" : datasheet ? "Request datasheet" : "Send enquiry"}
           {!submitting && (
@@ -273,7 +273,7 @@ export function EnquiryForm({
           type="button"
           onClick={() => viaChannel("whatsapp")}
           disabled={submitting}
-          className="inline-flex h-12 items-center justify-center rounded-full border border-ink/15 px-6 text-[15px] font-medium transition-colors hover:border-ink disabled:opacity-60"
+          className="inline-flex h-12 items-center justify-center rounded-[4px] border border-navy/25 px-6 text-[15px] font-semibold text-navy transition-colors hover:border-navy disabled:opacity-60"
         >
           Or send on WhatsApp
         </button>

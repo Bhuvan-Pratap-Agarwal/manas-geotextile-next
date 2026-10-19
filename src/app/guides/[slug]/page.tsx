@@ -40,19 +40,19 @@ export default async function GuidePage({ params }: Props) {
     <>
       <JsonLd data={articleSchema({ title: g.title, description: g.metaDescription, path, updated: g.updated })} />
       <article>
-        <header className="pb-12 pt-28 md:pt-36">
+        <header className="pb-10 pt-32 md:pt-[148px]">
           <Container>
             <Breadcrumbs items={[{ name: "Guides", path: "/guides" }, { name: g.title.split(":")[0], path }]} />
-            <h1 className="mt-12 max-w-[22ch] text-balance text-[clamp(2.3rem,5vw,4.5rem)] font-medium leading-[1] tracking-[-0.04em]">
+            <h1 className="display mt-8 max-w-[24ch] text-balance text-navy">
               {g.title}
             </h1>
             <p className="lead mt-6 max-w-2xl">{g.excerpt}</p>
-            <p className="mt-8 font-mono text-xs uppercase tracking-[0.14em] text-muted">
+            <p className="mt-8 text-[14px] text-muted">
               {g.readingMinutes} min read · Updated <time dateTime={g.updated}>{dateFmt.format(new Date(g.updated))}</time>
             </p>
           </Container>
         </header>
-        <Container className="grid gap-12 border-t border-line pt-12 lg:grid-cols-12">
+        <Container className="grid gap-12 border-t border-line pt-12 lg:grid-cols-12 [&>*]:min-w-0">
           {toc.length > 1 && (
             <aside className="lg:col-span-3">
               <nav aria-label="On this page" className="lg:sticky lg:top-24">
@@ -77,7 +77,7 @@ export default async function GuidePage({ params }: Props) {
             )}
             <div className="mt-16 flex flex-wrap gap-3 border-t border-line pt-10">
               <ButtonLink href="/contact">Ask an engineer</ButtonLink>
-              <ButtonLink href="/tools/geotextile-calculator" variant="ghost">Geotextile calculator</ButtonLink>
+              <ButtonLink href="/tools/geotextile-calculator" variant="outline">Geotextile calculator</ButtonLink>
             </div>
           </div>
         </Container>

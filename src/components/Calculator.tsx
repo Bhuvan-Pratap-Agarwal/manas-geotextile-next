@@ -41,7 +41,7 @@ function NumberField({
           onChange={(e) => onChange(e.target.value === "" ? NaN : Number(e.target.value))}
           className="w-full bg-transparent py-2 text-2xl font-medium tracking-[-0.02em] tabular-nums outline-none"
         />
-        <span className="font-mono text-sm text-muted">{unit}</span>
+        <span className="spec text-sm text-muted">{unit}</span>
       </span>
     </label>
   );
@@ -86,8 +86,8 @@ export function Calculator() {
                 aria-pressed={use === u.id}
                 className={
                   use === u.id
-                    ? "rounded-full bg-ink px-4 py-2 text-[14px] text-paper"
-                    : "rounded-full border border-line px-4 py-2 text-[14px] text-ink-2 hover:border-ink"
+                    ? "rounded-[4px] bg-navy px-4 py-2 text-[14px] text-white"
+                    : "rounded-[4px] border border-line px-4 py-2 text-[14px] text-ink-2 hover:border-ink"
                 }
               >
                 {u.label}
@@ -117,42 +117,42 @@ export function Calculator() {
       </div>
 
       <div className="lg:col-span-5">
-        <div className="sticky top-24 bg-ink p-8 text-paper sm:p-10">
-          <p className="eyebrow !text-paper/50">You need about</p>
+        <div className="sticky top-32 rounded-[4px] bg-navy p-8 text-white sm:p-10">
+          <p className="eyebrow !text-sky">You need about</p>
           <p className="mt-4 text-6xl font-medium tracking-[-0.04em] tabular-nums sm:text-7xl">
             {r ? fmt(r.gross) : "—"}
-            <span className="ml-2 text-2xl text-paper/50">m²</span>
+            <span className="ml-2 text-2xl text-white/60">m²</span>
           </p>
-          <dl className="mt-8 divide-y divide-paper/10 border-t border-paper/10 text-[15px]">
+          <dl className="mt-8 divide-y divide-white/15 border-t border-white/15 text-[15px]">
             <div className="flex justify-between py-3">
-              <dt className="text-paper/60">Net area</dt>
+              <dt className="text-white/75">Net area</dt>
               <dd className="tabular-nums">{r ? `${fmt(r.net)} m²` : "—"}</dd>
             </div>
             <div className="flex justify-between py-3">
-              <dt className="text-paper/60">Laps + wastage</dt>
+              <dt className="text-white/75">Laps + wastage</dt>
               <dd className="tabular-nums">{r ? `+${r.extra.toFixed(1)}%` : "—"}</dd>
             </div>
             <div className="flex justify-between py-3">
-              <dt className="text-paper/60">Strips across</dt>
+              <dt className="text-white/75">Strips across</dt>
               <dd className="tabular-nums">{r ? r.strips : "—"}</dd>
             </div>
             <div className="flex justify-between py-3">
-              <dt className="text-paper/60">Rolls ({rollWidth} × {rollLength || 0} m)</dt>
+              <dt className="text-white/75">Rolls ({rollWidth} × {rollLength || 0} m)</dt>
               <dd className="tabular-nums">{r ? fmt(r.rolls) : "—"}</dd>
             </div>
             <div className="flex justify-between py-3">
-              <dt className="text-paper/60">Suggested grade</dt>
-              <dd className="text-right text-accent">{selected.gsm}</dd>
+              <dt className="text-white/75">Suggested grade</dt>
+              <dd className="text-right text-sky">{selected.gsm}</dd>
             </div>
           </dl>
           <Link
             href={`/contact?product=${selected.product}${r ? `&area=${Math.round(r.gross)}` : ""}`}
-            className="group mt-8 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-paper text-[15px] font-medium text-ink transition-colors hover:bg-accent-ink hover:text-white"
+            className="group mt-8 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[4px] bg-white text-[15px] font-semibold text-navy transition-colors hover:bg-sky"
           >
             Get a quote for this quantity
             <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.75} />
           </Link>
-          <p className="mt-4 text-[12px] leading-relaxed text-paper/60">
+          <p className="mt-4 text-[12px] leading-relaxed text-white/75">
             Estimate only. Grade suggestions are typical; your specification decides.
           </p>
         </div>
