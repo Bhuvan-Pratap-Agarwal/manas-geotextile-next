@@ -7,6 +7,7 @@ import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
 import { DatasheetTable } from "@/components/DatasheetTable";
 import { MarkSeen, SeenBadge } from "@/components/Explored";
+import { FabricZoom } from "@/components/FabricZoom";
 import { Faq } from "@/components/Faq";
 import { GradeFinder } from "@/components/GradeFinder";
 import { JsonLd } from "@/components/JsonLd";
@@ -114,6 +115,8 @@ export default async function ProductPage({ params }: Props) {
           ))}
         </Container>
       </section>
+
+      {p.slug === "non-woven-geotextile" && <FabricZoom />}
 
       {/* Features bento */}
       <section id="features" className="scroll-mt-40 bg-paper-2 py-20 md:py-28">

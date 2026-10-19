@@ -74,7 +74,7 @@ function geometry(t: number, withGeo: boolean) {
   return { stones, fines, asphalt: [...top, ...bottom].join(" ") };
 }
 
-const Panel = memo(function Panel({ t, withGeo }: { t: number; withGeo: boolean }) {
+export const Panel = memo(function Panel({ t, withGeo }: { t: number; withGeo: boolean }) {
   const g = useMemo(() => geometry(t, withGeo), [t, withGeo]);
   return (
     <svg viewBox={`0 0 ${W} ${BOTTOM}`} className="block h-auto w-full" aria-hidden>

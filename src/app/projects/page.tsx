@@ -4,6 +4,7 @@ import { ClientLogos } from "@/components/ClientLogos";
 import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
+import { IndiaMap } from "@/components/IndiaMap";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { Reveal } from "@/components/Reveal";
 import { applications } from "@/lib/applications";
@@ -46,6 +47,16 @@ export default function ProjectsPage() {
               </article>
             </Reveal>
           ))}
+        </Container>
+      </section>
+
+      <section className="border-t border-line py-16 md:py-24">
+        <Container>
+          <h2 className="h2 text-navy">Across India</h2>
+          <p className="lead mt-3">Tap a pin to see what we supplied there.</p>
+          <div className="mt-10">
+            <IndiaMap />
+          </div>
         </Container>
       </section>
 

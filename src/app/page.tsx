@@ -3,7 +3,10 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { ClientLogos } from "@/components/ClientLogos";
 import { CountUp } from "@/components/CountUp";
+import { BuildRoadGame } from "@/components/BuildRoadGame";
+import { FibreField } from "@/components/FibreField";
 import { GradeFinder } from "@/components/GradeFinder";
+import { IndiaMap } from "@/components/IndiaMap";
 import { MakingStory } from "@/components/MakingStory";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { ScrollLayers } from "@/components/ScrollLayers";
@@ -52,8 +55,10 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-24 md:pt-[108px]">
-        <Container className="flex flex-col items-center pb-6 pt-14 text-center md:pt-24">
+      <section className="relative overflow-hidden pt-24 md:pt-[108px]">
+        <FibreField opacity={0.13} />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.92)_30%,rgba(255,255,255,0)_75%)]" />
+        <Container className="relative flex flex-col items-center pb-6 pt-14 text-center md:pt-24">
             <p className="eyebrow">Non-woven geotextile &amp; PVC membrane manufacturer · ISO 9001</p>
             <h1 className="mt-5 max-w-[16ch] text-balance text-[clamp(2.75rem,7.2vw,6.25rem)] font-bold leading-[0.98] tracking-[-0.035em] text-navy [font-stretch:90%]">
               Made in Haryana. <span className="text-accent">Laid under India&apos;s roads, railways and tunnels.</span>
@@ -96,6 +101,18 @@ export default function Home() {
               </div>
             ))}
           </dl>
+        </Container>
+      </section>
+
+      {/* Game */}
+      <section className="py-20 md:py-28">
+        <Container>
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="eyebrow">Your turn</p>
+            <h2 className="mt-3 text-[clamp(2.2rem,5vw,4rem)] font-bold leading-none tracking-[-0.03em] text-navy [font-stretch:90%]">Build a road.</h2>
+            <p className="lead mt-4">Stack the layers from the ground up, then open it to ten years of traffic. Skip a layer if you dare.</p>
+          </div>
+          <BuildRoadGame />
         </Container>
       </section>
 
@@ -265,6 +282,16 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </Container>
+      </section>
+
+      {/* Map */}
+      <section className="py-20 md:py-28">
+        <Container>
+          <SectionHead eyebrow="Across India" title="From Kashmir to Karnataka" lead="Tap a pin. From our factory in Haryana to tunnels in the Himalaya and riverbanks in the North East." />
+          <div className="mt-12">
+            <IndiaMap />
+          </div>
         </Container>
       </section>
 
