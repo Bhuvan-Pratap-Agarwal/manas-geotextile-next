@@ -2,23 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { ClientLogos } from "@/components/ClientLogos";
+import { CountUp } from "@/components/CountUp";
+import { GradeFinder } from "@/components/GradeFinder";
+import { MakingStory } from "@/components/MakingStory";
+import { ProjectCarousel } from "@/components/ProjectCarousel";
+import { ScrollLayers } from "@/components/ScrollLayers";
 import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
 import { Photo } from "@/components/Photo";
 import { Reveal } from "@/components/Reveal";
 import { SectionHead } from "@/components/SectionHead";
-import { SeparationDemo } from "@/components/SeparationDemo";
 import { applications } from "@/lib/applications";
 import { products } from "@/lib/products";
 import { events, projects } from "@/lib/projects";
 import { site, tel } from "@/lib/site";
 
-const facts = [
+const facts: { value: React.ReactNode; label: string }[] = [
   { value: "1996", label: "Founders working in Indian infrastructure since" },
-  { value: "250 t", label: "Non-woven geotextile made every month" },
-  { value: "100–1000", label: "GSM, in polypropylene and polyester" },
-  { value: "ISO 9001", label: "and ISO 14001 certified, CE marked" },
+  { value: <CountUp to={250} suffix=" t" />, label: "Non-woven geotextile made every month" },
+  { value: <CountUp to={1000} prefix="100–" />, label: "GSM, in polypropylene and polyester" },
+  { value: <CountUp to={30} />, label: "Major contractors supplied, from L&T to Afcons" },
 ];
 
 const homeFaqs = [
@@ -43,69 +47,51 @@ const homeFaqs = [
 export default function Home() {
   const made = products.filter((p) => p.origin === "manufactured");
   // Certificates already appear in the proof band, so show site photos here.
-  const homeProjects = projects.filter((p) => !p.image.includes("/cert-")).slice(0, 6);
+  const homeProjects = projects.filter((p) => !p.image.includes("/cert-") && p.slug !== "tunnel-waterproofing").slice(0, 10);
 
   return (
     <>
       {/* Hero */}
       <section className="pt-24 md:pt-[108px]">
-        <Container className="grid items-center gap-10 py-10 md:py-16 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-6">
-            <Reveal immediate>
-              <p className="eyebrow">Geotextile manufacturer · New Delhi &amp; IMT Bawal</p>
-              <h1 className="display mt-4 text-balance text-navy">
-                Made in Haryana. Laid under India&apos;s roads, railways and tunnels.
-              </h1>
-            </Reveal>
-            <Reveal immediate delay={0.05}>
-              <p className="lead mt-6 max-w-xl">
-                We make non-woven geotextile from 100 to 1000 GSM and PVC tunnel waterproofing membrane at our own
-                plant. Contractors like L&amp;T, Afcons and Patel Engineering have used it on highways, ports and the
-                Kashmir rail link.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <ButtonLink href="/contact">Get a quote</ButtonLink>
-                <ButtonLink href="/downloads" variant="outline">Download datasheets</ButtonLink>
-              </div>
-              <p className="mt-5 text-[15px] text-muted">
-                Prefer to talk?{" "}
-                <a href={tel(site.contact.mobile)} className="font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy">
-                  {site.contact.mobile}
-                </a>
-              </p>
-            </Reveal>
-          </div>
-          <div className="relative lg:col-span-6">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[4px]">
-              <Image
-                src="/images/tunnel-pvc-green.jpg"
-                alt="Tunnel lined with Manas PVC waterproofing membrane over geotextile"
-                fill
-                priority
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-              />
+        <Container className="flex flex-col items-center pb-6 pt-14 text-center md:pt-24">
+            <p className="eyebrow">Non-woven geotextile &amp; PVC membrane manufacturer · ISO 9001</p>
+            <h1 className="mt-5 max-w-[16ch] text-balance text-[clamp(2.75rem,7.2vw,6.25rem)] font-bold leading-[0.98] tracking-[-0.035em] text-navy [font-stretch:90%]">
+              Made in Haryana. <span className="text-accent">Laid under India&apos;s roads, railways and tunnels.</span>
+            </h1>
+          <Reveal immediate delay={0.1}>
+            <p className="lead mx-auto mt-7 max-w-2xl">
+              Needle-punched geotextile from 100 to 1000 GSM and PVC tunnel membrane, made at our own plant and
+              trusted by L&amp;T, Afcons and Patel Engineering.
+            </p>
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <ButtonLink href="/contact">Get a quote</ButtonLink>
+              <ButtonLink href="/downloads" variant="outline">Download datasheets</ButtonLink>
             </div>
-            <Link
-              href="/projects#usbrl-tunnel-t15"
-              className="absolute -bottom-6 left-4 right-4 flex items-center gap-4 rounded-[4px] border border-line bg-white p-4 shadow-[0_12px_30px_rgba(15,27,45,0.12)] transition-colors hover:border-accent sm:left-auto sm:right-6 sm:w-[340px]"
-            >
-              <Image src="/images/cert-patel-usbrl-t15.jpg" alt="" width={56} height={79} className="h-[72px] w-auto rounded-[2px] border border-line" />
-              <span className="text-[14px] leading-snug">
-                <span className="block font-semibold text-navy">Performance certificate</span>
-                <span className="text-ink-2">Patel Engineering, Tunnel T15 of the Udhampur–Srinagar–Baramulla rail link</span>
-              </span>
-            </Link>
-          </div>
+            <p className="mt-5 text-[15px] text-muted">
+              Or call{" "}
+              <a href={tel(site.contact.mobile)} className="font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy">
+                {site.contact.mobile}
+              </a>
+            </p>
+          </Reveal>
+          <p className="mt-14 flex flex-col items-center gap-2 text-[14px] font-medium text-muted motion-reduce:hidden" aria-hidden>
+            Scroll to look inside a road
+            <span className="block h-8 w-px animate-pulse bg-gradient-to-b from-accent to-transparent" />
+          </p>
         </Container>
-        <Container className="mt-8 md:mt-4">
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-line py-10 lg:grid-cols-4">
+      </section>
+
+      <ScrollLayers />
+
+      <section className="pb-6">
+        <Container>
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-10 border-y border-line py-12 lg:grid-cols-4">
             {facts.map((f) => (
-              <div key={f.value}>
+              <div key={f.label}>
                 <dt className="sr-only">{f.label}</dt>
                 <dd>
-                  <span className="block text-4xl font-bold tracking-[-0.02em] text-navy [font-stretch:92%] md:text-5xl">{f.value}</span>
-                  <span className="mt-2 block max-w-[22ch] text-[15px] text-muted">{f.label}</span>
+                  <span className="block text-[clamp(2.4rem,5vw,4rem)] font-bold leading-none tracking-[-0.03em] text-navy [font-stretch:90%]">{f.value}</span>
+                  <span className="mt-3 block max-w-[24ch] text-[15px] text-muted">{f.label}</span>
                 </dd>
               </div>
             ))}
@@ -152,6 +138,36 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Tunnel photos */}
+      <section className="pb-20 md:pb-28">
+        <Container>
+          <div className="grid gap-4 md:grid-cols-5">
+            <Reveal className="md:col-span-3">
+              <div className="group relative aspect-[4/3] overflow-hidden rounded-[6px] md:aspect-auto md:h-full md:min-h-[460px]">
+                <Image src="/images/tunnel-pvc-green.jpg" alt="Tunnel lined with Manas PVC membrane over geotextile, before the final concrete" fill sizes="(min-width: 768px) 60vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-6 pt-24 text-white md:p-8">
+                  <p className="text-[13px] font-semibold text-sky">Tunnel waterproofing</p>
+                  <p className="mt-1 max-w-md text-xl font-semibold leading-snug md:text-2xl">Our PVC membrane, welded over our geotextile, before the final concrete goes in.</p>
+                </div>
+              </div>
+            </Reveal>
+            <div className="grid gap-4 md:col-span-2">
+              <Reveal delay={0.05}>
+                <div className="group relative aspect-[4/3] overflow-hidden rounded-[6px]">
+                  <Image src="/images/tunnel-gantry.jpg" alt="Lining gantry inside a tunnel lined with PVC membrane" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]" />
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <div className="group relative aspect-[4/3] overflow-hidden rounded-[6px]">
+                  <Image src="/images/tunnel-fleece-discs.jpg" alt="Geotextile fixed to shotcrete with fastening discs" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]" />
+                  <p className="absolute bottom-3 left-3 rounded-[3px] bg-white/90 px-2.5 py-1 text-[13px] font-medium text-navy">Geotextile fixed with discs, ready for the membrane</p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Proof: T15 */}
       <section className="bg-navy text-white">
         <Container className="grid items-center gap-12 py-20 md:py-24 lg:grid-cols-12">
@@ -186,32 +202,22 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Demo */}
-      <section className="py-20 md:py-28">
-        <Container className="grid items-center gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-5">
-            <p className="eyebrow">Why it matters</p>
-            <h2 className="h2 mt-3 text-balance text-navy">A 2 mm fabric that saves the road above it</h2>
-            <p className="lead mt-5">
-              On clay or silt, traffic pushes the stone base into the soil and pumps mud up into the stone. The base
-              loses strength and the road ruts. A layer of non-woven geotextile keeps the two apart and lets water
-              out.
-            </p>
-            <p className="mt-4 text-ink-2">Drag the slider to see ten years of traffic, with and without it.</p>
-            <div className="mt-8">
-              <ButtonLink href="/applications/roads" variant="outline">Geotextile for roads</ButtonLink>
-            </div>
-          </Reveal>
-          <Reveal className="lg:col-span-7" delay={0.05}>
-            <div className="rounded-[4px] border border-line p-5 sm:p-8">
-              <SeparationDemo />
-            </div>
-          </Reveal>
+      {/* Grade finder */}
+      <section className="bg-paper-2 py-20 md:py-28">
+        <Container>
+          <SectionHead
+            eyebrow="Find your grade"
+            title="Twelve weights. One will be right for your job."
+            lead="Heavier fabric is stronger and more puncture resistant. Lighter fabric drains faster. Slide to see how the real numbers change."
+          />
+          <div className="mt-12">
+            <GradeFinder />
+          </div>
         </Container>
       </section>
 
       {/* Applications */}
-      <section className="bg-paper-2 py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <Container>
           <SectionHead
             eyebrow="Applications"
@@ -235,7 +241,7 @@ export default function Home() {
       </section>
 
       {/* Manufacturing */}
-      <section className="py-20 md:py-28">
+      <section className="bg-paper-2 py-20 md:py-28">
         <Container>
           <SectionHead
             eyebrow="Manufacturing"
@@ -243,10 +249,8 @@ export default function Home() {
             lead="Fibre is carded, needle-punched, thermo-calendered and wound into 5 m rolls at IMT Bawal. Every batch is tested before it leaves."
             aside={<ButtonLink href="/about" variant="outline">See the plant</ButtonLink>}
           />
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            <Photo src="/images/plant-hall.jpg" alt="Needle-punching line inside the Manas plant at IMT Bawal" caption="Needle-punching line, IMT Bawal" ratio="4/3" sizes="(min-width: 640px) 33vw, 100vw" />
-            <Photo src="/images/plant-carding.jpg" alt="High-speed carding machine" caption="High-speed carding machine for web formation" ratio="4/3" sizes="(min-width: 640px) 33vw, 100vw" />
-            <Photo src="/images/plant-ramina-winder.jpg" alt="Ramina roll winder" caption="Ramina winder for even, tight rolls" ratio="4/3" sizes="(min-width: 640px) 33vw, 100vw" />
+          <div className="mt-8 lg:mt-4">
+            <MakingStory />
           </div>
           <ul className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -265,7 +269,7 @@ export default function Home() {
       </section>
 
       {/* Projects */}
-      <section className="bg-paper-2 py-20 md:py-28">
+      <section className="overflow-hidden py-20 md:py-28">
         <Container>
           <SectionHead
             eyebrow="Projects"
@@ -273,18 +277,8 @@ export default function Home() {
             lead="Photos from our customers' sites. Captions are from our project records."
             aside={<ButtonLink href="/projects" variant="outline">All projects</ButtonLink>}
           />
-          <div className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {homeProjects.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 3) * 0.05}>
-                <Link href={`/projects#${p.slug}`} className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-white">
-                    <Image src={p.image} alt={p.imageAlt} fill sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
-                  </div>
-                  <h3 className="mt-4 text-[17px] font-semibold leading-snug text-navy group-hover:text-accent-ink">{p.title}</h3>
-                  <p className="mt-1 text-[14px] text-muted">{p.where} · {p.product}</p>
-                </Link>
-              </Reveal>
-            ))}
+          <div className="mt-6">
+            <ProjectCarousel items={homeProjects} />
           </div>
         </Container>
       </section>

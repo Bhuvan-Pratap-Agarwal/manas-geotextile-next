@@ -8,6 +8,7 @@ import { Faq } from "@/components/Faq";
 import { LayerStack } from "@/components/LayerStack";
 import { Photo } from "@/components/Photo";
 import { Reveal } from "@/components/Reveal";
+import { SeparationDemo } from "@/components/SeparationDemo";
 import { applications, getApplication } from "@/lib/applications";
 import { getProduct } from "@/lib/products";
 import { projects } from "@/lib/projects";
@@ -96,6 +97,20 @@ export default async function ApplicationPage({ params }: Props) {
           </Reveal>
         </Container>
       </section>
+
+      {a.slug === "roads" && (
+        <section className="border-t border-line py-16 md:py-24">
+          <Container className="grid items-center gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <h2 className="h2 text-navy">Ten years of traffic, with and without</h2>
+              <p className="lead mt-4">Drag the slider and watch what happens to the stone base when nothing separates it from the clay.</p>
+            </div>
+            <div className="rounded-[6px] border border-line p-5 sm:p-8 lg:col-span-7">
+              <SeparationDemo />
+            </div>
+          </Container>
+        </section>
+      )}
 
       {related.length > 0 && (
         <section className="bg-paper-2 py-16 md:py-20">

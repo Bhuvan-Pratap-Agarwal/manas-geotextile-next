@@ -22,10 +22,12 @@ const field =
 export function EnquiryForm({
   defaultProduct = "",
   defaultArea = "",
+  defaultMessage = "",
   datasheet = false,
 }: {
   defaultProduct?: string;
   defaultArea?: string;
+  defaultMessage?: string;
   datasheet?: boolean;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
@@ -240,7 +242,7 @@ export function EnquiryForm({
       </label>
       <label className="block sm:col-span-2">
         <span className="eyebrow">Project details</span>
-        <textarea name="message" rows={3} className={`${field} resize-none`} placeholder="Application, GSM or spec, timeline…" />
+        <textarea name="message" rows={3} defaultValue={defaultMessage} className={`${field} resize-none`} placeholder="Application, GSM or spec, timeline…" />
       </label>
       {status.kind === "failed" && (
         <div role="alert" className="border-l-2 border-accent-ink bg-paper-2 px-5 py-4 text-[15px] text-ink sm:col-span-2">
@@ -295,6 +297,7 @@ export function EnquiryFromParams() {
       defaultProduct={q.get("product") ?? ""}
       defaultArea={q.get("area")?.replace(/\D/g, "") ?? ""}
       datasheet={q.get("datasheet") === "1"}
+      defaultMessage={/^MGT-\d{2,3}$/.test(q.get("grade") ?? "") ? `Grade: ${q.get("grade")}` : ""}
     />
   );
 }
