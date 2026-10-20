@@ -67,6 +67,7 @@ export default async function ProductPage({ params }: Props) {
 
   const sections = [
     { id: "overview", label: "Overview" },
+    ...(p.slug === "non-woven-geotextile" ? [{ id: "zoom", label: "Zoom in" }] : []),
     { id: "features", label: "Features" },
     ...(demo ? [{ id: "try", label: "Try it" }] : []),
     ...(p.datasheets ? [{ id: "datasheet", label: "Datasheet" }] : []),

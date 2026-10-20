@@ -28,7 +28,7 @@ export function Footer() {
         <div className="lg:col-span-4">
           <Logo inverted />
           <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-white/70">
-            {site.legalName}. Non-woven geotextile and PVC geomembrane, made at IMT Bawal, Haryana.
+            {site.legalName} makes non-woven geotextile and PVC geomembrane at IMT Bawal, Haryana.
             Sales offices in {facts.salesOffices.join(", ")}.
           </p>
           <div className="mt-6 text-[15px]">
