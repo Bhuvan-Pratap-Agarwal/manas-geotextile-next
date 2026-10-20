@@ -7,7 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 type VB = [number, number, number, number];
 const STAGES: VB[] = [
-  [-350, -900, 5700, 4500], // the roll and a run of fabric
+  [-450, -1150, 5900, 5200], // the roll and a run of fabric
   [1880, 880, 1240, 1240], // one square metre
   [2440, 1440, 120, 120], // 100 mm
   [2493.5, 1493.5, 13, 13], // a few millimetres
@@ -124,7 +124,7 @@ export function FabricZoom() {
   }, []);
 
   return (
-    <section ref={sectionRef} aria-label="Zoom into one square metre of geotextile" className={reduced ? "relative py-10" : "relative h-[340vh]"}>
+    <section ref={sectionRef} id="zoom" aria-label="Zoom into one square metre of geotextile" className={reduced ? "relative py-10" : "relative h-[340vh]"}>
       <div className={reduced ? "" : "sticky top-16 h-[calc(100svh-4rem)] md:top-[108px] md:h-[calc(100svh-108px)]"}>
         <div className="mx-auto grid h-full max-w-[1360px] grid-rows-[auto_1fr] items-center gap-4 px-5 sm:px-8 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10 lg:px-12">
           <div className="relative pt-6 lg:col-span-5 lg:pt-0">
@@ -147,35 +147,47 @@ export function FabricZoom() {
             </div>
           </div>
           <div className="relative h-full min-h-0 lg:col-span-7">
-            <div className="absolute inset-0 overflow-hidden rounded-[12px] bg-[#e8eef7]">
-              <svg ref={svgRef} viewBox={STAGES[0].join(" ")} preserveAspectRatio="xMidYMid slice" className="h-full w-full" role="img" aria-label="Geotextile roll, zooming into its fibres">
+            <div className="absolute inset-0 overflow-hidden rounded-[12px] bg-[#eef2f8] shadow-[inset_0_0_0_1px_rgba(16,52,122,0.08)]">
+              <svg ref={svgRef} viewBox={STAGES[0].join(" ")} preserveAspectRatio="xMidYMid meet" className="h-full w-full" role="img" aria-label="Geotextile roll, zooming into its fibres">
                 <defs>
                   <pattern id="z-felt" width="60" height="60" patternUnits="userSpaceOnUse">
-                    <rect width="60" height="60" fill="#f7f9fc" />
-                    <path d="M2 12 Q20 4 38 14 M18 40 Q34 30 56 44 M6 52 Q14 34 4 24 M40 2 Q50 22 44 36 M24 22 Q32 28 30 50" stroke="#d6e0ee" strokeWidth="2.2" fill="none" />
+                    <rect width="60" height="60" fill="#f5f8fc" />
+                    <path d="M2 12 Q20 4 38 14 M18 40 Q34 30 56 44 M6 52 Q14 34 4 24 M40 2 Q50 22 44 36 M24 22 Q32 28 30 50 M48 50 Q54 40 58 56" stroke="#bccbe0" strokeWidth="2.4" fill="none" />
                   </pattern>
                   <linearGradient id="z-roll" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0" stopColor="#ffffff" />
-                    <stop offset="0.55" stopColor="#e6ecf5" />
-                    <stop offset="1" stopColor="#b9c6da" />
+                    <stop offset="0.45" stopColor="#e3eaf4" />
+                    <stop offset="1" stopColor="#8fa3c2" />
+                  </linearGradient>
+                  <linearGradient id="z-shadow" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor="#10347a" stopOpacity="0.18" />
+                    <stop offset="1" stopColor="#10347a" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 {/* Unrolled fabric */}
                 <rect x="0" y="0" width="5000" height="3400" fill="url(#z-felt)" />
-                <rect x="0" y="0" width="5000" height="3400" fill="none" stroke="#c4d0e2" strokeWidth="8" />
-                {/* Roll */}
-                <rect x="0" y="-620" width="5000" height="620" rx="40" fill="url(#z-roll)" />
-                <ellipse cx="0" cy="-310" rx="90" ry="310" fill="#dfe6f1" stroke="#b9c6da" strokeWidth="8" />
-                <ellipse cx="0" cy="-310" rx="30" ry="100" fill="#5a6472" />
-                <text x="2500" y="-250" textAnchor="middle" fontSize="170" fontWeight="800" fill="#1f6fc5" opacity="0.5" fontFamily="var(--font-archivo), sans-serif">MANAS MGT-30</text>
+                <rect x="0" y="0" width="5000" height="260" fill="url(#z-shadow)" />
+                <rect x="0" y="0" width="5000" height="3400" fill="none" stroke="#b7c5da" strokeWidth="10" />
+                {/* Roll: a cylinder with wound layers visible on the end */}
+                <rect x="0" y="-760" width="5000" height="760" fill="url(#z-roll)" />
+                {[-640, -520, -400, -280, -160].map((y) => (
+                  <line key={y} x1="40" x2="4960" y1={y} y2={y} stroke="#ffffff" strokeOpacity="0.35" strokeWidth="6" />
+                ))}
+                <ellipse cx="5000" cy="-380" rx="150" ry="380" fill="#dfe6f1" stroke="#9fb0c9" strokeWidth="8" />
+                <ellipse cx="0" cy="-380" rx="150" ry="380" fill="#f3f6fa" stroke="#9fb0c9" strokeWidth="8" />
+                {[0.85, 0.7, 0.55, 0.4].map((k) => (
+                  <ellipse key={k} cx="0" cy="-380" rx={150 * k} ry={380 * k} fill="none" stroke="#c3cfe1" strokeWidth="6" />
+                ))}
+                <ellipse cx="0" cy="-380" rx="42" ry="105" fill="#3c4656" />
+                <text x="2500" y="-300" textAnchor="middle" fontSize="190" fontWeight="800" fill="#1f6fc5" opacity="0.75" fontFamily="var(--font-archivo), sans-serif">MANAS MGT-30</text>
                 {/* 5 m dimension */}
                 <path d="M0 3600 H5000 M0 3540 V3660 M5000 3540 V3660" stroke="#10347a" strokeWidth="12" />
                 <text x="2500" y="3830" textAnchor="middle" fontSize="170" fontWeight="700" fill="#10347a" fontFamily="var(--font-archivo), sans-serif">5 m</text>
                 {/* One square metre */}
                 <rect x="2000" y="1000" width="1000" height="1000" fill="#ffffff" />
-                <path d={paths.medium} stroke="#b7c7de" strokeWidth="0.45" fill="none" strokeLinecap="round" />
-                <path d={paths.fine} stroke="#9fb3d1" strokeWidth="0.09" fill="none" strokeLinecap="round" />
-                <path d={paths.micro} stroke="#7f97bd" strokeWidth="0.03" fill="none" strokeLinecap="round" />
+                <path d={paths.medium} stroke="#7d95bd" strokeWidth="0.55" fill="none" strokeLinecap="round" />
+                <path d={paths.fine} stroke="#5f7aa8" strokeWidth="0.11" fill="none" strokeLinecap="round" />
+                <path d={paths.micro} stroke="#3f5c8f" strokeWidth="0.04" fill="none" strokeLinecap="round" />
                 <rect x="2000" y="1000" width="1000" height="1000" fill="none" stroke="#1f6fc5" strokeWidth="10" />
                 <text x="2500" y="975" textAnchor="middle" fontSize="60" fontWeight="700" fill="#1f6fc5" fontFamily="var(--font-archivo), sans-serif">1 m²</text>
                 {/* 100 mm frame */}

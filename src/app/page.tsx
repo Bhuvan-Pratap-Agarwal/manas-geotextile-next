@@ -56,7 +56,7 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden pt-24 md:pt-[108px]">
-        <FibreField opacity={0.13} />
+        <FibreField opacity={0.09} />
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.92)_30%,rgba(255,255,255,0)_75%)]" />
         <Container className="relative flex flex-col items-center pb-6 pt-14 text-center md:pt-24">
             <p className="eyebrow">Non-woven geotextile &amp; PVC membrane manufacturer · ISO 9001</p>
@@ -230,6 +230,22 @@ export default function Home() {
           <div className="mt-12">
             <GradeFinder />
           </div>
+          <Link
+            href="/products/non-woven-geotextile#zoom"
+            className="group mt-6 grid overflow-hidden rounded-[10px] bg-navy text-white sm:grid-cols-5"
+          >
+            <div className="relative aspect-[16/9] sm:col-span-2 sm:aspect-auto sm:min-h-[200px]">
+              <Image src="/images/line-fabric.jpg" alt="" fill sizes="(min-width: 640px) 40vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.08]" />
+            </div>
+            <div className="flex flex-col justify-center p-7 sm:col-span-3 sm:p-10">
+              <p className="text-[14px] font-semibold text-sky">Look closer</p>
+              <p className="mt-2 text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-tight tracking-[-0.02em] [font-stretch:92%]">Zoom from a 5 m roll down to a single fibre.</p>
+              <p className="mt-2 text-white/75">See what 300 grams of fabric is made of, and why soil can&apos;t get through it.</p>
+              <span className="mt-5 inline-flex items-center gap-2 font-semibold">
+                Start zooming <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+              </span>
+            </div>
+          </Link>
         </Container>
       </section>
 

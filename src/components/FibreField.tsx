@@ -54,15 +54,16 @@ export function FibreField({
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.round(((w * h) / (w < 640 ? 4200 : 2600)) * density);
-      fibres = Array.from({ length: Math.min(n, 900) }, () => ({
+      // A dense, fine felt: many short, thin fibres, like needle-punched fabric.
+      const n = Math.round(((w * h) / (w < 640 ? 520 : 380)) * density);
+      fibres = Array.from({ length: Math.min(n, 4200) }, () => ({
         x: rnd() * w,
         y: rnd() * h,
         a: rnd() * Math.PI,
-        len: 40 + rnd() * 110,
-        bend: (rnd() - 0.5) * 0.9,
+        len: 7 + rnd() * 20,
+        bend: (rnd() - 0.5) * 0.7,
         phase: rnd() * Math.PI * 2,
-        speed: 0.2 + rnd() * 0.5,
+        speed: 0.2 + rnd() * 0.6,
         dx: 0,
         dy: 0,
       }));
@@ -71,33 +72,37 @@ export function FibreField({
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
       ctx.lineCap = "round";
-      for (const f of fibres) {
-        const sway = reduced ? 0 : Math.sin(t * 0.0004 * f.speed + f.phase) * 0.25;
-        const a = f.a + sway;
-        // Push away from the pointer, then ease back.
-        const px = f.x - pointer.x;
-        const py = f.y - pointer.y;
-        const d2 = px * px + py * py;
-        if (d2 < 140 * 140) {
-          const d = Math.sqrt(d2) || 1;
-          const force = (1 - d / 140) * 26;
-          f.dx += ((px / d) * force - f.dx) * 0.12;
-          f.dy += ((py / d) * force - f.dy) * 0.12;
-        } else {
-          f.dx *= 0.94;
-          f.dy *= 0.94;
-        }
-        const cx = f.x + f.dx;
-        const cy = f.y + f.dy;
-        const hx = (Math.cos(a) * f.len) / 2;
-        const hy = (Math.sin(a) * f.len) / 2;
-        const bx = -Math.sin(a) * f.len * f.bend;
-        const by = Math.cos(a) * f.len * f.bend;
-        ctx.strokeStyle = `rgba(${color}, ${opacity * (0.5 + (f.speed - 0.2) * 1.2)})`;
-        ctx.lineWidth = 0.6 + f.speed * 0.9;
+      // Three depth layers, each drawn as one path: far fewer canvas calls.
+      for (let layer = 0; layer < 3; layer++) {
         ctx.beginPath();
-        ctx.moveTo(cx - hx, cy - hy);
-        ctx.quadraticCurveTo(cx + bx, cy + by, cx + hx, cy + hy);
+        for (let i = layer; i < fibres.length; i += 3) {
+          const f = fibres[i];
+          const sway = reduced ? 0 : Math.sin(t * 0.0003 * f.speed + f.phase) * 0.18;
+          const a = f.a + sway;
+          const px = f.x - pointer.x;
+          const py = f.y - pointer.y;
+          const d2 = px * px + py * py;
+          if (d2 < 120 * 120) {
+            const d = Math.sqrt(d2) || 1;
+            const force = (1 - d / 120) * 18;
+            f.dx += ((px / d) * force - f.dx) * 0.12;
+            f.dy += ((py / d) * force - f.dy) * 0.12;
+          } else if (f.dx !== 0 || f.dy !== 0) {
+            f.dx *= 0.93;
+            f.dy *= 0.93;
+            if (Math.abs(f.dx) < 0.01 && Math.abs(f.dy) < 0.01) f.dx = f.dy = 0;
+          }
+          const cx = f.x + f.dx;
+          const cy = f.y + f.dy;
+          const hx = (Math.cos(a) * f.len) / 2;
+          const hy = (Math.sin(a) * f.len) / 2;
+          const bx = -Math.sin(a) * f.len * f.bend;
+          const by = Math.cos(a) * f.len * f.bend;
+          ctx.moveTo(cx - hx, cy - hy);
+          ctx.quadraticCurveTo(cx + bx, cy + by, cx + hx, cy + hy);
+        }
+        ctx.strokeStyle = `rgba(${color}, ${opacity * (0.55 + layer * 0.3)})`;
+        ctx.lineWidth = 0.45 + layer * 0.25;
         ctx.stroke();
       }
     };

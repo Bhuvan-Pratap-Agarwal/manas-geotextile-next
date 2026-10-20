@@ -13,7 +13,7 @@ export function CtaBand({
 }) {
   return (
     <section className="relative overflow-hidden bg-navy text-white">
-      <FibreField color="255, 255, 255" opacity={0.09} density={0.7} />
+      <FibreField color="63, 183, 228" opacity={0.14} density={0.8} />
       <Container className="relative grid gap-10 py-20 md:py-24 lg:grid-cols-12 lg:items-center">
         <Reveal className="lg:col-span-7">
           <h2 className="h2 text-balance">{title}</h2>
