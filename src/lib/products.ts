@@ -77,9 +77,9 @@ export const products: Product[] = [
     slug: "non-woven-geotextile",
     code: "MGT",
     name: "Non-Woven Geotextile",
-    seoTitle: "Non-Woven Geotextile Manufacturer in India | 100 to 1000 GSM, PP & PET",
+    seoTitle: "Non-Woven Geotextile Fabric Manufacturer | 100–1000 GSM",
     metaDescription:
-      "Needle-punched non-woven geotextile in polypropylene (MGT) and polyester (M-Geo), 100 to 1000 GSM, 5 m rolls, tested to ASTM. Made at IMT Bawal, Haryana. Download the datasheet.",
+      "Needle-punched PP and polyester geotextile fabric, 100 to 1000 GSM, 5 m rolls, ASTM tested. Made in Haryana, supplied across India. Free datasheet.",
     summary: "Needle-punched polypropylene and polyester fabric, 100 to 1000 GSM, in 5 m wide rolls.",
     image: "/images/line-fabric.jpg",
     imageAlt: "Needle-punched non-woven fabric coming off the line",
@@ -138,9 +138,9 @@ export const products: Product[] = [
     slug: "pvc-geomembrane",
     code: "PVC",
     name: "PVC Tunnel Waterproofing Membrane",
-    seoTitle: "PVC Geomembrane for Tunnel Waterproofing | Manufacturer in India",
+    seoTitle: "PVC Geomembrane for Tunnel Waterproofing | Manas Geo Tech",
     metaDescription:
-      "Manas PVC waterproofing membrane for tunnels and underground structures: over 300% elongation, Fire Class E, signal layer, hot-air welded seams. Supplied with 500 to 700 GSM protection geotextile.",
+      "PVC waterproofing membrane for tunnels: over 300% elongation, Fire Class E, signal layer, welded seams. Supplied with 500–700 GSM protection geotextile.",
     summary: "Two-colour PVC sheet with a signal layer, over 300% elongation, welded on site.",
     image: "/images/tunnel-pvc-green.jpg",
     imageAlt: "Tunnel lined with PVC waterproofing membrane before the final concrete",
@@ -184,7 +184,7 @@ export const products: Product[] = [
     slug: "geo-bags",
     code: "GB",
     name: "Geo Bags",
-    seoTitle: "Geo Bags Manufacturer | Non-Woven Geotextile Bags for River & Coastal Protection",
+    seoTitle: "Geo Bags Manufacturer: Geotextile Bags for Erosion Control",
     metaDescription:
       "Non-woven geo bags in 300 and 400 GSM polyester or polypropylene for riverbank, coastal and flood protection. Custom sizes, filled with local sand. Made in India.",
     summary: "300 and 400 GSM sand-filled bags for riverbanks, coasts and flood bunds.",
@@ -226,7 +226,7 @@ export const products: Product[] = [
     name: "Drainage Geocomposite",
     seoTitle: "Drainage Geocomposite for RE Walls | Manas Geo Tech",
     metaDescription:
-      "Manas drainage geocomposite: a drainage core wrapped in non-woven geotextile. Replaces graded filter layers behind RE walls and under slabs. Lighter, faster to lay, does not clog.",
+      "Drainage geocomposite for RE walls and slabs: a drainage core in a non-woven filter jacket. Replaces graded filter, lighter and faster to lay.",
     summary: "A drainage core inside a non-woven filter jacket. Replaces graded filter behind RE walls.",
     image: "/images/re-wall-geocomposite.jpg",
     imageAlt: "Drainage geocomposite installed at an RE wall project in North India",
@@ -258,7 +258,7 @@ export const products: Product[] = [
     slug: "pipe-wrap-geotextile",
     code: "PW",
     name: "Pipe Wrap Geotextile",
-    seoTitle: "Geotextile for Perforated PVC Pipe Wrapping | Custom Width 0.1 to 5 m",
+    seoTitle: "Pipe Wrap Geotextile for Perforated PVC Drain Pipes",
     metaDescription:
       "Non-woven geotextile slit to custom widths from 0.1 m to 5 m for wrapping perforated PVC drain pipes (geotextile socks) and for pasting at site.",
     summary: "Slit to any width from 0.1 m for pipe socks and site pasting.",

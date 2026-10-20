@@ -1,6 +1,7 @@
 // The real domain. Until it points at Vercel, the site runs on its
 // *.vercel.app address and stays out of search engines (see `indexable`).
-const PRODUCTION_DOMAIN = "https://manasgeotextile.com";
+// www is the host Google already knows from the old site, so keep it.
+const PRODUCTION_DOMAIN = "https://www.manasgeotextile.com";
 
 // Vercel sets VERCEL_PROJECT_PRODUCTION_URL at build time; once
 // manasgeotextile.com is added in Vercel it becomes that domain automatically.
@@ -21,6 +22,8 @@ export const site = {
   tagline: "Non-woven geotextile and PVC geomembrane, made in Haryana",
   description:
     "Manas Geo Tech India makes needle-punched non-woven geotextile (100 to 1000 GSM, 5 m rolls), PVC tunnel waterproofing membrane, geo bags and drainage geocomposite at IMT Bawal, Haryana. ISO 9001 certified. Supplied to L&T, Afcons, Patel Engineering and other major contractors.",
+  metaDescription:
+    "Non-woven geotextile (100–1000 GSM), PVC tunnel membrane, geo bags and geocomposite, made at IMT Bawal, Haryana. ISO 9001. Supplied across India.",
   url: siteUrl,
   foundingDate: "1995-12-12",
   cin: "U17120DL1995PTC068486",

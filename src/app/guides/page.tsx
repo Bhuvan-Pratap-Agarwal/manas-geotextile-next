@@ -8,7 +8,8 @@ import { guides } from "@/lib/guides";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Geotextile Guides | Types, GSM, Price, Standards & Installation",
+  title: "Geotextile Guides: Types, GSM, Price & BIS Standards",
+  absoluteTitle: true,
   description:
     "Practical geotextile guides for engineers and contractors: what geotextile is, woven vs non-woven, GSM selection, prices in India, BIS standards and installation.",
   path: "/guides",

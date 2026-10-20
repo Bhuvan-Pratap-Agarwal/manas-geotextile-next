@@ -8,7 +8,8 @@ import { site, tel } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Contact | Geotextile Quote & Technical Advice",
+  title: "Contact Manas Geo Tech | Geotextile Quote, Delhi NCR",
+  absoluteTitle: true,
   description:
     "Get a geotextile quote or datasheet from Manas Geo Tech India. Head office Vasant Kunj, New Delhi; factory IMT Bawal, Haryana. Call +91 11 4600 0770.",
   path: "/contact",

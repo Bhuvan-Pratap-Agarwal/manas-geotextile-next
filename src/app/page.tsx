@@ -60,13 +60,13 @@ export default function Home() {
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.92)_30%,rgba(255,255,255,0)_75%)]" />
         <Container className="relative flex flex-col items-center pb-6 pt-14 text-center md:pt-24">
             <p className="eyebrow">Non-woven geotextile &amp; PVC membrane manufacturer · ISO 9001</p>
-            <h1 className="mt-5 max-w-[16ch] text-balance text-[clamp(2.75rem,7.2vw,6.25rem)] font-bold leading-[0.98] tracking-[-0.035em] text-navy [font-stretch:90%]">
-              Made in Haryana. <span className="text-accent">Laid under India&apos;s roads, railways and tunnels.</span>
+            <h1 className="mt-5 max-w-[18ch] text-balance text-[clamp(2.75rem,7.2vw,6.25rem)] font-bold leading-[0.98] tracking-[-0.035em] text-navy [font-stretch:90%]">
+              Geotextile made in Haryana. <span className="text-accent">Laid under India&apos;s roads, railways and tunnels.</span>
             </h1>
           <Reveal immediate delay={0.1}>
             <p className="lead mx-auto mt-7 max-w-2xl">
-              Needle-punched geotextile from 100 to 1000 GSM and PVC tunnel membrane, made at our own plant and
-              trusted by L&amp;T, Afcons and Patel Engineering.
+              Needle-punched geotextile from 100 to 1000 GSM and PVC tunnel membrane, made at our own plant near
+              Delhi and trusted by L&amp;T, Afcons and Patel Engineering.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <ButtonLink href="/contact">Get a quote</ButtonLink>

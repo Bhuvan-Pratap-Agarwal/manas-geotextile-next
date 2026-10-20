@@ -23,9 +23,9 @@ export const applications: Application[] = [
   {
     slug: "roads",
     name: "Roads & Highways",
-    seoTitle: "Geotextile for Road Construction | Subgrade Separation & Stabilisation",
+    seoTitle: "Geotextile for Road Construction | Separation & Stabilisation",
     metaDescription:
-      "How geotextile is used in road construction: separation of subgrade and aggregate, filtration and stabilisation. Grades, standards (IRC:SP:59, IS 16391) and supply across India.",
+      "How geotextile works in road construction: subgrade separation, filtration and stabilisation, IRC:SP:59 and IS 16391, grades and supply across India.",
     summary: "Keep aggregate clean, spread load and extend pavement life on weak subgrades.",
     problem:
       "On clay and silty subgrades, traffic pushes aggregate down into the soil and pumps fines up into the base. The granular layer loses strength, the road ruts and potholes appear years early.",
@@ -70,9 +70,9 @@ export const applications: Application[] = [
   {
     slug: "railways",
     name: "Railways",
-    seoTitle: "Geotextile for Railway Track Formation | Ballast & Subgrade Protection",
+    seoTitle: "Geotextile for Railway Track Formation & Ballast",
     metaDescription:
-      "Geotextile in railway formations keeps ballast clean, stops mud pumping and stabilises subgrade under heavy axle loads. Non-woven and woven grades for Indian Railways and metro projects.",
+      "Geotextile keeps railway ballast clean, stops mud pumping and stabilises weak subgrade under heavy axle loads. Grades for Indian Railways and metro.",
     summary: "Stop mud pumping and keep ballast clean under heavy, repeated axle loads.",
     problem:
       "Each passing wheel pumps water and fine soil up from the formation into the ballast. Fouled ballast drains poorly, loses its interlock and the track geometry deteriorates, driving constant maintenance.",
@@ -138,7 +138,7 @@ export const applications: Application[] = [
   {
     slug: "landfills",
     name: "Landfills & Canals",
-    seoTitle: "Geotextile for Landfills | Geomembrane Protection & Leachate Filtration",
+    seoTitle: "Geotextile for Landfills: Liner Protection & Filtration",
     metaDescription:
       "Heavy non-woven geotextiles protect landfill geomembranes from puncture and filter leachate drainage layers. Grades from 600 to 1000 GSM.",
     summary: "Protect the liner, filter the leachate, keep the barrier intact for decades.",
@@ -168,7 +168,7 @@ export const applications: Application[] = [
   {
     slug: "coastal-riverbank",
     name: "Coastal & Riverbank Protection",
-    seoTitle: "Geo Bags and Geotextile for Riverbank & Coastal Erosion Protection",
+    seoTitle: "Geo Bags & Geotextile for Riverbank and Coastal Protection",
     metaDescription:
       "Geotextile filters and sand-filled geo bags protect riverbanks, coastlines and bridge piers from erosion and scour. 300–500 GSM non-woven grades.",
     summary: "Hold soil in place where water moves fastest.",
@@ -202,7 +202,7 @@ export const applications: Application[] = [
   {
     slug: "drainage",
     name: "Drainage & Filtration",
-    seoTitle: "Geotextile for Drainage | French Drains, Pipe Wrap & Filter Fabric",
+    seoTitle: "Geotextile for Drainage: French Drains & Filter Fabric",
     metaDescription:
       "Non-woven filter geotextile for French drains, subsurface drains, retaining wall backfill and perforated pipe wrapping. Prevents clogging and extends drain life.",
     summary: "Drains that keep working, because the soil stays out.",
@@ -229,9 +229,9 @@ export const applications: Application[] = [
   {
     slug: "ports",
     name: "Ports & Land Reclamation",
-    seoTitle: "Geotextile for Ports | Soil Stabilisation for Container Yards & Reclamation",
+    seoTitle: "Geotextile for Ports: Soil Stabilisation & Reclamation",
     metaDescription:
-      "Non-woven geotextile for port projects: soil stabilisation under container yards, land reclamation, sea walls and breakwaters. Supplied to port and defence port projects in India.",
+      "Non-woven geotextile stabilises soft reclaimed soil under container yards and filters behind sea walls. Supplied to port and defence port projects.",
     summary: "Stabilise reclaimed ground so it carries heavy axle loads.",
     problem:
       "Port yards are often built on soft, reclaimed coastal soil. Under container handlers and heavy trucks the aggregate punches into the subgrade and the pavement fails early.",
@@ -263,7 +263,7 @@ export const applications: Application[] = [
   {
     slug: "waterproofing",
     name: "Roof & Building Waterproofing",
-    seoTitle: "Geotextile for Roof Waterproofing | Protection Layer for Waterproofing Coatings",
+    seoTitle: "Geotextile for Roof Waterproofing: Protection Layer",
     metaDescription:
       "Non-woven geotextile protects roof and basement waterproofing coatings from damage and adds durability. Used on hotel and commercial projects in Delhi NCR.",
     summary: "Protect the waterproofing coat so it lasts as long as the building.",
@@ -297,7 +297,7 @@ export const applications: Application[] = [
   {
     slug: "re-walls",
     name: "RE Walls & Slopes",
-    seoTitle: "Geotextile and Geocomposite for RE Walls | Drainage & Filter Layer",
+    seoTitle: "Geotextile & Geocomposite for RE Walls: Drainage Layer",
     metaDescription:
       "Non-woven geotextile and drainage geocomposite as the filter and drainage layer in reinforced earth (RE) walls, gabions and slope protection.",
     summary: "Keep water pressure off the wall and the fill where it belongs.",

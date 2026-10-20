@@ -77,7 +77,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={productSchema({ name: p.name, description: p.metaDescription, path })} />
+      <JsonLd data={productSchema({ name: p.name, description: p.metaDescription, path, image: p.image, properties: p.specs })} />
       <MarkSeen path={path} />
       <LocalNav title={p.name} sections={sections} cta={{ href: `/contact?product=${p.slug}`, label: "Get a quote" }} />
 

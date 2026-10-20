@@ -7,9 +7,10 @@ import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: "Datasheets & Brochures | Non-Woven Geotextile and PVC Membrane",
+  title: "Geotextile Datasheets & Brochures (PDF) | Manas",
+  absoluteTitle: true,
   description:
-    "Download the Manas MGT polypropylene and M-Geo polyester geotextile datasheets (ASTM values, 100 to 1000 GSM), the tunnel waterproofing PVC membrane brochure and the company brochure.",
+    "Download MGT polypropylene and M-Geo polyester geotextile datasheets with ASTM values, plus the PVC tunnel membrane and company brochures.",
   path: "/downloads",
 });
 

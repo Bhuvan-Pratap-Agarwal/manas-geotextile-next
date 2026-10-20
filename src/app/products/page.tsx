@@ -10,9 +10,10 @@ import { products } from "@/lib/products";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Geotextile Products | Non-Woven Geotextile, PVC Membrane, Geo Bags, Geocomposite",
+  title: "Geotextile Products: Non-Woven, PVC Membrane, Geo Bags",
+  absoluteTitle: true,
   description:
-    "Manas Geo Tech products: MGT polypropylene and M-Geo polyester non-woven geotextile (100 to 1000 GSM), PVC tunnel waterproofing membrane, geo bags, drainage geocomposite and pipe wrap geotextile.",
+    "MGT and M-Geo non-woven geotextile 100–1000 GSM, PVC tunnel waterproofing membrane, geo bags, drainage geocomposite and pipe wrap. Free datasheets.",
   path: "/products",
 });
 
