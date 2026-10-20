@@ -12,9 +12,10 @@ import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Manufacturing & Company | Geotextile Plant at IMT Bawal, Haryana",
+  title: "Geotextile Factory in Haryana (IMT Bawal) | Manas Geo Tech",
+  absoluteTitle: true,
   description:
-    "Manas Geo Tech India Pvt. Ltd.: European needle-punching lines, Ramina winder, PVC membrane extrusion and an in-house lab at IMT Bawal, Haryana. 250 tonnes a month. ISO 9001:2015 and ISO 14001:2015.",
+    "Needle-punching lines, PVC membrane plant and in-house lab at IMT Bawal, Haryana. 250 tonnes a month. ISO 9001:2015 and ISO 14001:2015 certified.",
   path: "/about",
 });
 

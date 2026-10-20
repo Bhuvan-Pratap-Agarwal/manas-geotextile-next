@@ -13,9 +13,10 @@ import { projects } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Projects & Clients | Geotextile Supplied Across India",
+  title: "Geotextile Projects & Clients Across India | Manas",
+  absoluteTitle: true,
   description:
-    "Manas Geo Tech geotextile on site: USBRL Tunnel T15, Delhi–Mumbai Expressway, the Oberoi New Delhi, port and defence port projects, highways and coastal protection. Clients include L&T, Afcons, Tata Projects, HCC and IRCON.",
+    "USBRL Tunnel T15, Delhi–Mumbai Expressway, the Oberoi New Delhi, ports and highways. Clients include L&T, Afcons, Tata Projects, HCC and IRCON.",
   path: "/projects",
 });
 

@@ -73,7 +73,7 @@ Vercel → project → **Analytics** → **Enable**, and **Speed Insights** → 
 ## 8. Later — the real domain
 
 When the client approves:
-1. Vercel → **Settings → Domains** → add `manasgeotextile.com` and `www.manasgeotextile.com` (set one to redirect to the other).
+1. Vercel → **Settings → Domains** → add `www.manasgeotextile.com` and `manasgeotextile.com`. Make **www** the primary (Google already knows the site as www) and redirect the bare domain to it.
 2. At the domain registrar, set the DNS records Vercel shows (usually an `A` record to `76.76.21.21` and a `CNAME` for `www` to `cname.vercel-dns.com`).
 3. HTTPS is issued automatically. The old `.html` URLs already 301 to the new pages.
 4. Then: Google Search Console → add property → submit `https://manasgeotextile.com/sitemap.xml`; create Google Business Profiles for the office and factory (see `docs/market-research-and-seo.md`).

@@ -6,7 +6,8 @@ import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Privacy",
+  title: "Privacy Policy | Manas Geo Tech India",
+  absoluteTitle: true,
   description: `How ${site.legalName} handles information you share through this website.`,
   path: "/privacy",
 });

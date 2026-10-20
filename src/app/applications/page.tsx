@@ -10,9 +10,10 @@ import { applications } from "@/lib/applications";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Geotextile Applications | Roads, Railways, Tunnels, Ports, Landfills, Coastal",
+  title: "Geotextile Applications: Roads, Rail, Tunnels, Ports",
+  absoluteTitle: true,
   description:
-    "Where geotextile is used: road subgrade separation, railway formations, tunnel waterproofing, ports, landfills and canals, riverbank and coastal protection, drainage, roof waterproofing and RE walls.",
+    "Where geotextile is used and why: roads, railways, tunnels, ports, landfills, canals, riverbanks, drainage, roof waterproofing and RE walls.",
   path: "/applications",
 });
 

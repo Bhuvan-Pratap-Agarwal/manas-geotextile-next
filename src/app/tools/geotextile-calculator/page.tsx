@@ -11,7 +11,8 @@ import { pageMetadata } from "@/lib/seo";
 const path = "/tools/geotextile-calculator";
 
 export const metadata = pageMetadata({
-  title: "Geotextile Calculator | Square Metres, Rolls & Overlap",
+  title: "Geotextile Calculator: Square Metres, Rolls & Overlap",
+  absoluteTitle: true,
   description:
     "Free geotextile quantity calculator: enter area, roll size, overlap and wastage to get total square metres, number of rolls and a suggested GSM.",
   path,

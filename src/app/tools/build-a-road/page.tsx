@@ -7,7 +7,8 @@ import { PageHero } from "@/components/PageHero";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Build a Road | Can Your Road Survive 10 Years of Traffic?",
+  title: "Build a Road: Can It Survive 10 Years of Traffic?",
+  absoluteTitle: true,
   description: "A one-minute game: stack the layers of a road from the ground up and open it to ten years of traffic. See why geotextile matters.",
   path: "/tools/build-a-road",
 });

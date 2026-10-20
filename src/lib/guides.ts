@@ -19,7 +19,7 @@ export const guides: Guide[] = [
     title: "What is geotextile? Types, functions and uses",
     seoTitle: "What is Geotextile? Types, Functions & Uses | Complete Guide",
     metaDescription:
-      "Geotextile explained: what it is, how it's made, woven vs non-woven types, the five functions (separation, filtration, drainage, reinforcement, protection) and where it's used.",
+      "Geotextile explained: what it is, woven vs non-woven types, the five functions (separation, filtration, drainage, reinforcement, protection) and uses.",
     excerpt: "The plain-English guide to the fabric that sits under almost every modern road, railway and landfill.",
     readingMinutes: 7,
     updated: "2026-10-11",
@@ -228,9 +228,9 @@ export const guides: Guide[] = [
   {
     slug: "geotextile-gsm-guide",
     title: "Geotextile GSM chart: which weight for which job",
-    seoTitle: "Geotextile GSM Chart | Which GSM for Roads, Drains, Landfills & Tunnels",
+    seoTitle: "Geotextile GSM Chart: Which GSM for Roads, Drains & Tunnels",
     metaDescription:
-      "Choose the right geotextile GSM: a simple chart from 100 to 1000 GSM with typical applications for drains, roads, railways, erosion control and geomembrane protection.",
+      "Choose the right geotextile GSM: a chart from 100 to 1000 GSM with typical uses for drains, roads, railways, erosion control and membrane protection.",
     excerpt: "From 120 GSM pipe socks to 1000 GSM liner cushions, on one page.",
     readingMinutes: 4,
     updated: "2026-10-11",
@@ -273,7 +273,7 @@ export const guides: Guide[] = [
   {
     slug: "bis-standards-for-geotextiles",
     title: "BIS standards and Quality Control Orders for geotextiles in India",
-    seoTitle: "BIS Standards for Geotextiles in India | QCO, IS 16391, IS 16362, IRC:SP:59",
+    seoTitle: "BIS Standards for Geotextiles: QCO, IS 16391, IRC:SP:59",
     metaDescription:
       "A guide to Indian standards for geotextiles: the Geotextiles Quality Control Order, IS 16391, IS 16362, IS 16090, IS 16392 and IRC:SP:59 for road pavements.",
     excerpt: "Which Indian Standard applies to your geotextile, and why BIS certification now matters.",

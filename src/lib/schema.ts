@@ -28,6 +28,11 @@ export function organizationSchema() {
         email: site.contact.email,
         telephone: site.contact.phone,
         address: address(site.office),
+        alternateName: ["Manas Geotextile", site.legalName],
+        sameAs: [site.social.linkedin, site.social.facebook, site.social.youtube],
+        areaServed: { "@type": "Country", name: "India" },
+        knowsAbout: ["Geotextile", "Non-woven geotextile", "PVC geomembrane", "Tunnel waterproofing", "Geo bags", "Drainage geocomposite", "Geosynthetics"],
+        hasCertification: site.facts.certifications.map((c) => ({ "@type": "Certification", name: c })),
         contactPoint: [
           {
             "@type": "ContactPoint",
@@ -47,6 +52,35 @@ export function organizationSchema() {
         telephone: site.factory.phone,
         email: site.factory.email,
         address: address(site.factory),
+        image: absoluteUrl("/images/factory-bawal.jpg"),
+        // IMT Bawal, Sector 3 (approximate).
+        geo: { "@type": "GeoCoordinates", latitude: 28.084, longitude: 76.587 },
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            opens: "09:30",
+            closes: "18:30",
+          },
+        ],
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": absoluteUrl("/#head-office"),
+        name: `${site.name} | Head office, New Delhi`,
+        parentOrganization: { "@id": orgId },
+        telephone: site.contact.phone,
+        email: site.contact.email,
+        address: address(site.office),
+        image: absoluteUrl("/images/logo-go.png"),
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            opens: "09:30",
+            closes: "18:30",
+          },
+        ],
       },
       {
         "@type": "WebSite",
@@ -85,17 +119,26 @@ export function faqSchema(faqs: Faq[]) {
   };
 }
 
-export function productSchema(p: { name: string; description: string; path: string; category?: string }) {
+export function productSchema(p: {
+  name: string;
+  description: string;
+  path: string;
+  image: string;
+  category?: string;
+  properties?: { label: string; value: string }[];
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: p.name,
     description: p.description,
     url: absoluteUrl(p.path),
-    image: absoluteUrl(`${p.path}/opengraph-image`),
+    image: [absoluteUrl(p.image), absoluteUrl(`${p.path}/opengraph-image`)],
     category: p.category ?? "Geosynthetics",
     brand: { "@type": "Brand", name: site.name },
     manufacturer: { "@id": orgId },
+    countryOfOrigin: "IN",
+    additionalProperty: p.properties?.map((x) => ({ "@type": "PropertyValue", name: x.label, value: x.value })),
   };
 }
 

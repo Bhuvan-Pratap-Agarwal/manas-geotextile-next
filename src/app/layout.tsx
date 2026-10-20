@@ -16,10 +16,10 @@ const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Geotextile Manufacturer in India | Non-Woven Geotextile & PVC Geomembrane | Manas Geo Tech",
+    default: "Geotextile Manufacturer in India | Manas Geo Tech",
     template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description: site.metaDescription,
   applicationName: site.name,
   alternates: { canonical: "/" },
   openGraph: { type: "website", siteName: site.name, locale: "en_IN" },
